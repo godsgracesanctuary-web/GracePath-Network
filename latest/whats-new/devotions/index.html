@@ -1,156 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Books & Novels | GracePath Network</title>
+
+<title>Daily Devotions | GracePath Network</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-    font-family:'Poppins',sans-serif;
-    background:#f8fafc;
-    color:#334155;
+font-family:'Poppins',sans-serif;
+background:#f1f5f9;
+color:#334155;
 }
 
+
+/* HEADER */
+
 header{
-    background:linear-gradient(135deg,#0f766e,#14b8a6);
-    color:white;
-    text-align:center;
-    padding:80px 20px;
+
+background:linear-gradient(135deg,#0b2d5c,#0f766e);
+
+padding:80px 20px;
+
+text-align:center;
+
+color:white;
+
 }
 
 header h1{
-    color:#fbbf24;
-    margin-bottom:10px;
+
+font-size:2.4rem;
+
+color:#fbbf24;
+
+margin-bottom:10px;
+
 }
+
+header p{
+
+max-width:700px;
+
+margin:auto;
+
+opacity:.9;
+
+}
+
+
+/* CONTENT */
 
 .container{
-    max-width:1100px;
-    margin:auto;
-    padding:50px 20px;
+
+max-width:1200px;
+
+margin:auto;
+
+padding:50px 20px;
+
 }
+
+
+.back-btn{
+
+display:inline-block;
+
+margin-bottom:30px;
+
+text-decoration:none;
+
+font-weight:600;
+
+color:#0f766e;
+
+}
+
 
 .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+gap:25px;
+
 }
+
 
 .card{
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+transition:.3s;
+
 }
+
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}
+
 
 .card h3{
-    margin-bottom:15px;
-    color:#0f766e;
+
+color:#0f766e;
+
+margin-bottom:10px;
+
 }
+
+
+.card p{
+
+font-size:.92rem;
+
+margin-bottom:20px;
+
+color:#64748b;
+
+}
+
 
 .btn{
-    display:inline-block;
-    padding:10px 20px;
-    border-radius:30px;
-    text-decoration:none;
-    color:white;
-    background:#f59e0b;
-    font-weight:600;
+
+display:inline-block;
+
+padding:11px 22px;
+
+border-radius:30px;
+
+text-decoration:none;
+
+background:#f59e0b;
+
+color:white;
+
+font-weight:600;
+
 }
+
 
 .btn:hover{
-    opacity:.9;
+
+opacity:.9;
+
 }
 
-.back{
-    display:inline-block;
-    margin-bottom:30px;
-    text-decoration:none;
-    color:#0f766e;
-    font-weight:600;
+
+/* FOOTER */
+
+footer{
+
+margin-top:60px;
+
+padding:25px;
+
+background:#0b2d5c;
+
+text-align:center;
+
+color:white;
+
 }
+
 </style>
+
 </head>
 
 <body>
 
+
 <header>
-    <h1>🙏 Devotionals</h1>
-    <p>Browse available books and stories.</p>
+
+<h1>🙏 Daily Devotions</h1>
+
+<p>
+
+Be encouraged through daily devotionals designed to strengthen your faith, deepen your walk with Christ, and inspire victorious living.
+
+</p>
+
 </header>
+
+
 
 <div class="container">
 
-<a href="../index.html" class="back">← Back to What's New</a>
+
+<a href="../index.html" class="back-btn">
+
+← Back to What's New
+
+</a>
+
+
 
 <div class="grid">
 
+
+
 <div class="card">
+
 <h3>God Specializes in the Impossible</h3>
-<a href="../God Specializes in the Impossible.pdf" class="btn" target="_blank">Read</a>
+
+<p>
+
+Trust God for situations that seem impossible.
+
+</p>
+
+<a href="../God Specializes in the Impossible.pdf"
+
+class="btn"
+
+target="_blank">
+
+Read Devotion
+
+</a>
+
 </div>
 
+
+
+
 <div class="card">
+
 <h3>God's Promises Never Fail</h3>
-<a href="../God's Promises Never Fail.pdf" class="btn" target="_blank">Read</a>
+
+<p>
+
+Stand firm on the unfailing promises of God.
+
+</p>
+
+<a href="../God's Promises Never Fail.pdf"
+
+class="btn"
+
+target="_blank">
+
+Read Devotion
+
+</a>
+
 </div>
 
+
+
+
 <div class="card">
+
 <h3>Stay Close to God</h3>
-<a href="../Stay Close to God.pdf" class="btn" target="_blank">Read</a>
+
+<p>
+
+Discover the blessings of maintaining intimacy with Christ.
+
+</p>
+
+<a href="../Stay Close to God.pdf"
+
+class="btn"
+
+target="_blank">
+
+Read Devotion
+
+</a>
+
 </div>
 
+
+
+
 <div class="card">
+
 <h3>Walking in Divine Favour and Victory</h3>
-<a href="../Walking in Divine Favour and Victory.pdf" class="btn" target="_blank">Read</a>
+
+<p>
+
+Learn how to walk daily in God's favour and triumph.
+
+</p>
+
+<a href="../Walking in Divine Favour and Victory.pdf"
+
+class="btn"
+
+target="_blank">
+
+Read Devotion
+
+</a>
+
 </div>
 
+
+
+
 <div class="card">
+
 <h3>Be Still and Trust God</h3>
-<a href="../Be Still and Trust God.pdf" class="btn" target="_blank">Read</a>
+
+<p>
+
+Find peace and confidence in God's perfect timing.
+
+</p>
+
+<a href="../Be Still and Trust God.pdf"
+
+class="btn"
+
+target="_blank">
+
+Read Devotion
+
+</a>
+
 </div>
 
+
+
+
 <div class="card">
+
 <h3>Be Strong and Courageous</h3>
-<a href="../Be Strong and Courageous.pdf" class="btn" target="_blank">Read</a>
+
+<p>
+
+Receive strength and courage for every challenge.
+
+</p>
+
+<a href="../Be Strong and Courageous.pdf"
+
+class="btn"
+
+target="_blank">
+
+Read Devotion
+
+</a>
+
 </div>
 
+
+
+
 <div class="card">
+
 <h3>Do Not Be Afraid</h3>
-<a href="../Do Not Be Afraid.pdf" class="btn" target="_blank">Read</a>
+
+<p>
+
+God's presence removes fear and fills us with hope.
+
+</p>
+
+<a href="../Do Not Be Afraid.pdf"
+
+class="btn"
+
+target="_blank">
+
+Read Devotion
+
+</a>
+
 </div>
 
+
+
+
 <div class="card">
+
 <h3>Do Not Despise Small Beginnings</h3>
-<a href="../Do Not Despise Small Beginnings.pdf" class="btn" target="_blank">Read</a>
+
+<p>
+
+God delights in growing great things from small starts.
+
+</p>
+
+<a href="../Do Not Despise Small Beginnings.pdf"
+
+class="btn"
+
+target="_blank">
+
+Read Devotion
+
+</a>
+
 </div>
 
-<div class="card">
-<h3>GOD HAS NOT FORGOTEN YOU</h3>
-<a href="../GOD HAS NOT FORGOTEN YOU.pdf" class="btn" target="_blank">Read</a>
-</div>
+
+
 
 <div class="card">
+
+<h3>God Has Not Forgotten You</h3>
+
+<p>
+
+Be assured that God remembers His children.
+
+</p>
+
+<a href="../GOD HAS NOT FORGOTEN YOU.pdf"
+
+class="btn"
+
+target="_blank">
+
+Read Devotion
+
+</a>
+
+</div>
+
+
+
+
+<div class="card">
+
 <h3>God Is Still Writing Your Story</h3>
-<a href="../God Is Still Writing Your Story.pdf" class="btn" target="_blank">Read</a>
+
+<p>
+
+Your current chapter is not the end of your testimony.
+
+</p>
+
+<a href="../God Is Still Writing Your Story.pdf"
+
+class="btn"
+
+target="_blank">
+
+Read Devotion
+
+</a>
+
 </div>
+
+
+
 
 <div class="card">
+
 <h3>God Is Working for Your Good</h3>
-<a href="../God Is Working for Your Good.pdf" class="btn" target="_blank">Read</a>
+
+<p>
+
+Even difficult seasons are used by God for your benefit.
+
+</p>
+
+<a href="../God Is Working for Your Good.pdf"
+
+class="btn"
+
+target="_blank">
+
+Read Devotion
+
+</a>
+
 </div>
+
+
 
 </div>
 
 </div>
+
+
+
+<footer>
+
+© 2026 GracePath Network • gracepathnetwork.org
+
+</footer>
+
 
 </body>
 </html>
