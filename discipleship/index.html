@@ -1,199 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Discipleship | GracePath Network</title>
 
-<link rel="stylesheet" href="../style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
-    font-family:Arial,sans-serif;
+font-family:'Poppins',sans-serif;
+background:#f8fafc;
+color:#334155;
+line-height:1.7;
 }
-
-/* HEADER */
-
-header{
-    text-align:center;
-    padding:40px 20px;
-}
-
-/* NAVIGATION */
 
 nav{
-    padding:15px 25px;
+background:#0b2d5c;
+padding:18px 8%;
 }
 
 nav a{
-    text-decoration:none;
-    color:white;
-    font-weight:bold;
+color:white;
+text-decoration:none;
+font-weight:600;
 }
 
-/* SECTION */
-
-section{
-    padding:40px 8%;
+header{
+background:linear-gradient(135deg,#0b2d5c,#0f766e);
+padding:90px 20px;
+text-align:center;
+color:white;
 }
 
-section h2{
-    text-align:center;
-    margin-bottom:15px;
+header h1{
+font-size:2.7rem;
+color:#fbbf24;
+margin-bottom:15px;
 }
 
-section p{
-    text-align:center;
+header p{
+max-width:800px;
+margin:auto;
+opacity:.95;
 }
 
-/* CARDS GRID */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
-    margin-top:30px;
+.container{
+max-width:1200px;
+margin:auto;
+padding:60px 20px;
 }
 
-/* CARD */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
 
 .card{
-    background:linear-gradient(to bottom right,#ffffff,#dbeafe);
-
-    border-radius:25px;
-
-    padding:30px 25px;
-
-    box-shadow:
-    0 8px 25px rgba(0,0,0,0.08),
-    0 3px 10px rgba(37,99,235,0.08);
-
-    transition:all 0.4s ease;
-
-    border-top:6px solid #2563eb;
-
-    position:relative;
-
-    overflow:hidden;
+background:white;
+padding:30px;
+border-radius:25px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.3s;
+border-top:5px solid #2563eb;
 }
-
-/* LIGHT EFFECT */
-
-.card::before{
-    content:"";
-
-    position:absolute;
-
-    top:-50px;
-    right:-50px;
-
-    width:140px;
-    height:140px;
-
-    background:rgba(255,255,255,0.35);
-
-    border-radius:50%;
-}
-
-/* HOVER */
 
 .card:hover{
-    transform:translateY(-8px) scale(1.02);
-
-    box-shadow:
-    0 15px 35px rgba(0,0,0,0.12),
-    0 5px 15px rgba(37,99,235,0.15);
+transform:translateY(-6px);
 }
-
-/* TITLE */
 
 .card h3{
-    font-size:1.5rem;
-    margin-bottom:15px;
-    color:#0f172a;
-    font-weight:700;
+color:#0f172a;
+margin-bottom:15px;
 }
-
-/* BLUE LINE */
-
-.card h3::after{
-    content:"";
-    display:block;
-    width:60px;
-    height:4px;
-    background:#2563eb;
-    border-radius:10px;
-    margin-top:10px;
-    margin-bottom:20px;
-}
-
-/* TEXT */
 
 .card p{
-    color:#475569;
-    line-height:1.8;
-    font-size:1rem;
-    text-align:left;
+color:#475569;
+margin-bottom:20px;
 }
 
-/* LESSON SUMMARY */
-
-.lesson-content{
-    margin-top:15px;
-    color:#334155;
-    line-height:1.7;
+.btn{
+display:inline-block;
+padding:12px 24px;
+border-radius:30px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+font-weight:600;
 }
 
-/* BUTTONS */
-
-.card button{
-    display:inline-block;
-    margin-top:20px;
-    margin-right:10px;
-    padding:13px 24px;
-    background:#2563eb;
-    color:white;
-    border:none;
-    border-radius:40px;
-    cursor:pointer;
-    font-size:1rem;
-    font-weight:700;
-    transition:0.35s ease;
+.btn:hover{
+background:#1d4ed8;
 }
-
-.card button:hover{
-    background:#1d4ed8;
-    transform:translateY(-3px);
-}
-
-.card a{
-    display:inline-block;
-    margin-top:20px;
-    padding:13px 24px;
-    background:#2563eb;
-    color:white;
-    text-decoration:none;
-    border-radius:40px;
-    font-size:1rem;
-    font-weight:700;
-    transition:0.35s ease;
-    box-shadow:0 4px 10px rgba(0,0,0,0.12);
-}
-
-.card a:hover{
-    background:#1d4ed8;
-    transform:translateY(-3px);
-}
-
-/* FOOTER */
 
 footer{
-    margin-top:40px;
-    text-align:center;
-    padding:20px;
+margin-top:60px;
+padding:30px;
+text-align:center;
+background:#0b2d5c;
+color:white;
+}
+
+footer p{
+margin:5px 0;
 }
 
 </style>
@@ -202,193 +122,169 @@ footer{
 
 <body>
 
-<header>
-<h1>Discipleship</h1>
-</header>
-
 <nav>
-<a href="../index.html">Home</a>
+
+<a href="../index.html">
+
+← Back Home
+
+</a>
+
 </nav>
 
-<section>
 
-<h2>Available Lessons</h2>
+<header>
+
+<h1>📖 Discipleship</h1>
 
 <p>
-You can continue adding more lessons, PDFs, videos,
-documents, and resources here.
+
+Grow deeper in Christ through biblical lessons,
+practical teachings, and discipleship resources.
+
 </p>
 
-<div class="cards">
+</header>
 
-<!-- CARD 1 -->
+
+
+<div class="container">
+
+
+<div class="grid">
+
 
 <div class="card">
 
 <h3>FOUNDATIONS OF FAITH</h3>
 
-<p>Discipleship lesson.</p>
+<p>
 
-<div class="lesson-content">
-Learn the foundational truths of Christianity, salvation,
-faith, repentance, prayer, and spiritual growth.
-</div>
+Learn the foundational truths of Christianity,
+salvation, prayer, repentance and spiritual growth.
 
-<button onclick="readLesson(this)">
-🔊 Read Lesson
-</button>
-<button onclick="stopReading()">
-⏹ Stop Reading
-</button>
+</p>
 
-<a href="LESSONS/FOUNDATIONS OF FAITH.pdf" target="_blank">
+<a href="LESSONS/FOUNDATIONS OF FAITH.pdf"
+class="btn"
+target="_blank">
+
 Open Lesson
+
 </a>
 
 </div>
 
-<!-- CARD 2 -->
+
 
 <div class="card">
 
 <h3>STEWARDSHIP</h3>
 
-<p></p>
+<p>
 
-<details>
+Discover biblical principles for managing time,
+talents, finances and God's resources faithfully.
 
-<summary>View Lesson</summary>
+</p>
 
-<div class="lesson-content">
-
-
-</div>
-
-</details>
-
-<button onclick="readLesson(this)">
-🔊 Read Lesson
-</button>
-<button onclick="stopReading()">
-⏹ Stop Reading
-</button>
-
-<a href="LESSONS/FOUNDATIONS OF FAITH.pdf"
+<a href="LESSONS/STEWARDSHIP.pdf"
+class="btn"
 target="_blank">
+
 Open Lesson
+
 </a>
 
 </div>
 
-<!-- CARD 3 -->
+
 
 <div class="card">
 
-<h3>FOUNDATIONS OF FAITH</h3>
+<h3>THE GOD FACTOR</h3>
 
-<p>Discipleship lesson.</p>
+<p>
 
-<div class="lesson-content">
-Understand the purpose of the Church, fellowship,
-worship, discipleship, evangelism and spiritual growth
-within the body of Christ.
-</div>
+Experience the transforming power of God's presence
+in every area of your life and ministry.
 
-<button onclick="readLesson(this)">
-🔊 Read Lesson
-</button>
-<button onclick="stopReading()">
-⏹ Stop Reading
-</button>
+</p>
 
-<a href="LESSONS/FOUNDATIONS OF FAITH.pdf" target="_blank">
+<a href="LESSONS/THE GOD FACTOR.pdf"
+class="btn"
+target="_blank">
+
 Open Lesson
+
 </a>
 
 </div>
 
-<!-- CARD 4 -->
+
 
 <div class="card">
 
-<h3>FOUNDATIONS OF FAITH</h3>
+<h3>FOUNDATIONS OF CHURCH LEADERSHIP</h3>
 
-<p>Discipleship lesson.</p>
+<p>
 
-<div class="lesson-content">
-Learn the biblical roles, responsibilities and qualifications
-of pastors, elders, deacons and ministry leaders.
-</div>
+Study biblical leadership principles, vision,
+character, and servant leadership.
 
-<button onclick="readLesson(this)">
-🔊 Read Lesson
-</button>
-<button onclick="stopReading()">
-⏹ Stop Reading
-</button>
+</p>
 
-<a href="LESSONS/FOUNDATIONS OF FAITH.pdf" target="_blank">
+<a href="LESSONS/Foundations Of Church Leadership.pdf"
+class="btn"
+target="_blank">
+
 Open Lesson
+
 </a>
 
 </div>
 
-</section>
+
+
+<div class="card">
+
+<h3>STANDING FIRM IN FAITH</h3>
+
+<p>
+
+Stand firm in Christ through Scripture,
+fellowship, perseverance and spiritual maturity.
+
+</p>
+
+<a href="LESSONS/STANDING FIRM IN FAITH.pdf"
+class="btn"
+target="_blank">
+
+Open Lesson
+
+</a>
+
+</div>
+
+
+</div>
+
+</div>
+
+
 
 <footer>
 
-<p>GracePath Network</p>
+<p><strong>GracePath Network</strong></p>
 
-<p>grapathnetwork@gmail.com</p>
+<p>gracepathnetwork@gmail.com</p>
 
-<p>+254721335631</p>
+<p>+254 721 335 631</p>
+
+<p>Growing in Christ • Walking in Grace • Impacting Lives</p>
 
 </footer>
-
-<script>
-
-function readLesson(button){
-
-    const lesson =
-    button.parentElement.querySelector('.lesson-content').innerText;
-
-    const chunks = splitText(lesson, 1500);
-
-    window.speechSynthesis.cancel();
-
-    speakChunks(chunks, 0);
-}
-
-function splitText(text, size){
-
-    let chunks = [];
-
-    for(let i = 0; i < text.length; i += size){
-        chunks.push(text.substring(i, i + size));
-    }
-
-    return chunks;
-}
-
-function speakChunks(chunks, index){
-
-    if(index >= chunks.length) return;
-
-    const speech =
-    new SpeechSynthesisUtterance(chunks[index]);
-
-    speech.lang = "en-US";
-    speech.rate = 1;
-    speech.pitch = 1;
-
-    speech.onend = function(){
-        speakChunks(chunks, index + 1);
-    };
-
-    window.speechSynthesis.speak(speech);
-}
-
-</script>
 
 </body>
 
