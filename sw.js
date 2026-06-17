@@ -1,4 +1,4 @@
-const CACHE_NAME = "gracepath-v3";
+const CACHE_NAME = "gracepath-v2";
 
 self.addEventListener("install", event => {
   event.waitUntil(

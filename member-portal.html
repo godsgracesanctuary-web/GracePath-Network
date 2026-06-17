@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GracePath Member Portal</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.portal-card{
+max-width:1000px;
+margin:30px auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ddd;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+button{
+padding:12px 20px;
+background:#f59e0b;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:0.9;
+}
+
+.profile-row{
+padding:12px 0;
+border-bottom:1px solid #eee;
+}
+
+.section-title{
+margin-top:30px;
+color:#f59e0b;
+}
+
+.progress-bar{
+background:#e5e7eb;
+height:20px;
+border-radius:10px;
+margin-top:8px;
+overflow:hidden;
+}
+
+.progress-fill{
+background:#16a34a;
+height:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">← Back Home</a>
+</nav>
+
+<header>
+
+<h1>👤 GracePath Member Portal</h1>
+
+<p>
+Welcome to your GracePath Family dashboard.
+Track your learning journey, achievements,
+certificates, reading progress and community participation.
+</p>
+
+</header>
+
+<div class="portal-card">
+
+<h2>Access My Dashboard</h2>
+
+<p>
+Enter your Member ID and Phone Number.
+</p>
+
+<input
+type="text"
+id="memberId"
+placeholder="Member ID"
+>
+
+<input
+type="text"
+id="phoneNumber"
+placeholder="Phone Number"
+>
+
+<button onclick="loadMember()">
+Access My Dashboard
+</button>
+
+</div>
+
+<div
+class="portal-card"
+id="portalContent"
+style="display:none;">
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+query,
+where,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+projectId: "gods-grace-sanctuary-7c3e9",
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+messagingSenderId: "794689665126",
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.loadMember = async function(){
+
+try{
+
+const memberId =
+document.getElementById("memberId").value.trim();
+
+const phoneNumber =
+document.getElementById("phoneNumber").value.trim();
+
+if(!memberId || !phoneNumber){
+
+alert(
+"Please enter your GracePath Member ID and registered Phone Number."
+);
+
+return;
+
+}
+
+const memberQuery = query(
+collection(db,"membershipApplication"),
+where("memberId","==",memberId)
+);
+
+const memberSnapshot =
+await getDocs(memberQuery);
+
+if(memberSnapshot.empty){
+
+alert("Member not found.");
+
+return;
+
+}
+
+const memberData =
+memberSnapshot.docs[0].data();
+
+const savedPhone =
+(memberData.phoneNumber || "")
+.replace(/\s/g,"")
+.replace("+254","0");
+
+const enteredPhone =
+phoneNumber
+.replace(/\s/g,"")
+.replace("+254","0");
+
+if(savedPhone !== enteredPhone){
+
+alert(
+"Member ID and Phone Number do not match."
+);
+
+return;
+
+}
+
+let coursesHtml = "";
+let certificatesHtml = "";
+
+/* COURSES */
+
+const coursesQuery = query(
+collection(db,"memberCourses"),
+where("memberId","==",memberId)
+);
+
+const coursesSnapshot =
+await getDocs(coursesQuery);
+
+if(coursesSnapshot.empty){
+
+coursesHtml = `
+<div class="profile-row">
+No learning records found.
+</div>
+`;
+
+}else{
+
+coursesSnapshot.forEach((courseDoc)=>{
+
+const course = courseDoc.data();
+
+coursesHtml += `
+
+<div class="profile-row">
+
+<strong>${course.program || ""}</strong><br>
+
+Level:
+${course.level || "-"}<br>
+
+Lessons Completed:
+${course.lessonsCompleted || 0}<br>
+
+Progress:
+${course.progress || 0}%
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+style="width:${course.progress || 0}%;">
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+/* CERTIFICATES */
+
+const certQuery = query(
+collection(db,"memberCertificates"),
+where("memberId","==",memberId)
+);
+
+const certSnapshot =
+await getDocs(certQuery);
+
+if(certSnapshot.empty){
+
+certificatesHtml = `
+<div class="profile-row">
+No certificates earned yet.
+</div>
+`;
+
+}else{
+
+certSnapshot.forEach((certDoc)=>{
+
+const cert = certDoc.data();
+
+certificatesHtml += `
+
+<div class="profile-row">
+
+🏆 ${cert.certificateName || ""}
+
+<br>
+
+Program:
+${cert.program || ""}
+
+<br><br>
+
+<button
+onclick="
+${cert.certificateUrl ?
+`window.open('${cert.certificateUrl}','_blank')`
+:
+`alert('Certificate file not available.')`}
+">
+View Certificate
+</button>
+
+<button
+onclick="
+${cert.certificateUrl ?
+`window.location.href='${cert.certificateUrl}'`
+:
+`alert('Certificate file not available.')`}
+">
+Download Certificate
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+document.getElementById(
+"portalContent"
+).style.display = "block";
+
+document.getElementById(
+"portalContent"
+).innerHTML = `
+
+<div style="margin-bottom:20px;">
+
+<button onclick="
+document.getElementById('portalContent').style.display='none';
+window.scrollTo(0,0);
+">
+Logout
+</button>
+
+</div>
+
+<h2>Welcome, ${memberData.fullName || ""}</h2>
+
+<div class="profile-row">
+<strong>Member ID:</strong>
+${memberData.memberId || ""}
+</div>
+
+<div class="profile-row">
+<strong>Community Status:</strong>
+${memberData.status || "Member"}
+</div>
+
+<div class="profile-row">
+<strong>Phone:</strong>
+${memberData.phoneNumber || ""}
+</div>
+
+<div class="profile-row">
+<strong>Email:</strong>
+${memberData.email || ""}
+</div>
+
+<div class="profile-row">
+<strong>Residence:</strong>
+${memberData.residence || ""}
+</div>
+
+<div class="profile-row">
+<strong>Interest Area:</strong>
+${memberData.ministryInterest || ""}
+</div>
+
+<div class="profile-row">
+<strong>Orientation Date:</strong>
+${memberData.orientationDate || ""}
+</div>
+
+<h3 class="section-title">
+📈 My Growth Summary
+</h3>
+
+<div class="profile-row">
+<strong>Learning Programs Enrolled:</strong>
+${coursesSnapshot.size}
+</div>
+
+<div class="profile-row">
+<strong>Certificates Earned:</strong>
+${certSnapshot.size}
+</div>
+
+<div class="profile-row">
+<strong>Member Since:</strong>
+${memberData.orientationDate || "Not recorded"}
+</div>
+
+<div class="profile-row">
+<strong>Community Status:</strong>
+${memberData.status || "Member"}
+</div>
+
+<h3 class="section-title">
+📚 My Learning Journey
+</h3>
+
+${coursesHtml}
+
+<h3 class="section-title">
+🏆 My Achievements & Certificates
+</h3>
+
+${certificatesHtml}
+
+<h3 class="section-title">
+📖 My Reading Library
+</h3>
+
+<div class="profile-row">
+Reading history will appear here.
+</div>
+
+<h3 class="section-title">
+🤝 Community Participation
+</h3>
+
+<div class="profile-row">
+Community activities and service opportunities will appear here.
+</div>
+
+<h3 class="section-title">
+🪪 GracePath Family Membership Card
+</h3>
+
+<div class="profile-row">
+
+<strong>Name:</strong>
+${memberData.fullName || ""}
+
+<br><br>
+
+<strong>Member ID:</strong>
+${memberData.memberId || ""}
+
+<br><br>
+
+<strong>Status:</strong>
+${memberData.status || "Member"}
+
+<br><br>
+
+<strong>Community:</strong>
+GracePath Network Family
+
+<br><br>
+
+<button
+onclick="
+${memberData.cardUrl ?
+`window.open('${memberData.cardUrl}','_blank')`
+:
+`alert('Membership card not yet available.')`}
+">
+View Membership Card
+</button>
+
+<button
+onclick="
+${memberData.cardUrl ?
+`window.location.href='${memberData.cardUrl}'`
+:
+`alert('Membership card not yet available.')`}
+">
+Download Membership Card
+</button>
+</div>
+
+`;
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"An error occurred while loading your dashboard."
+);
+
+}
+
+};   // closes loadMember function
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Membership Report | GracePath Family</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background:#f4f6f9;
+}
+
+header{
+    background:#1e3a8a;
+    color:white;
+    padding:20px;
+}
+
+.container{
+    padding:20px;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card h2{
+    margin:0;
+    font-size:30px;
+    color:#1e3a8a;
+}
+
+.card p{
+    margin-top:10px;
+    color:#666;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+table th,
+table td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:left;
+}
+
+table th{
+    background:#1e3a8a;
+    color:white;
+}
+
+.section{
+    margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📊 Membership Report</h1>
+    <p>GracePath Family Administration Dashboard</p>
+</header>
+
+<a href="index.html"
+style="
+background:white;
+color:#1e3a8a;
+padding:10px 15px;
+border-radius:6px;
+text-decoration:none;
+font-weight:bold;">
+← Back to Dashboard
+</a>
+
+<div class="container">
+
+<div class="stats-grid">
+
+<div class="card">
+    <h2 id="totalMembers">0</h2>
+    <p>Total Members</p>
+</div>
+
+<div class="card">
+    <h2 id="activeMembers">0</h2>
+    <p>Active Members</p>
+</div>
+
+<div class="card">
+    <h2 id="newMembers">0</h2>
+    <p>New Members This Month</p>
+</div>
+
+<div class="card">
+    <h2 id="regions">0</h2>
+    <p>Regions Represented</p>
+</div>
+
+</div>
+
+<div class="section">
+<h2>📋 Recent Registrations</h2>
+<input
+type="text"
+id="searchInput"
+placeholder="Search member..."
+style="
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:6px;">
+
+<div style="margin-bottom:15px;">
+
+<button onclick="exportMembers()">
+📥 Export CSV
+</button>
+
+<button onclick="window.print()">
+🖨️ Print Report
+</button>
+
+</div>
+
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Region</th>
+</tr>
+</thead>
+
+<tbody id="membersTable">
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+projectId: "gods-grace-sanctuary-7c3e9",
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+messagingSenderId: "794689665126",
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const membersSnapshot =
+await getDocs(collection(db,"members"));
+
+document.getElementById("totalMembers").textContent =
+membersSnapshot.size;
+
+let members = [];
+
+membersSnapshot.forEach((doc)=>{
+    members.push(doc.data());
+});
+
+let regions = [...new Set(
+    members.map(m => m.region).filter(Boolean)
+)];
+
+document.getElementById("regions").textContent =
+regions.length;
+
+document.getElementById("activeMembers").textContent =
+members.length;
+
+document.getElementById("newMembers").textContent =
+members.length;
+
+let table = document.getElementById("membersTable");
+
+members.slice(-10).reverse().forEach(member => {
+
+table.innerHTML += `
+
+
+
+<tr>
+<td>${member.fullName || member.name || ""}</td>
+<td>${member.email || ""}</td>
+<td>${member.phone || ""}</td>
+<td>${member.region || ""}</td>
+</tr>
+`;
+
+});
+
+document.getElementById("searchInput")
+.addEventListener("keyup", function() {
+
+const search = this.value.toLowerCase();
+
+const rows =
+document.querySelectorAll("#membersTable tr");
+
+rows.forEach(row => {
+
+row.style.display =
+row.textContent.toLowerCase().includes(search)
+? ""
+: "none";
+
+});
+
+});
+
+window.exportMembers = function(){
+
+let csv =
+"Name,Email,Phone,Region\n";
+
+members.forEach(member => {
+
+csv +=
+`"${member.fullName || member.name || ""}","${member.email || ""}","${member.phone || ""}","${member.region || ""}"\n`;
+
+});
+
+const blob =
+new Blob([csv], {type:"text/csv"});
+
+const link =
+document.createElement("a");
+
+link.href =
+URL.createObjectURL(blob);
+
+link.download =
+"gracepath-members.csv";
+
+link.click();
+
+};
+</script>
+
+
+
+</body>
+</html>

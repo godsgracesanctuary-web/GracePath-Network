@@ -1,31 +1,50 @@
-js<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Media & Library | GracePath Network</title>
+<title>Media Library | GracePath Network</title>
 
-<link rel="stylesheet" href="../style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
-/* PAGE STYLE */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
 body{
     font-family:'Poppins',sans-serif;
+    background:#f8fafc;
+    color:#0f172a;
 }
 
 /* NAVIGATION */
 
 nav{
-    padding:15px 25px;
-    margin-top:20px;
-    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:white;
+
+    padding:18px 8%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    box-shadow:0 2px 12px rgba(0,0,0,.06);
+}
+
+.logo{
+    font-size:1.2rem;
+    font-weight:700;
+    color:#1e3a8a;
 }
 
 nav a{
@@ -34,122 +53,95 @@ nav a{
     font-weight:600;
 }
 
-/* HEADER */
+/* HERO */
 
-header{
+.hero{
+    background:
+    linear-gradient(
+        rgba(15,23,42,.75),
+        rgba(15,23,42,.75)
+    ),
+    url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600');
+
+    background-size:cover;
+    background-position:center;
+
     text-align:center;
-    padding:90px 20px;
+    color:white;
+
+    padding:120px 20px;
 }
 
-header h1{
-    font-size:3rem;
-    margin-bottom:15px;
-    color:#0f172a;
+.hero h1{
+    font-size:clamp(2.5rem,7vw,4.5rem);
+    margin-bottom:20px;
+    font-weight:800;
 }
 
-header p{
-    max-width:750px;
+.hero p{
+    max-width:800px;
     margin:auto;
-    color:#475569;
-    line-height:1.8;
     font-size:1.1rem;
+    line-height:1.9;
 }
 
-/* SECTION */
+/* CONTENT */
 
-section{
-    padding:40px 8%;
+.section{
+    padding:80px 8%;
 }
 
-/* CARDS GRID */
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-title h2{
+    font-size:2.4rem;
+    margin-bottom:10px;
+}
+
+.section-title p{
+    color:#64748b;
+}
+
+/* GRID */
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
     gap:30px;
 }
 
 /* CARD */
 
 .card{
-    background:linear-gradient(to bottom right,#ffffff,#fef3c7);
+    background:white;
 
     border-radius:25px;
 
-    padding:30px 25px;
+    padding:30px;
 
-    border-top:6px solid #f59e0b;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
 
-    box-shadow:
-    0 8px 25px rgba(0,0,0,0.08),
-    0 3px 10px rgba(245,158,11,0.08);
+    transition:.3s ease;
 
-    transition:all 0.4s ease;
-
-    position:relative;
-
-    overflow:hidden;
+    border-top:5px solid #f59e0b;
 }
 
 .card:hover{
-    transform:translateY(-10px);
-
-    box-shadow:
-    0 15px 35px rgba(0,0,0,0.12),
-    0 5px 15px rgba(245,158,11,0.15);
+    transform:translateY(-8px);
 }
-
-/* LIGHT EFFECT */
-
-.card::before{
-    content:"";
-
-    position:absolute;
-
-    top:-50px;
-    right:-50px;
-
-    width:140px;
-    height:140px;
-
-    background:rgba(255,255,255,0.3);
-
-    border-radius:50%;
-}
-
-/* TITLES */
 
 .card h3{
-    font-size:1.4rem;
-    margin-bottom:20px;
-    color:#111827;
+    margin-bottom:15px;
+    font-size:1.3rem;
 }
-
-.card h3::after{
-    content:"";
-
-    display:block;
-
-    width:60px;
-    height:4px;
-
-    background:#f59e0b;
-
-    border-radius:10px;
-
-    margin-top:10px;
-}
-section h2{
-    text-align:center;
-    margin-bottom:40px;
-    color:#0f172a;
-}
-/* TEXT */
 
 .card p{
-    color:#475569;
-    line-height:1.8;
+    color:#64748b;
     margin-bottom:25px;
+    line-height:1.8;
 }
 
 /* BUTTON */
@@ -159,143 +151,158 @@ section h2{
 
     text-decoration:none;
 
-    padding:13px 24px;
-
-    border-radius:40px;
-
-    background:linear-gradient(135deg,#f59e0b,#d97706);
+    background:#1e3a8a;
 
     color:white;
 
-    font-weight:700;
+    padding:12px 24px;
 
-    transition:0.3s ease;
+    border-radius:50px;
 
-    box-shadow:0 4px 10px rgba(0,0,0,0.12);
+    font-weight:600;
+
+    transition:.3s;
 }
 
 .card a:hover{
-    transform:translateY(-3px);
-
-    box-shadow:0 8px 20px rgba(0,0,0,0.18);
+    opacity:.9;
 }
 
 /* FOOTER */
 
 footer{
+    background:#0f172a;
+    color:white;
     text-align:center;
-    padding:30px 20px;
-    margin-top:40px;
+    padding:50px 20px;
+}
+
+footer h3{
+    margin-bottom:10px;
 }
 
 footer p{
-    color:#475569;
+    margin:6px 0;
+    opacity:.85;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .hero{
+        padding:90px 20px;
+    }
+
+    .section{
+        padding:60px 20px;
+    }
+
+    .section-title h2{
+        font-size:2rem;
+    }
 }
 
 </style>
 
 </head>
+
+<body>
+
+<nav>
+    <div class="logo">GracePath Network</div>
+    <a href="../index.html">Home</a>
+</nav>
+
+<section class="hero">
+
+    <h1>Media Library</h1>
+
+    <p>
+        Access sermons, worship music, live services, videos,
+        biblical teachings, and ministry resources designed
+        to strengthen your faith and spiritual growth.
+    </p>
+
+</section>
+
+<section class="section">
+
+    <div class="section-title">
+        <h2>Media Resources</h2>
+        <p>Watch, listen, and grow through faith-filled content.</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>📺 Live Services</h3>
+            <p>
+                Watch live worship services, conferences,
+                special meetings, and previous broadcasts.
+            </p>
+            <a href="../live/index.html">Open Library</a>
+        </div>
+
+        <div class="card">
+            <h3>🎤 Sermons</h3>
+            <p>
+                Practical biblical messages and life-transforming
+                teachings for everyday Christian living.
+            </p>
+            <a href="../sermons/index.html">Open Library</a>
+        </div>
+
+        <div class="card">
+            <h3>🎧 Audio Sermons & Music</h3>
+            <p>
+                Listen to worship music, sermons,
+                devotionals, and inspirational audio resources.
+            </p>
+            <a href="../audio-sermons-&-music/index.html">Open Library</a>
+        </div>
+
+        <div class="card">
+            <h3>📖 Ministers' Sermons</h3>
+            <p>
+                Messages from pastors, guest speakers,
+                evangelists, and trusted Christian leaders.
+            </p>
+            <a href="../ministers-sermons/index.html">Open Library</a>
+        </div>
+
+        <div class="card">
+            <h3>🎬 Videos & Dramas</h3>
+            <p>
+                Christian films, dramas, teachings,
+                documentaries, and inspirational videos.
+            </p>
+            <a href="../videos-dramas/index.html">Open Library</a>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <h3>GracePath Network</h3>
+
+    <p>Growing in Faith, Walking in Purpose.</p>
+
+    <p>gracepathnetwork@gmail.com</p>
+
+    <p>+254 721 335 631</p>
+
+</footer>
+
 <script>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('/sw.js')
     .then(() => console.log('Service Worker Registered'))
     .catch(err => console.log(err));
 }
 </script>
-<body>
-
-<header>
-
-<h1>Media Library</h1>
-
-<p>
-Access sermons, teachings, worship music, videos, live services,
-and ministry resources designed to strengthen your faith and spiritual growth.
-</p>
-
-</header>
-
-<!-- NAVIGATION -->
-
-<nav>
-
-<a href="../index.html">Home</a>
-
-</nav>
-
-<section>
-
-<h2>Media Resources</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>📺 Live Services</h3>
-<p>
-Watch live worship services, special meetings, conferences, and previous broadcasts.
-</p>
-<a href="../live/index.html">
-Open Library
-</a>
-</div>
-
-<div class="card">
-<h3>🎤 Sermons</h3>
-<p>
-Life-transforming biblical messages, teachings, and practical sermons for everyday living.
-</p>
-<a href="../sermons/index.html">
-Open Library
-</a>
-</div>
-
-<div class="card">
-<h3>🎧 Audio Sermons & Music</h3>
-<p>
-Listen to inspiring sermons, worship music, devotionals, and faith-building audio resources.
-</p>
-<a href="../audio-sermons-&-music/index.html">
-Open Library
-</a>
-</div>
-
-<div class="card">
-<h3>📖 Ministers' Sermons</h3>
-<p>
-Messages from pastors, ministers, guest speakers, and trusted Christian leaders.
-</p>
-<a href="../ministers-sermons/index.html">
-Open Library
-</a>
-</div>
-
-<div class="card">
-<h3>🎬 Videos & Dramas</h3>
-<p>
-Christian films, dramas, teachings, and video resources that inspire and encourage.
-</p>
-<a href="../videos-dramas/index.html">
-Open Library
-</a>
-</div>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-
-<p><strong>GracePath Network</strong></p>
-
-<p>Growing in Faith, Walking in Purpose.</p>
-
-<p>gracepathnetwork@gmail.com</p>
-
-<p>+254 721 335 631</p>
-
-</footer>
 
 </body>
 </html>

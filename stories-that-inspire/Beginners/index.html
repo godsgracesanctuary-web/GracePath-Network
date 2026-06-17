@@ -8,7 +8,16 @@
 
 <title>Beginners Stories | GracePath Network</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Simple Christian stories for young children that teach faith, kindness, obedience, courage, and God's love through engaging Bible-based lessons.">
+
+<link rel="icon" type="image/png" href="../images/gracepath-logo.png">
+
+<meta property="og:title" content="Beginners Stories | GracePath Network">
+<meta property="og:description" content="Faith-building stories for children that teach biblical values and God's love.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="../images/beginners-stories-banner.jpg">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -18,191 +27,351 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:'Poppins',sans-serif;
-    background:linear-gradient(to bottom,#fffef7,#f5f7fb);
-    color:#333;
+    background:#f8fafc;
+    color:#334155;
     line-height:1.8;
 }
 
-/* Navigation */
+/* ==========================
+   NAVIGATION
+========================== */
 
 nav{
     background:#14532d;
-    padding:18px 25px;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.logo{
+    color:#fde047;
+    font-size:1.3rem;
+    font-weight:700;
 }
 
 nav a{
-    color:#ffffff;
+    color:white;
     text-decoration:none;
     font-weight:600;
+    transition:.3s;
 }
 
 nav a:hover{
     color:#fde047;
 }
 
-/* Hero Section */
+/* ==========================
+   HERO SECTION
+========================== */
 
-header{
-    background:linear-gradient(135deg,#14532d,#22c55e);
-    color:#ffffff;
+.hero{
+    background:
+    linear-gradient(rgba(20,83,45,.88),rgba(34,197,94,.85)),
+    url('https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1600&q=80');
+
+    background-size:cover;
+    background-position:center;
+
+    color:white;
     text-align:center;
-    padding:90px 20px;
+    padding:120px 20px;
 }
 
-header h1{
-    font-size:3rem;
-    margin-bottom:15px;
-    color:#fde047;
-}
-
-header p{
-    max-width:700px;
-    margin:auto;
-    font-size:1.1rem;
-}
-
-/* Sections */
-
-section{
-    max-width:1200px;
-    margin:auto;
-    padding:60px 20px;
-}
-
-section h2{
-    text-align:center;
-    color:#14532d;
-    margin-bottom:35px;
-    font-size:2rem;
-}
-
-/* Cards */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
-}
-
-.card{
-    background:#ffffff;
-    border-radius:25px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:translateY(-8px);
-}
-
-.card-top{
-    height:8px;
+.hero-badge{
+    display:inline-block;
     background:#fde047;
-}
-
-.card-content{
-    padding:25px;
-}
-
-.card h3{
     color:#14532d;
-    margin-bottom:15px;
-}
-
-.card p{
+    padding:10px 20px;
+    border-radius:40px;
+    font-weight:700;
     margin-bottom:20px;
 }
 
-/* Buttons */
+.hero h1{
+    font-size:4rem;
+    margin-bottom:20px;
+    font-weight:800;
+}
+
+.hero p{
+    max-width:850px;
+    margin:auto;
+    font-size:1.15rem;
+}
+
+.hero-buttons{
+    margin-top:35px;
+}
 
 .btn{
     display:inline-block;
-    background:#14532d;
-    color:#ffffff;
     text-decoration:none;
-    padding:12px 25px;
-    border-radius:30px;
-    font-weight:600;
-    transition:0.3s;
+    padding:14px 30px;
+    border-radius:50px;
+    font-weight:700;
+    transition:.3s;
 }
 
-.btn:hover{
+.btn-primary{
     background:#fde047;
     color:#14532d;
 }
 
-/* Memory Verse */
-
-.memory-verse{
-    background:#ffffff;
-    padding:50px 30px;
-    border-radius:25px;
-    text-align:center;
-    box-shadow:0 8px 25px rgba(0,0,0,0.08);
-    max-width:850px;
-    margin:auto;
+.btn-primary:hover{
+    transform:translateY(-4px);
 }
 
-.memory-verse h2{
+.btn-secondary{
+    border:2px solid white;
+    color:white;
+    margin-left:10px;
+}
+
+.btn-secondary:hover{
+    background:white;
     color:#14532d;
 }
 
+/* ==========================
+   SECTIONS
+========================== */
+
+section{
+    padding:90px 8%;
+}
+
+.section-title{
+    text-align:center;
+    color:#14532d;
+    font-size:2.4rem;
+    margin-bottom:15px;
+}
+
+.section-subtitle{
+    text-align:center;
+    max-width:800px;
+    margin:auto;
+    margin-bottom:50px;
+    color:#64748b;
+}
+
+/* ==========================
+   FEATURED STORY
+========================== */
+
+.featured{
+    background:white;
+    border-radius:30px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+    border-top:8px solid #fde047;
+}
+
+.featured h3{
+    color:#14532d;
+    font-size:2rem;
+    margin-bottom:15px;
+}
+
+.featured p{
+    max-width:750px;
+    margin:auto;
+    margin-bottom:30px;
+}
+
+/* ==========================
+   STORIES
+========================== */
+
+.story-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.story-card{
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.story-card:hover{
+    transform:translateY(-10px);
+}
+
+.story-top{
+    height:10px;
+    background:#fde047;
+}
+
+.story-content{
+    padding:30px;
+}
+
+.story-content h3{
+    color:#14532d;
+    margin-bottom:15px;
+}
+
+.story-content p{
+    color:#64748b;
+    margin-bottom:25px;
+}
+
+/* ==========================
+   LESSONS
+========================== */
+
+.lesson-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.lesson-card{
+    background:white;
+    padding:35px 25px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.lesson-card:hover{
+    transform:translateY(-8px);
+}
+
+.lesson-card h3{
+    color:#14532d;
+    margin-bottom:10px;
+}
+
+/* ==========================
+   MEMORY VERSE
+========================== */
+
+.memory-verse{
+    background:linear-gradient(135deg,#14532d,#22c55e);
+    color:white;
+    text-align:center;
+    padding:70px 30px;
+    border-radius:30px;
+}
+
+.memory-verse h2{
+    color:#fde047;
+    margin-bottom:25px;
+}
+
 .memory-verse p{
-    font-size:1.1rem;
+    max-width:850px;
+    margin:auto;
+    font-size:1.15rem;
 }
 
 .memory-verse strong{
-    color:#22c55e;
     display:block;
-    margin-top:15px;
+    margin-top:20px;
+    color:#fde047;
 }
 
-/* Footer */
+/* ==========================
+   CTA
+========================== */
+
+.cta-box{
+    background:white;
+    border-radius:30px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.cta-box h2{
+    color:#14532d;
+    margin-bottom:15px;
+}
+
+.cta-box p{
+    max-width:750px;
+    margin:auto;
+    margin-bottom:25px;
+}
+
+/* ==========================
+   FOOTER
+========================== */
 
 footer{
     background:#14532d;
-    color:#ffffff;
+    color:white;
     text-align:center;
-    padding:60px 20px;
-    margin-top:40px;
+    padding:70px 20px;
 }
 
-footer h3{
+footer h2{
     color:#fde047;
     margin-bottom:15px;
-    font-size:1.8rem;
 }
 
 footer p{
-    margin:10px 0;
+    margin:8px 0;
 }
 
-.tagline{
+.footer-note{
+    max-width:850px;
+    margin:20px auto;
     color:#d1fae5;
 }
 
 .copyright{
-    margin-top:20px;
+    margin-top:25px;
     color:#bbf7d0;
 }
 
-/* Mobile */
+/* ==========================
+   MOBILE
+========================== */
 
 @media(max-width:768px){
 
-    header{
-        padding:70px 20px;
+    .hero{
+        padding:90px 20px;
     }
 
-    header h1{
-        font-size:2.2rem;
+    .hero h1{
+        font-size:2.5rem;
+        line-height:1.2;
+    }
+
+    .hero-buttons .btn{
+        display:block;
+        max-width:280px;
+        margin:10px auto;
+    }
+
+    .btn-secondary{
+        margin-left:0;
     }
 
     section{
-        padding:40px 15px;
+        padding:70px 20px;
+    }
+
+    .featured,
+    .cta-box{
+        padding:35px 20px;
     }
 
 }
@@ -214,62 +383,132 @@ footer p{
 <body>
 
 <nav>
-<a href="../index.html">← Back to Stories That Inspire</a>
+
+<div class="logo">
+🌱 GracePath Kids
+</div>
+
+<a href="../index.html">
+← Back Home
+</a>
+
 </nav>
 
-<header>
+<header class="hero">
 
-<h1>🌱 Beginners Stories</h1>
+<div class="hero-badge">
+📖 Faith • Kindness • Obedience
+</div>
+
+<h1>Beginners Stories</h1>
 
 <p>
-Simple, engaging, faith-building stories designed to help young children learn about God, obedience, kindness, courage, and faith.
+Simple, engaging, and faith-building stories designed to help young children learn about God, kindness, obedience, courage, and His everlasting love.
 </p>
+
+<div class="hero-buttons">
+
+<a href="#stories" class="btn btn-primary">
+Explore Stories
+</a>
+
+<a href="../index.html" class="btn btn-secondary">
+GracePath Network
+</a>
+
+</div>
 
 </header>
 
 <section>
 
-<h2>📚 Available Stories</h2>
+<h2 class="section-title">⭐ Featured Story</h2>
 
-<div class="cards">
-
-<div class="card">
-<div class="card-top"></div>
-<div class="card-content">
-<h3>👕⭐ Joseph The Dreamer</h3>
-<p>
-Follow Joseph's journey of faith, forgiveness, perseverance, and God's perfect plan.
+<p class="section-subtitle">
+A special story chosen to inspire young hearts and teach biblical values.
 </p>
-<a href="stories/Joseph The Dreamer.pdf" target="_blank" class="btn">
-Read Story
+
+<div class="featured">
+
+<h3>👕 Joseph The Dreamer</h3>
+
+<p>
+Follow Joseph's incredible journey and discover lessons about faith, forgiveness, perseverance, and trusting God's plan.
+</p>
+
+<a href="stories/Joseph The Dreamer.pdf" target="_blank" class="btn btn-primary">
+Read Featured Story
 </a>
+
+</div>
+
+</section>
+
+<section id="stories">
+
+<h2 class="section-title">📚 Story Collection</h2>
+
+<p class="section-subtitle">
+Bible-based stories designed to help children grow in faith and character.
+</p>
+
+<div class="story-grid">
+
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
+<h3>👕 Joseph The Dreamer</h3>
+<p>Learn about faith, forgiveness, perseverance, and God's perfect plan.</p>
+<a href="stories/Joseph The Dreamer.pdf" target="_blank" class="btn btn-primary">Read Story</a>
 </div>
 </div>
 
-<div class="card">
-<div class="card-top"></div>
-<div class="card-content">
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
 <h3>🦁 Daniel and the Lions</h3>
-<p>
-Learn how Daniel trusted God and remained faithful even in difficult situations.
-</p>
-<a href="stories/daniel-lions.pdf" target="_blank" class="btn">
-Read Story
-</a>
+<p>Discover how Daniel trusted God and remained faithful in difficult times.</p>
+<a href="stories/DANIEL.pdf" target="_blank" class="btn btn-primary">Read Story</a>
 </div>
 </div>
 
-<div class="card">
-<div class="card-top"></div>
-<div class="card-content">
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
 <h3>🌈 Noah's Ark</h3>
-<p>
-A beautiful lesson about obedience, faith, and God's promises.
-</p>
-<a href="stories/noahs-ark.pdf" target="_blank" class="btn">
-Read Story
-</a>
+<p>A beautiful lesson about obedience, faith, and God's promises.</p>
+<a href="stories/NOAH.pdf" target="_blank" class="btn btn-primary">Read Story</a>
 </div>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">💡 Lessons Children Will Learn</h2>
+
+<div class="lesson-grid">
+
+<div class="lesson-card">
+<h3>🙏 Faith</h3>
+<p>Trusting God every day.</p>
+</div>
+
+<div class="lesson-card">
+<h3>❤️ Kindness</h3>
+<p>Treating others with love and respect.</p>
+</div>
+
+<div class="lesson-card">
+<h3>🌟 Obedience</h3>
+<p>Following God's instructions faithfully.</p>
+</div>
+
+<div class="lesson-card">
+<h3>💪 Courage</h3>
+<p>Being brave because God is always with us.</p>
 </div>
 
 </div>
@@ -292,17 +531,55 @@ Read Story
 
 </section>
 
+<section>
+
+<div class="cta-box">
+
+<h2>🌍 Continue Learning About God</h2>
+
+<p>
+Explore more stories, devotionals, Bible lessons, Sunday School resources, and Christian materials from GracePath Network.
+</p>
+
+<a href="../index.html" class="btn btn-primary">
+Explore More Resources
+</a>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="cta-box">
+
+<h2>📱 Connect With GracePath Network</h2>
+
+<p>
+Scan the QR Code to access more children's stories, biblical lessons, devotionals, and Christian resources.
+</p>
+
+<img src="../images/gracepath-qr.png"
+alt="GracePath QR Code"
+style="width:180px;margin-top:20px;">
+
+</div>
+
+</section>
+
 <footer>
 
-<h3>GracePath Network</h3>
+<h2>GracePath Network</h2>
 
-<p class="tagline">
-Transforming Lives Through Christ
-</p>
+<p><strong>Transforming Lives Through Christ, One Story at a Time</strong></p>
 
 <p>📧 gracepathnetwork@gmail.com</p>
 
 <p>📞 +254 721 335 631</p>
+
+<p class="footer-note">
+Helping children discover God's love through faith-building stories, biblical lessons, and Christian resources.
+</p>
 
 <p class="copyright">
 © 2026 GracePath Network. All Rights Reserved.

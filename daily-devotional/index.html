@@ -4,482 +4,765 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Daily Devotional | GracePath Network</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>
+Daily Devotional | GracePath Network
+</title>
 
 <link rel="stylesheet" href="../style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
 
-/* PAGE STYLE */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 
 body{
-    font-family:'Poppins',sans-serif;
+
+font-family:Arial,Helvetica,sans-serif;
+
+background:#f4f7fb;
+
+color:#333;
+
+line-height:1.6;
+
 }
+
+
+
+/* HERO */
+
+.hero{
+
+background:linear-gradient(135deg,#0b2d5c,#163f86);
+
+padding:70px 20px;
+
+text-align:center;
+
+color:white;
+
+}
+
+
+.hero h1{
+
+font-size:42px;
+
+margin-bottom:15px;
+
+}
+
+
+.hero p{
+
+max-width:750px;
+
+margin:auto;
+
+font-size:18px;
+
+}
+
+
 
 /* NAVIGATION */
 
 nav{
-    padding:15px 25px;
+
+background:white;
+
+padding:15px 8%;
+
+box-shadow:0 2px 5px rgba(0,0,0,.1);
+
 }
+
 
 nav a{
-    text-decoration:none;
-    color:white;
-    font-weight:600;
+
+text-decoration:none;
+
+font-weight:bold;
+
+color:#0b2d5c;
+
 }
 
-/* HEADER */
 
-header{
-    text-align:center;
-    padding:90px 20px;
+
+/* SEARCH */
+
+.search{
+
+padding:40px 20px;
+
+text-align:center;
+
 }
 
-header h1{
-    font-size:3rem;
-    margin-bottom:15px;
-    color:#0f172a;
+
+.search input{
+
+
+width:100%;
+
+max-width:650px;
+
+padding:15px 25px;
+
+border-radius:40px;
+
+border:1px solid #ddd;
+
+outline:none;
+
+font-size:16px;
+
 }
 
-header p{
-    max-width:750px;
-    margin:auto;
-    color:#475569;
-    line-height:1.8;
-    font-size:1.1rem;
+
+
+.count{
+
+text-align:center;
+
+color:#666;
+
+margin-bottom:30px;
+
 }
 
-/* SECTION */
 
-section{
-    padding:40px 8%;
-}
 
-/* CARDS GRID */
+/* CARDS */
+
 
 .cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
+
+
+display:grid;
+
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(260px,1fr));
+
+
+gap:25px;
+
+
+padding:0 8% 60px;
+
+
 }
 
-/* CARD */
+
+
 
 .card{
-    background:linear-gradient(to bottom right,#ffffff,#fef9c3);
 
-    border-radius:25px;
 
-    padding:30px 25px;
+background:white;
 
-    border-top:6px solid #eab308;
 
-    min-height:260px;
+padding:25px;
 
-    display:flex;
 
-    flex-direction:column;
+border-radius:18px;
 
-    justify-content:flex-start;
 
-    box-shadow:
-    0 8px 25px rgba(0,0,0,0.08),
-    0 3px 10px rgba(234,179,8,0.08);
+box-shadow:
 
-    transition:all 0.4s ease;
+0 4px 12px rgba(0,0,0,.08);
 
-    position:relative;
 
-    overflow:hidden;
+transition:.3s;
+
+
+text-align:center;
+
+
 }
+
+
 
 .card:hover{
-    transform:translateY(-10px);
 
-    box-shadow:
-    0 15px 35px rgba(0,0,0,0.12),
-    0 5px 15px rgba(234,179,8,0.15);
+
+transform:translateY(-5px);
+
+
 }
 
-/* LIGHT EFFECT */
 
-.card::before{
-    content:"";
-
-    position:absolute;
-
-    top:-50px;
-    right:-50px;
-
-    width:140px;
-    height:140px;
-
-    background:rgba(255,255,255,0.3);
-
-    border-radius:50%;
-}
-
-/* TITLES */
 
 .card h3{
-    font-size:1.4rem;
-    margin-bottom:20px;
-    color:#111827;
+
+
+min-height:60px;
+
+
+color:#0b2d5c;
+
+
+margin-bottom:25px;
+
+
 }
 
-.card h3::after{
-    content:"";
 
-    display:block;
-
-    width:60px;
-    height:4px;
-
-    background:#eab308;
-
-    border-radius:10px;
-
-    margin-top:10px;
-}
-
-/* TEXT */
-
-.card p{
-    color:#475569;
-    line-height:1.8;
-    margin-bottom:25px;
-}
-
-/* BUTTON */
 
 .card a{
-    display:inline-block;
 
-    text-decoration:none;
 
-    padding:13px 24px;
+display:inline-block;
 
-    border-radius:40px;
 
-    background:linear-gradient(135deg,#eab308,#ca8a04);
+padding:12px 28px;
 
-    color:white;
 
-    font-weight:700;
+border-radius:30px;
 
-    transition:0.3s ease;
 
-    box-shadow:0 4px 10px rgba(0,0,0,0.12);
+background:#0b2d5c;
 
-    width:170px;
 
-    text-align:center;
+color:white;
+
+
+text-decoration:none;
+
+
+font-weight:bold;
+
+
 }
+
+
 
 .card a:hover{
-    transform:translateY(-3px);
 
-    box-shadow:0 8px 20px rgba(0,0,0,0.18);
+
+background:#163f86;
+
+
 }
 
-/* FOOTER */
+
+
 
 footer{
-    text-align:center;
-    padding:30px 20px;
-    margin-top:40px;
+
+
+background:#081f4d;
+
+
+padding:40px;
+
+
+text-align:center;
+
+
+color:white;
+
+
 }
+
+
 
 footer p{
-    color:#475569;
-}section h2{
-    text-align:center;
-    margin-bottom:40px;
-    color:#0f172a;
+
+
+margin:8px 0;
+
+
 }
 
+
+
+
+@media(max-width:768px){
+
+
+.hero h1{
+
+
+font-size:32px;
+
+
+}
+
+
+.cards{
+
+
+padding:0 20px 50px;
+
+
+}
+
+
+}
+
+
 </style>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MLHKT6GPLY"></script>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MLHKT6GPLY"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag() {
+  dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-MLHKT6GPLY');
+</script>
 
 </head>
 
 <body>
 
-<!-- HEADER -->
 
-<header>
 
-<h1>Daily Devotional</h1>
+
+<section class="hero">
+
+
+<h1>
+
+Daily Devotional
+
+</h1>
+
+
 
 <p>
-Daily devotionals, prayers, prophetic encouragement, and biblical reflections
-to strengthen your faith and help you walk closely with God every day.
+
+Daily devotionals, prayers,
+prophetic encouragement,
+and biblical reflections
+to strengthen your walk with God.
+
 </p>
 
-</header>
 
-<!-- NAVIGATION -->
-
-<nav>
-
-<a href="../index.html">Home</a>
-
-</nav>
-
-<!-- DEVOTIONALS -->
-
-<section>
-
-<h2>Available Devotions</h2>
-<div class="cards">
-
-<!-- DEVOTION 1 -->
-
-<div class="card">
-
-<h3>Shine Where God Has Placed You</h3>
-
-<p>
-A life surrendered to God becomes a light that cannot be hidden.
-<p>
-<a href="Lessons/Shine Where God Has Placed You.pdf" target="_blank">
-
-Open Devotion
-
-</a>
-
-</div>
-
-<!-- DEVOTION 2 -->
-
-<div class="card">
-
-<h3>Wait On The Lord</h3>
-
-<p>
-Those who trust God's timing will never be dissapointed by His faithfulness.
-</p>
-
-<a href="Lessons/Wait On The Lord.pdf" target="_blank">
-
-Open Devotion
-
-</a>
-
-</div>
- <div class="card">
-
-<h3>Your Breakthrough Is Closer Than You Think</h3>
-
-<p>
-Stay faithful today- God is working behind the scenes, and yoour breakthrough may be closer than you think.
-</p>
-
-<a href="Lessons/Your Breakthrough Is Closer Than You Think.pdf" target="_blank">
-Open Devotion
-</a>
-
-</div>
-
-<div class="card">
-
-<h3>God Will Give ou Peace</h3>
-
-<p>
-When you trust God completely, His peace will carry you through every situation.
-</p>
-
-<a href="Lessons/God Will Give You Peace.pdf" target="_blank">
-Open Devotion
-</a>
-
-</div>
-
-<div class="card">
-
-<h3>KEEP YOUR EYES ON JESUS</h3>
-
-<p>
-Keep your eyes on Jesus; He guides, strengthens, and sustains.
-<p>
-<a href="Lessons/KEEP YOUR EYES ON JESUS.pdf" target="_blank">
-
-Open Devotion
-
-</a>
-
-</div>
-
-<!-- DEVOTION 2 -->
-
-<div class="card">
-
-<h3>God Is Working for Your Good</h3>
-
-<p>
-Trust the process—God is writing a testimony from every chapter of your life. 
-</p>
-
-<a href="Lessons/God is Working for Your Good.pdf" target="_blank">
-
-Open Devotion
-
-</a>
-
-</div>
- <div class="card">
-
-<h3>Be Strong And Courageous</h3>
-
-<p>
-Fear has a way of magnifying obstacles, but faith 
-magnifies God.
-</p>
-
-<a href="Lessons/Be Strong and Courageous.pdf" target="_blank">
-Open Devotion
-</a>
-
-</div>
-
-<div class="card">
-
-<h3>Trust God In Every Season</h3>
-
-<p>
- Every step of God's process is preparing you for His purpose.
-</p>
-
-<a href="Lessons/TRUST GOD IN EVERY SEASON.pdf" target="_blank">
-Open Devotion
-</a>
-
-</div>
-
-<div class="card">
-
-<h3>Prophetic Declaration</h3>
-
-<p>
-Speak God's promises over your life and align your day with His purpose.
-</p>
-
-<a href="Lessons/Prophetic Declaration.pdf" target="_blank">
-Open Devotion
-</a>
-
-</div>
-
- <div class="card">
-
-<h3>God Is My Strength</h3>
-
-<p>
-When your strength fails, God provides the power to keep moving forward.
-</p>
-
-<a href="Lessons/GOD IS YOUR STRENGTH.pdf" target="_blank">
-Open Devotion
-</a>
-
-</div>
-
-<div class="card">
-
-<h3>The Lord Will Fight For You</h3>
-
-<p>
-Stand still in faith and watch God fight battles beyond your ability.
-</p>
-
-<a href="Lessons/The Lord Will Fight for You.pdf" target="_blank">
-Open Devotion
-</a>
-
-</div>
-
-<div class="card">
-
-<h3>God's Mercies</h3>
-
-<p>
-Each new day is a fresh opportunity to experience God's love and mercy.
-</p>
-
-<a href="Lessons/God's Mercies.pdf" target="_blank">
-Open Devotion
-</a>
-
-</div>
-<div class="card">
-
-<h3>God Has Not Forgotten</h3>
-
-<p>
-Be encouraged and remember that God's plans for your life remain secure.
-</p>
-
-<a href="Lessons/GOD HAS NOT FORGOTTEN YOU.pdf" target="_blank">
-Open Devotion
-</a>
-
-</div>
-
-<!-- DEVOTION 3 -->
-
-<div class="card">
-
-<h3>Walk By Faith YOU</h3>
-
-<p>
-Faith sees God's possibilities where human eyes see 
-limitations.
-</p>
-
-<a href="Lessons/Walk by Faith.pdf" target="_blank">
-
-Open Devotion
-
-</a>
-
-</div>
-
-<!-- DEVOTION 4 -->
-
-<div class="card">
-
-<h3>Morning Prayer</h3>
-
-<p>
-Start your day with prayer, scripture meditation, and spiritual encouragement.
-</p>
-
-<a href="Lessons/Morning Prayer.pdf" target="_blank">
-
-Open Devotion
-
-</a>
-
-</div>
-
-    
-</div>
 
 </section>
 
-<!-- FOOTER -->
+
+
+
+<nav>
+
+
+<a href="../index.html">
+
+← Back Home
+
+</a>
+
+
+</nav>
+
+
+
+
+<div class="search">
+
+
+<input
+
+type="text"
+
+id="search"
+
+placeholder="Search devotional...">
+
+
+</div>
+
+
+
+<p class="count"
+
+id="total">
+
+</p>
+
+
+
+
+<div class="cards"
+
+id="devotions">
+
+</div>
+
+
+
+
 
 <footer>
 
-<p><strong>GracePath Network</strong></p>
 
-<p>Growing in Christ • Walking in Grace • Impacting Lives</p>
+<p>
 
-<p>gracepathnetwork@gmail.com</p>
+GracePath Network
 
-<p>+254 721 335 631</p>
+</p>
+
+
+
+<p>
+
+Growing in Christ • Walking in Grace • Impacting Lives
+
+</p>
+
+
+
+<p>
+
+gracepathnetwork@gmail.com
+
+</p>
+
+
+
+<p>
+
++254 721 335 631
+
+</p>
+
 
 </footer>
+
+
+
+
+
+<script>
+
+
+
+
+const devotionals=[
+
+
+["God's Mercy is New Today",
+
+"Lessons/God's Mercy is New Today.pdf"],
+
+
+
+["The Battle Belongs to the Lord",
+
+"Lessons/The Battle Belongs to the Lord.pdf"],
+
+
+
+["Don't Give Up—God Is Working",
+
+"Lessons/Don't Give Up—God Is Working.pdf"],
+
+
+
+["God Will Guide Your Steps",
+
+"Lessons/God Will Guide Your Steps.pdf"],
+
+
+
+["Be Strong and Courageous",
+
+"Lessons/Be Strong and Courageous.pdf"],
+
+
+
+["Do Not Be Afraid",
+
+"Lessons/Do Not Be Afraid.pdf"],
+
+
+
+["God Has Not Forgotten You",
+
+"Lessons/GOD HAS NOT FORGOTTEN YOU.pdf"],
+
+
+
+["God Is Working for Your Good",
+
+"Lessons/God is Working for Your Good.pdf"],
+
+
+
+["God Is Your Strength",
+
+"Lessons/GOD IS YOUR STRENGTH.pdf"],
+
+
+
+["God Makes All Things New",
+
+"Lessons/God Makes All Things New.pdf"],
+
+
+
+["God Sees Your Faithfulness",
+
+"Lessons/God Sees Your Faithfulness.pdf"],
+
+
+
+["God Will Give You Peace",
+
+"Lessons/God Will Give You Peace.pdf"],
+
+
+
+["God's Mercies",
+
+"Lessons/God's Mercies.pdf"],
+
+
+
+["God's Promises Never Fail",
+
+"Lessons/God's Promises Never Fail.pdf"],
+
+
+
+["Hold On to Hope",
+
+"Lessons/Hold On to Hope.pdf"],
+
+
+
+["KEEP YOUR EYES ON JESUS",
+
+"Lessons/KEEP YOUR EYES ON JESUS.pdf"],
+
+
+
+["Keep Moving Forward",
+
+"Lessons/Keep Moving Forward.pdf"],
+
+
+
+["Morning Prayer",
+
+"Lessons/Morning Prayer.pdf"],
+
+
+
+["Prophetic Declaration",
+
+"Lessons/Prophetic Declaration.pdf"],
+
+
+
+["Shine Where God Has Placed You",
+
+"Lessons/Shine Where God Has Placed You.pdf"],
+
+
+
+["Stay Close to God",
+
+"Lessons/Stay Close to God.pdf"],
+
+
+
+["The Lord Is Your Shepherd",
+
+"Lessons/The Lord Is Your Shepherd.pdf"],
+
+
+
+["The Lord Will Fight for You",
+
+"Lessons/The Lord Will Fight for You.pdf"],
+
+
+
+["Trust God In Every Season",
+
+"Lessons/TRUST GOD IN EVERY SEASON.pdf"],
+
+
+
+["Wait On The Lord",
+
+"Lessons/Wait On The Lord.pdf"],
+
+
+
+["Walk by Faith",
+
+"Lessons/Walk by Faith.pdf"],
+
+
+
+["Your Breakthrough Is Closer Than You Think",
+
+"Lessons/Your Breakthrough Is Closer Than You Think.pdf"]
+
+
+
+].sort();
+
+
+
+
+
+const box=
+
+document.getElementById("devotions");
+
+
+
+const total=
+
+document.getElementById("total");
+
+
+
+
+function render(list){
+
+
+box.innerHTML="";
+
+
+
+total.innerHTML=
+
+
+list.length+
+
+" devotionals available";
+
+
+
+
+list.forEach(item=>{
+
+
+box.innerHTML+=`
+
+
+
+<div class="card">
+
+
+<h3>
+
+${item[0]}
+
+</h3>
+
+
+
+<a href="${item[1]}"
+
+target="_blank">
+
+
+Open Devotion
+
+
+</a>
+
+
+
+</div>
+
+
+
+`;
+
+
+
+});
+
+
+}
+
+
+
+render(devotionals);
+
+
+
+
+
+document
+
+.getElementById("search")
+
+.addEventListener(
+
+"keyup",
+
+function(){
+
+
+
+let term=
+
+
+this.value.toLowerCase();
+
+
+
+
+let filtered=
+
+
+devotionals.filter(
+
+
+d=>d[0]
+
+.toLowerCase()
+
+.includes(term)
+
+);
+
+
+
+render(filtered);
+
+
+
+});
+
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

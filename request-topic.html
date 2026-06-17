@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Lesson | GracePath Network</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.request-container{
+max-width:800px;
+margin:50px auto;
+padding:30px;
+background:#fff;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.request-container h1{
+text-align:center;
+margin-bottom:15px;
+}
+
+.request-container p{
+text-align:center;
+margin-bottom:25px;
+}
+
+.request-form{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.request-form input,
+.request-form select,
+.request-form textarea{
+padding:15px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+width:100%;
+box-sizing:border-box;
+}
+
+.request-form button{
+padding:15px;
+background:#f59e0b;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+.request-form button:hover{
+opacity:0.9;
+}
+
+#message{
+margin-top:20px;
+font-weight:bold;
+text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="request-container">
+
+<h1>📖 Request a Lesson or Topic</h1>
+
+<p>
+Tell us which Bible lesson, devotional topic, or inspirational subject you would like GracePath Network to prepare.
+</p>
+
+<form class="request-form" id="lessonForm">
+
+<input type="text" id="name" placeholder="Your Name">
+
+<input type="email" id="email" placeholder="Your Email">
+
+<input type="text" id="topic" placeholder="Requested Topic" required>
+
+<select id="category">
+<option>Bible Study</option>
+<option>Prayer</option>
+<option>Faith</option>
+<option>Youth</option>
+<option>Marriage</option>
+<option>Leadership</option>
+<option>Christian Living</option>
+<option>Other</option>
+</select>
+
+<textarea id="details" rows="6" placeholder="Additional Details"></textarea>
+
+<button type="submit">
+Submit Request
+</button>
+
+</form>
+
+<p id="message"></p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey:  "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+projectId: "gods-grace-sanctuary-7c3e9",
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+messagingSenderId: "794689665126",
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7",
+measurementId: "G-MLHKT6GPLY"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.getElementById("lessonForm")
+.addEventListener("submit", async (e) => {
+
+e.preventDefault();
+
+try {
+
+await addDoc(collection(db, "lesson_requests"), {
+
+name: document.getElementById("name").value,
+
+email: document.getElementById("email").value,
+
+topic: document.getElementById("topic").value,
+
+category: document.getElementById("category").value,
+
+details: document.getElementById("details").value,
+
+createdAt: serverTimestamp()
+
+});
+
+document.getElementById("message").innerHTML =
+"✅ Thank you! Your lesson request has been received.";
+
+document.getElementById("lessonForm").reset();
+
+}
+catch(error){
+
+document.getElementById("message").innerHTML =
+"❌ Error submitting request.";
+
+console.error(error);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

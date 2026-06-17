@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Profile | GracePath Family</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f4f6f9;
+margin:0;
+}
+
+header{
+background:#1e3a8a;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:6px;
+box-sizing:border-box;
+}
+
+button{
+padding:12px 18px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:#1e3a8a;
+color:white;
+}
+
+.profile-row{
+margin-bottom:12px;
+}
+
+.profile-label{
+font-weight:bold;
+}
+
+#profileSection{
+display:none;
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+<h1>👤 My Profile</h1>
+<p>GracePath Family Member Portal</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Profile Access</h2>
+
+<input
+type="text"
+id="membershipNumber"
+placeholder="Membership Number">
+
+<input
+type="text"
+id="phone"
+placeholder="Registered Phone Number">
+
+<button onclick="findMember()">
+Access My Profile
+</button>
+
+<p id="message"></p>
+
+</div>
+
+<div class="card" id="profileSection">
+
+<h2>Member Information</h2>
+
+<div class="profile-row">
+<span class="profile-label">Name:</span>
+<span id="displayName"></span>
+</div>
+
+<div class="profile-row">
+<span class="profile-label">Email:</span>
+<span id="displayEmail"></span>
+</div>
+
+<div class="profile-row">
+<span class="profile-label">Phone:</span>
+<span id="displayPhone"></span>
+</div>
+
+<div class="profile-row">
+<span class="profile-label">Region:</span>
+<span id="displayRegion"></span>
+</div>
+
+<div class="profile-row">
+<span class="profile-label">Membership Number:</span>
+<span id="displayMembershipNumber"></span>
+</div>
+<div style="margin-top:20px;">
+
+<button onclick="openCard()">
+🪪 Membership Card
+</button>
+
+<button onclick="window.location.href='my-certificates.html'">
+🏆 My Certificates
+</button>
+
+<button onclick="window.location.href='learning-progress.html'">
+📚 Learning Progress
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+projectId: "gods-grace-sanctuary-7c3e9",
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+messagingSenderId: "794689665126",
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.findMember = async function(){
+
+const membershipNumber =
+document.getElementById("membershipNumber").value.trim();
+
+const phone =
+document.getElementById("phone").value.trim();
+
+const message =
+document.getElementById("message");
+
+message.textContent = "";
+
+try{
+
+const snapshot =
+await getDocs(collection(db,"members"));
+
+let found = false;
+
+snapshot.forEach((doc) => {
+
+const member = doc.data();
+
+const memberNo = member.memberId || "";
+const memberPhone = member.phone || "";
+
+if (
+memberNo.trim() === membershipNumber.trim() &&
+memberPhone.trim() === phone.trim()
+) {
+
+found = true;
+
+document.getElementById("profileSection").style.display = "block";
+
+document.getElementById("displayName").textContent =
+member.fullName || "";
+
+document.getElementById("displayEmail").textContent =
+member.email || "";
+
+document.getElementById("displayPhone").textContent =
+member.phone || "";
+
+document.getElementById("displayRegion").textContent =
+member.region || "";
+
+document.getElementById("displayMembershipNumber").textContent =
+member.memberId || "";
+
+localStorage.setItem(
+  "currentMemberId",
+  member.memberId
+);
+
+}
+
+});
+
+if (!found) {
+
+message.style.color = "red";
+message.textContent = "No matching member found.";
+
+}
+
+}catch(error){
+
+console.error(error);
+
+message.style.color = "red";
+message.textContent = "Unable to load member information.";
+
+}
+
+};
+
+
+</script>
+
+</body>
+</html>

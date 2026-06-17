@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lesson Requests | GracePath Admin</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+margin-top:20px;
+}
+
+th{
+background:#f59e0b;
+color:white;
+padding:12px;
+text-align:left;
+}
+
+td{
+border:1px solid #ddd;
+padding:12px;
+vertical-align:top;
+}
+
+.status-new{
+color:#d97706;
+font-weight:bold;
+}
+
+.status-progress{
+color:#2563eb;
+font-weight:bold;
+}
+
+.status-completed{
+color:#16a34a;
+font-weight:bold;
+}
+
+.status-published{
+color:#7c3aed;
+font-weight:bold;
+}
+
+button{
+padding:6px 10px;
+margin:2px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.start-btn{
+background:#2563eb;
+color:white;
+}
+
+.complete-btn{
+background:#16a34a;
+color:white;
+}
+
+.publish-btn{
+background:#7c3aed;
+color:white;
+}
+
+.delete-btn{
+background:#dc2626;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">← Dashboard</a>
+</nav>
+
+<header>
+
+<h1>📖 Lesson Requests</h1>
+
+<p>
+View and manage lesson requests submitted through GracePath Network.
+</p>
+
+</header>
+
+<section>
+
+<div class="card">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Topic</th>
+<th>Category</th>
+<th>Details</th>
+<th>Status</th>
+<th>Date</th>
+<th>Actions</th>
+</tr>
+
+</thead>
+
+<tbody id="requestsTable">
+
+<tr>
+<td colspan="8">
+Loading requests...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs,
+deleteDoc,
+doc,
+updateDoc,
+query
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+
+projectId: "gods-grace-sanctuary-7c3e9",
+
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+
+messagingSenderId: "794689665126",
+
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const table = document.getElementById("requestsTable");
+
+async function loadRequests(){
+
+table.innerHTML = "";
+
+try{
+
+const q = query(
+collection(db,"lesson_requests")
+);
+
+const snapshot = await getDocs(q);
+
+if(snapshot.empty){
+
+table.innerHTML = `
+<tr>
+<td colspan="8">
+No lesson requests found.
+</td>
+</tr>
+`;
+
+return;
+
+}
+
+snapshot.forEach((requestDoc)=>{
+
+const data = requestDoc.data();
+
+const date = data.createdAt
+? data.createdAt.toDate().toLocaleString()
+: "";
+
+const status = data.status || "New";
+
+let statusClass = "status-new";
+
+if(status === "In Progress"){
+statusClass = "status-progress";
+}
+
+if(status === "Completed"){
+statusClass = "status-completed";
+}
+
+if(status === "Published"){
+statusClass = "status-published";
+}
+
+table.innerHTML += `
+<tr>
+
+<td>${data.name || ""}</td>
+
+<td>${data.email || ""}</td>
+
+<td>${data.topic || ""}</td>
+
+<td>${data.category || ""}</td>
+
+<td>${data.details || ""}</td>
+
+<td class="${statusClass}">
+${status}
+</td>
+
+<td>${date}</td>
+
+<td>
+
+<button
+class="start-btn"
+onclick="startWork('${requestDoc.id}')">
+Start
+</button>
+
+<button
+class="complete-btn"
+onclick="completeLesson('${requestDoc.id}')">
+Complete
+</button>
+
+<button
+class="publish-btn"
+onclick="publishLesson('${requestDoc.id}')">
+Publish
+</button>
+
+<button
+class="delete-btn"
+onclick="deleteRequest('${requestDoc.id}')">
+Delete
+</button>
+
+</td>
+
+</tr>
+`;
+
+});
+
+}catch(error){
+
+console.error(error);
+
+table.innerHTML = `
+<tr>
+<td colspan="8">
+Error loading requests.
+</td>
+</tr>
+`;
+
+}
+
+}
+
+window.startWork = async function(id){
+
+await updateDoc(
+doc(db,"lesson_requests",id),
+{
+status:"In Progress"
+}
+);
+
+loadRequests();
+
+};
+
+window.completeLesson = async function(id){
+
+await updateDoc(
+doc(db,"lesson_requests",id),
+{
+status:"Completed"
+}
+);
+
+loadRequests();
+
+};
+
+window.publishLesson = async function(id){
+
+await updateDoc(
+doc(db,"lesson_requests",id),
+{
+status:"Published"
+}
+);
+
+loadRequests();
+
+};
+
+window.deleteRequest = async function(id){
+
+if(confirm("Delete this lesson request?")){
+
+await deleteDoc(
+doc(db,"lesson_requests",id)
+);
+
+loadRequests();
+
+}
+
+};
+
+loadRequests();
+
+</script>
+
+</body>
+</html>

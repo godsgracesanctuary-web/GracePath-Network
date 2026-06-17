@@ -4,443 +4,725 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Prophetic Declarations | GracePath Network</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
 
-<link rel="stylesheet" href="../style.css">
+<title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+Prophetic Declarations |
+GracePath Network
+
+</title>
+
+<link rel="stylesheet"
+href="../style.css">
 
 <style>
 
-/* PAGE STYLE */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
 body{
-    font-family:'Poppins',sans-serif;
+
+font-family:Arial,Helvetica,sans-serif;
+
+background:#f4f7fb;
+
+color:#333;
+
+line-height:1.6;
+
 }
+
+
+/* HERO */
+
+.hero{
+
+background:linear-gradient(135deg,#7c3aed,#5b21b6);
+
+padding:70px 20px;
+
+text-align:center;
+
+color:white;
+
+}
+
+
+.hero h1{
+
+font-size:42px;
+
+margin-bottom:15px;
+
+}
+
+
+.hero p{
+
+max-width:750px;
+
+margin:auto;
+
+font-size:18px;
+
+}
+
+
 
 /* NAVIGATION */
 
 nav{
-    padding:15px 25px;
+
+background:white;
+
+padding:15px 8%;
+
+box-shadow:0 2px 5px rgba(0,0,0,.1);
+
 }
 
 nav a{
-    text-decoration:none;
-    color:white;
-    font-weight:600;
+
+text-decoration:none;
+
+font-weight:bold;
+
+color:#5b21b6;
+
 }
 
-/* HEADER */
 
-header{
-    text-align:center;
-    padding:90px 20px;
+
+/* SEARCH */
+
+.search{
+
+padding:40px 20px;
+
+text-align:center;
+
 }
 
-header h1{
-    font-size:3rem;
-    margin-bottom:15px;
-    color:#0f172a;
+
+.search input{
+
+
+width:100%;
+
+max-width:650px;
+
+padding:15px 25px;
+
+border-radius:40px;
+
+border:1px solid #ddd;
+
+outline:none;
+
+font-size:16px;
+
 }
 
-header p{
-    max-width:750px;
-    margin:auto;
-    color:#475569;
-    line-height:1.8;
-    font-size:1.1rem;
+
+
+.count{
+
+text-align:center;
+
+color:#666;
+
+margin-bottom:30px;
+
 }
 
-/* SECTION */
 
-section{
-    padding:40px 8%;
-}
 
-/* CARDS GRID */
+/* CARDS */
 
 .cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(260px,1fr));
+
+gap:25px;
+
+padding:0 8% 60px;
+
 }
 
-/* CARD */
+
 
 .card{
-    background:linear-gradient(to bottom right,#ffffff,#ede9fe);
 
-    border-radius:25px;
+background:white;
 
-    padding:30px 25px;
+padding:25px;
 
-    border-top:6px solid #7c3aed;
+border-radius:18px;
 
-    min-height:260px;
+box-shadow:
+0 4px 12px rgba(0,0,0,.08);
 
-    display:flex;
+transition:.3s;
 
-    flex-direction:column;
+text-align:center;
 
-    justify-content:flex-start;
+border-top:5px solid #7c3aed;
 
-    box-shadow:
-    0 8px 25px rgba(0,0,0,0.08),
-    0 3px 10px rgba(124,58,237,0.08);
-
-    transition:all 0.4s ease;
-
-    position:relative;
-
-    overflow:hidden;
 }
+
 
 .card:hover{
-    transform:translateY(-10px);
 
-    box-shadow:
-    0 15px 35px rgba(0,0,0,0.12),
-    0 5px 15px rgba(124,58,237,0.15);
+transform:translateY(-5px);
+
 }
 
-/* LIGHT EFFECT */
-
-.card::before{
-    content:"";
-
-    position:absolute;
-
-    top:-50px;
-    right:-50px;
-
-    width:140px;
-    height:140px;
-
-    background:rgba(255,255,255,0.3);
-
-    border-radius:50%;
-}
-
-/* TITLES */
 
 .card h3{
-    font-size:1.4rem;
-    margin-bottom:20px;
-    color:#111827;
+
+min-height:60px;
+
+color:#5b21b6;
+
+margin-bottom:25px;
+
 }
 
-.card h3::after{
-    content:"";
-
-    display:block;
-
-    width:60px;
-    height:4px;
-
-    background:#7c3aed;
-
-    border-radius:10px;
-
-    margin-top:10px;
-}
-
-/* TEXT */
-
-.card p{
-    color:#475569;
-    line-height:1.8;
-    margin-bottom:25px;
-}
-
-/* BUTTON */
 
 .card a{
-    display:inline-block;
 
-    text-decoration:none;
+display:inline-block;
 
-    padding:13px 24px;
+padding:12px 28px;
 
-    border-radius:40px;
+border-radius:30px;
 
-    background:linear-gradient(135deg,#7c3aed,#6d28d9);
+background:#7c3aed;
 
-    color:white;
+color:white;
 
-    font-weight:700;
+text-decoration:none;
 
-    transition:0.3s ease;
+font-weight:bold;
 
-    box-shadow:0 4px 10px rgba(0,0,0,0.12);
-
-    width:170px;
-
-    text-align:center;
 }
+
 
 .card a:hover{
-    transform:translateY(-3px);
 
-    box-shadow:0 8px 20px rgba(0,0,0,0.18);
+background:#5b21b6;
+
 }
 
-/* FOOTER */
+
 
 footer{
-    text-align:center;
-    padding:30px 20px;
-    margin-top:40px;
+
+background:#081f4d;
+
+padding:40px;
+
+text-align:center;
+
+color:white;
+
 }
 
+
 footer p{
-    color:#475569;
+
+margin:8px 0;
+
+}
+
+
+
+@media(max-width:768px){
+
+.hero h1{
+
+font-size:32px;
+
+}
+
+.cards{
+
+padding:0 20px 50px;
+
+}
+
 }
 
 </style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MLHKT6GPLY"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+  dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-MLHKT6GPLY');
+</script>
 
 </head>
 
 <body>
 
-<!-- HEADER -->
 
-<header>
 
-<h1>Prophetic Declarations</h1>
+<section class="hero">
 
-<p>
-Faith-filled declarations, prophetic encouragement, and biblical confessions
-designed to strengthen your faith, inspire hope, and align your life with God's promises.
-</p>
+<h1>
 
-</header>
+Prophetic Declarations
 
-<!-- NAVIGATION -->
-
-<nav>
-
-<a href="../index.html">Home</a>
-
-</nav>
-
-<!-- DECLARATIONS -->
-
-<section>
-
-<h2>Declarations & Faith Confessions</h2>
-
-<div class="cards">
-
-<!-- CARD 1 -->
-
-<div class="card">
-
-<h3>GOD HAS NOT FORGOTEN YOU</h3>
+</h1>
 
 <p>
-Be encouraged and remember that God sees you, knows you, and is working in your life.
+
+Faith-filled declarations,
+prophetic encouragement,
+and biblical confessions
+designed to strengthen faith,
+inspire hope,
+and align your life with God's promises.
+
 </p>
-
-<a href="Lessons/GOD HAS NOT FORGOTEN YOU.pdf" target="_blank">
-
-Open Lesson
-
-</a>
-
-</div>
-
-<!-- CARD 2 -->
-
-<div class="card">
-
-<h3>God Is My Refuge</h3>
-
-<p>
-Declare God's protection, peace, and safety over your life and family.
-</p>
-
-<a href="Lessons/God Is My Refuge.pdf" target="_blank">
-
-Open Lesson
-
-</a>
-
-</div>
-
-<!-- CARD 3 -->
-
-<div class="card">
-
-<h3>I Will Rise Again</h3>
-
-<p>
-Speak hope and victory over every setback and trust God for a fresh beginning.
-</p>
-
-<a href="Lessons/I Will Rise Again.pdf" target="_blank">
-
-Open Lesson
-
-</a>
-
-</div>
-
-<!-- CARD 4 -->
-
-<div class="card">
-
-<h3>OPEN DOOR</h3>
-
-<p>
-Declare divine opportunities, favor, breakthroughs, and new seasons of blessing.
-</p>
-
-<a href="Lessons/MAY YOU SEE THE OPEN DOOR.pdf" target="_blank">
-
-Open Lesson
-
-</a>
-
-</div>
-
-<!-- CARD 5 -->
-
-<div class="card">
-
-<h3>Mountains Will Be Levelled Before You</h3>
-
-<p>
-Proclaim God's power to remove obstacles and make a way where none exists.
-</p>
-
-<a href="Lessons/Mountains.pdf" target="_blank">
-
-Open Lesson
-
-</a>
-
-</div>
-
-<!-- CARD 6 -->
-
-<div class="card">
-
-<h3>The Lord is My Strength</h3>
-
-<p>
-Receive renewed strength, courage, and confidence through God's presence.
-</p>
-
-<a href="Lessons/My Strength.pdf" target="_blank">
-
-Open Lesson
-
-</a>
-
-</div>
-<!-- CARD 7 -->
-
-<div class="card">
-
-<h3>The Lord Orders My Steps</h3>
-
-<p>
-Declare divine guidance and wisdom for every decision and direction in life.
-</p>
-
-<a href="Lessons/The Lord Orders My Steps.pdf" target="_blank">
-
-Open Lesson
-
-</a>
-
-</div>
-<!-- CARD 4 -->
-
-<div class="card">
-
-<h3>Grace In Distress</h3>
-
-<p>
-Experience God's grace, comfort, and help during difficult times and challenges.
-</p>
-
-<a href="Lessons/in Distress.pdf" target="_blank">
-
-Open Lesson
-
-</a>
-
-</div>
-
-<!-- CARD 5 -->
-
-<div class="card">
-
-<h3>The Lords Help</h3>
-
-<p>
-Confess God's assistance, provision, and intervention in every situation.
-</p>
-
-<a href="Lessons/With Your Help Lord.pdf" target="_blank">
-
-Open Lesson
-
-</a>
-
-</div>
-
-<!-- CARD 6 -->
-
-<div class="card">
-
-<h3>I Will Overcome</h3>
-
-<p>
-Declare victory through Christ over trials, fears, and every obstacle before you.
-</p>
-
-<a href="Lessons/I will Overcome.pdf" target="_blank">
-
-Open Lesson
-
-</a>
-
-</div>
-<!-- CARD 7 -->
-
-<div class="card">
-
-<h3>The Lord is Gracious</h3>
-
-<p>
-Celebrate God's goodness, mercy, favor, and faithfulness in your daily walk.
-</p>
-<a href="Lessons/The Lord is Gracious.pdf" target="_blank">
-
-Open Lesson
-
-</a>
-
-</div>
-
-</div>
 
 </section>
 
-<!-- FOOTER -->
+
+
+
+<nav>
+
+<a href="../index.html">
+
+← Back Home
+
+</a>
+
+</nav>
+
+
+
+
+<div class="search">
+
+<input
+
+type="text"
+
+id="search"
+
+placeholder="Search declaration...">
+
+</div>
+
+
+
+<p class="count"
+
+id="total">
+
+</p>
+
+
+
+
+<div class="cards"
+
+id="declarations">
+
+</div>
+
+
+
+
 
 <footer>
 
-<p><strong>GracePath Network</strong></p>
+<p>
 
-<p>Growing in Christ • Walking in Grace • Impacting Lives</p>
+GracePath Network
 
-<p>gracepathnetwork@gmail.com</p>
+</p>
 
-<p>+254 721 335 631</p>
+<p>
+
+Growing in Christ • Walking in Grace • Impacting Lives
+
+</p>
+
+<p>
+
+gracepathnetwork@gmail.com
+
+</p>
+
+<p>
+
++254 721 335 631
+
+</p>
 
 </footer>
+
+
+
+
+<script>
+
+
+
+
+const declarations=[
+
+["The Lord Will Strengthen Me",
+
+"Lessons/The Lord Will Strengthen Me.pdf"],
+
+
+
+["The Lord Will Go Before Me",
+
+"Lessons/The Lord Will Go Before Me.pdf"],
+
+
+
+["The Lord Will Fight for Me",
+
+"Lessons/The Lord Will Fight for Me.pdf"],
+
+
+
+["The Lord Is My Strength in Times of Distress",
+
+"Lessons/The Lord Is My Strength in Times of Distress.pdf"],
+
+
+
+["THE LORD IS MY LIGHT",
+
+"Lessons/THE LORD IS MY LIGHT.pdf"],
+
+
+
+["The Joy of the Lord Is My Strength",
+
+"Lessons/The Joy of the Lord Is My Strength.pdf"],
+
+
+
+["My Season of Breakthrough Has Come",
+
+"Lessons/My Season of Breakthrough Has Come.pdf"],
+
+
+
+["My Hope Is in the Lord",
+
+"Lessons/My Hope Is in the Lord.pdf"],
+
+
+["My God Shall Supply All My Needs",
+
+"Lessons/My God Shall Supply All My Needs.pdf"],
+
+
+
+["I Will Trust in the Lord",
+
+"Lessons/I Will Trust in the Lord.pdf"],
+
+
+
+["I Will Rise Again",
+
+"Lessons/I Will Rise Again.pdf"],
+
+
+
+["I Shall See the Goodness of the Lord",
+
+"Lessons/I Shall See the Goodness of the Lord.pdf"],
+
+
+
+["I Shall Not Be Moved",
+
+"Lessons/I Shall Not Be Moved.pdf"],
+
+
+
+["I Am More Than a Conqueror",
+
+"Lessons/I Am More Than a Conqueror.pdf"],
+
+
+
+["God's Mercy Is New Every Morning",
+
+"Lessons/God's Mercy Is New Every Morning.pdf"],
+
+
+
+["Open God Will Make a Way",
+
+"Lessons/God Will Make a Way.pdf"],
+
+
+
+["GOD IS YOUR REFUGE",
+
+"Lessons/GOD IS YOUR REFUGE.pdf"],
+
+
+
+["God Is Working for My Good",
+
+"Lessons/God Is Working for My Good.pdf"],
+
+
+
+["AM COVERED BY GOD'S GRACE",
+
+"Lessons/AM COVERED BY GOD'S GRACE.pdf"],
+
+
+["Grace In Distress",
+
+"Lessons/in Distress.pdf"],
+
+
+
+["God Has Not Forgotten You",
+
+"Lessons/GOD HAS NOT FORGOTEN YOU.pdf"],
+
+
+
+["God Is My Refuge",
+
+"Lessons/God Is My Refuge.pdf"],
+
+
+
+["He Is Gracious",
+
+"Lessons/He Is Gracious.pdf"],
+
+
+
+["I Will Overcome",
+
+"Lessons/I will Overcome.pdf"],
+
+
+
+["I Will Rise Again",
+
+"Lessons/I Will Rise Again.pdf"],
+
+
+
+["Mountains Will Be Levelled Before You",
+
+"Lessons/Mountains.pdf"],
+
+
+
+["Open Door",
+
+"Lessons/MAY YOU SEE THE OPEN DOOR.pdf"],
+
+
+
+["Overcome",
+
+"Lessons/Overcome.pdf"],
+
+
+
+["The Lord Is Gracious",
+
+"Lessons/The Lord is Gracious.pdf"],
+
+
+
+["The Lord Is My Strength",
+
+"Lessons/My Strength.pdf"],
+
+
+
+["The Lord Orders My Steps",
+
+"Lessons/The Lord Orders My Steps.pdf"],
+
+
+
+["The Lord's Help",
+
+"Lessons/With Your Help Lord.pdf"],
+
+
+
+["Walking in Divine Favour and Victory",
+
+"Lessons/Walking in Divine Favour and Victory.pdf"]
+
+
+
+].sort();
+
+
+
+
+
+const box=
+
+document.getElementById(
+
+'declarations');
+
+
+
+const total=
+
+document.getElementById(
+
+'total');
+
+
+
+
+
+function render(list){
+
+
+box.innerHTML='';
+
+
+
+total.innerHTML=
+
+list.length+
+
+" declarations available";
+
+
+
+
+list.forEach(item=>{
+
+
+box.innerHTML+=`
+
+
+<div class="card">
+
+
+<h3>
+
+${item[0]}
+
+</h3>
+
+
+
+<a href="${item[1]}"
+
+target="_blank">
+
+
+Open Declaration
+
+
+</a>
+
+
+
+</div>
+
+
+
+`;
+
+
+});
+
+
+}
+
+
+
+render(declarations);
+
+
+
+
+document
+
+.getElementById('search')
+
+.addEventListener(
+
+'keyup',
+
+function(){
+
+
+
+let term=
+
+this.value.toLowerCase();
+
+
+
+let filtered=
+
+declarations.filter(
+
+
+d=>d[0]
+
+.toLowerCase()
+
+.includes(term)
+
+
+);
+
+
+
+render(filtered);
+
+
+
+});
+
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

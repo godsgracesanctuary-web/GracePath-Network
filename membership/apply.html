@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Join GracePath Family</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.form-container{
+max-width:800px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.form-group{
+margin-bottom:15px;
+}
+
+label{
+display:block;
+font-weight:bold;
+margin-bottom:5px;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+button{
+background:#16a34a;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+}
+
+small{
+color:#666;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Join GracePath Family</h1>
+<p>Become part of a growing community of learning, discipleship and encouragement.</p>
+</header>
+
+<div class="form-container">
+
+<form id="membershipForm">
+
+<div class="form-group">
+<label>Full Name *</label>
+<input type="text" id="fullName" required>
+</div>
+
+<div class="form-group">
+<label>Phone Number *</label>
+<input type="tel" id="phoneNumber" required>
+</div>
+
+<div class="form-group">
+<label>Email Address *</label>
+<input type="email" id="email" required>
+</div>
+
+<div class="form-group">
+<label>Country *</label>
+<input type="text" id="country" required>
+</div>
+
+<div class="form-group">
+<label>Region / State / Province *</label>
+<input type="text" id="region" required>
+</div>
+
+<div class="form-group">
+<label>County / District *</label>
+<input type="text" id="county" required>
+</div>
+
+<div class="form-group">
+<label>Date of Birth (Optional)</label>
+<input type="date" id="dateOfBirth">
+
+<small>
+Optional. Used for birthday greetings from the wider GracePath Family community.
+</small>
+</div>
+
+<div class="form-group">
+<label>Area of Interest</label>
+
+<select id="ministryInterest">
+
+<option value="">Select</option>
+
+<option>Discipleship</option>
+<option>Prayer</option>
+<option>Leadership Development</option>
+<option>Family Life</option>
+<option>Evangelism</option>
+<option>Community Outreach</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+<label>Occupation (Optional)</label>
+<input type="text" id="occupation">
+</div>
+
+<div class="form-group">
+<label>Gender (Optional)</label>
+<select id="gender">
+<option value="">Prefer not to say</option>
+<option>Male</option>
+<option>Female</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Marital Status (Optional)</label>
+<select id="maritalStatus">
+<option value="">Prefer not to say</option>
+<option>Single</option>
+<option>Married</option>
+<option>Widowed</option>
+<option>Separated</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Denomination / Faith Background (Optional)</label>
+<input type="text" id="denomination"
+placeholder="e.g. Anglican, Catholic, Pentecostal, Baptist">
+</div>
+
+<div class="form-group">
+<label>Prayer Request (Optional)</label>
+<textarea id="prayerRequest" rows="4"></textarea>
+</div>
+
+<small>
+GracePath Family respects your privacy. Information marked optional is voluntary and will only be used to support learning, discipleship, community engagement, prayer support, and birthday greetings where applicable.
+</small>
+
+<br><br>
+
+<button type="submit">
+Submit Application
+</button>
+
+</form>
+
+<div id="message"></div>
+
+</div>
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+
+projectId: "gods-grace-sanctuary-7c3e9",
+
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+
+messagingSenderId: "794689665126",
+
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const form =
+document.getElementById("membershipForm");
+
+form.addEventListener("submit", async(e)=>{
+
+e.preventDefault();
+
+try{
+
+await addDoc(
+collection(db,"membershipApplication"),
+{
+
+fullName:
+document.getElementById("fullName").value,
+
+phoneNumber:
+document.getElementById("phoneNumber").value,
+
+email:
+document.getElementById("email").value,
+
+country:
+document.getElementById("country").value,
+
+region:
+document.getElementById("region").value,
+
+county:
+document.getElementById("county").value,
+
+dateOfBirth:
+document.getElementById("dateOfBirth").value,
+
+ministryInterest:
+document.getElementById("ministryInterest").value,
+
+occupation:
+document.getElementById("occupation").value,
+
+gender:
+document.getElementById("gender").value,
+
+maritalStatus:
+document.getElementById("maritalStatus").value,
+
+denomination:
+document.getElementById("denomination").value,
+
+prayerRequest:
+document.getElementById("prayerRequest").value,
+
+status:"Pending",
+
+createdAt:
+serverTimestamp()
+
+}
+);
+
+alert(
+"Application submitted successfully. Welcome to GracePath Family!"
+);
+
+form.reset();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Failed to submit application."
+);
+
+}
+
+});
+
+</script>
+</body>
+</html>

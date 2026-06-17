@@ -6,32 +6,312 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Leadership | GracePath Network</title>
+<title>Leadership & Governance | GracePath Network</title>
 
 <link rel="stylesheet" href="../style.css">
 
 <style>
 
-.leader-image{
-    width:300px;
-    max-width:100%;
-    height:auto;
-    display:block;
-    margin:0 auto 20px auto;
-    border-radius:15px;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-.leader-title{
-    color:#2563eb;
-    font-weight:600;
-    margin-top:10px;
+body{
+
+font-family:Arial,Helvetica,sans-serif;
+background:#f4f7fb;
+color:#333;
+line-height:1.8;
+
 }
 
-blockquote{
-    background:#f8fafc;
-    padding:25px;
-    border-left:5px solid #2563eb;
-    border-radius:10px;
+
+/* Navigation */
+
+nav{
+
+background:#0b2d5c;
+padding:18px 8%;
+
+}
+
+nav a{
+
+color:white;
+text-decoration:none;
+font-weight:bold;
+
+}
+
+
+/* Hero */
+
+.hero{
+
+background:linear-gradient(rgba(11,45,92,.92),
+rgba(11,45,92,.92));
+
+padding:90px 20px;
+
+text-align:center;
+
+color:white;
+
+}
+
+
+.hero h1{
+
+font-size:48px;
+margin-bottom:20px;
+
+}
+
+
+.hero p{
+
+max-width:900px;
+
+margin:auto;
+
+font-size:19px;
+
+}
+
+
+/* Sections */
+
+section{
+
+padding:70px 8%;
+
+}
+
+
+.section-title{
+
+text-align:center;
+
+font-size:35px;
+
+margin-bottom:40px;
+
+color:#0b2d5c;
+
+}
+
+
+/* Cards */
+
+.cards{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(280px,1fr));
+
+gap:25px;
+
+}
+
+
+.card{
+
+background:white;
+
+padding:30px;
+
+border-radius:18px;
+
+box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+
+.card:hover{
+
+transform:translateY(-6px);
+
+}
+
+
+.card h3{
+
+margin-bottom:15px;
+
+color:#0b2d5c;
+
+}
+
+
+/* Founder */
+
+.founder{
+
+max-width:900px;
+
+margin:auto;
+
+text-align:center;
+
+}
+
+
+.profile-image{
+
+width:230px;
+
+height:230px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:5px solid #0b2d5c;
+
+margin-bottom:25px;
+
+}
+
+
+.founder h3{
+
+font-size:32px;
+
+color:#0b2d5c;
+
+}
+
+
+.position{
+
+font-weight:bold;
+
+margin-bottom:20px;
+
+}
+
+
+/* Quote */
+
+.quote{
+
+max-width:900px;
+
+margin:auto;
+
+background:white;
+
+padding:40px;
+
+border-left:6px solid #0b2d5c;
+
+border-radius:15px;
+
+font-size:22px;
+
+font-style:italic;
+
+}
+
+
+/* Contact */
+
+.contact{
+
+max-width:700px;
+
+margin:auto;
+
+text-align:center;
+
+}
+
+
+.contact p{
+
+margin:15px 0;
+
+font-size:18px;
+
+}
+
+
+/* Footer */
+
+footer{
+
+background:#081f4d;
+
+padding:40px;
+
+text-align:center;
+
+color:white;
+
+}
+
+
+footer p{
+
+margin:8px 0;
+
+}
+
+
+/* WhatsApp */
+
+.whatsapp-btn{
+
+position:fixed;
+
+right:20px;
+
+bottom:20px;
+
+background:#25D366;
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:28px;
+
+color:white;
+
+text-decoration:none;
+
+box-shadow:0 4px 10px rgba(0,0,0,.3);
+
+}
+
+
+@media(max-width:768px){
+
+.hero h1{
+
+font-size:34px;
+
+}
+
+.section-title{
+
+font-size:28px;
+
+}
+
 }
 
 </style>
@@ -40,227 +320,612 @@ blockquote{
 
 <body>
 
+
+
 <nav>
 
-<a href="../index.html">← Back Home</a>
+<a href="../index.html">
+
+← Back Home
+
+</a>
 
 </nav>
 
-<header>
 
-<h1>GracePath Leadership</h1>
 
-<section>
 
-<h2>Leadership Overview</h2>
+<section class="hero">
 
-<p>
-GracePath Network is led by dedicated servants of Christ who are
-committed to biblical teaching, discipleship, prayer, evangelism,
-and community transformation.
-</p>
+<h1>
+
+Leadership & Governance
+
+</h1>
+
 
 <p>
-Our leadership seeks to serve with integrity, humility,
-and faithfulness to God's calling.
+
+GracePath Network is a Christ-centered ministry
+dedicated to equipping believers, churches,
+ministries, families, leaders, and communities
+through biblical teaching, discipleship resources,
+leadership development, mentorship, and practical
+tools that inspire spiritual growth and kingdom impact.
+
 </p>
+
 
 </section>
 
-</header>
+
+
 
 <section>
 
-<h2>Director</h2>
+<h2 class="section-title">
+
+Who We Are
+
+</h2>
+
+<div class="card">
+
+<p>
+
+GracePath Network is a Christ-centered learning,
+discipleship, leadership, and resource platform
+committed to helping individuals grow spiritually,
+discover purpose, and impact their generation for
+Christ.
+
+</p>
+
+<p>
+
+We provide churches, ministries, Christian educators,
+families, and believers with discipleship materials,
+Bible study guides, leadership courses, devotional
+resources, children's lessons, youth programs,
+family enrichment materials, and practical ministry
+tools that strengthen faith and encourage spiritual
+maturity.
+
+</p>
+
+<p>
+
+GracePath Network is also passionate about helping
+young people identify, develop, and maximize their
+God-given gifts, talents, abilities, and potential.
+Through mentorship, training, encouragement, and
+practical opportunities, we seek to inspire young
+men and women to pursue excellence, innovation,
+service, and purposeful living.
+
+</p>
+
+<p>
+
+By utilizing digital media, collaborative ministry,
+and biblical teaching, we desire to strengthen local
+churches, empower ministries, equip leaders,
+encourage families, and raise a generation of
+Christ-centered individuals who positively influence
+their communities and the world.
+
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+
+
+<h2 class="section-title">
+
+Founder & Executive Director
+
+</h2>
+
+
+
+<div class="card founder">
+
+
+<img src="../images/pst-david-ngure.jpg"
+
+class="profile-image">
+
+
+
+<h3>
+
+David Ngure
+
+</h3>
+
+
+
+<p class="position">
+
+Founder & Executive Director
+
+</p>
+
+
+
+<p>
+
+David Ngure founded GracePath Network with
+a vision of creating accessible biblical
+resources that support discipleship,
+leadership growth, family transformation,
+and ministry effectiveness.
+
+
+</p>
+
+
+
+<p>
+
+His passion is to see believers mature
+in faith, leaders equipped for service,
+churches strengthened, ministries empowered,
+and communities positively influenced
+through the Gospel of Jesus Christ.
+
+
+</p>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section>
+
+
+<h2 class="section-title">
+
+Our Leadership Values
+
+</h2>
+
+
 
 <div class="cards">
 
+
+
 <div class="card">
 
-<img src="images/pst-david-ngure.jpg"
-alt="Director David Ngure"
-class="leader-image">
+<h3>
 
-<h3>David Ngure</h3>
+✝ Christ-Centered
 
-<p class="leader-title">
-Founder & Director, GracePath Network
-</p>
+</h3>
 
 <p>
-David Ngure serves as the Founder and Director of GracePath Network.
-He is passionate about preaching the Gospel, developing disciples,
-equipping Christian leaders, strengthening families, and advancing
-God's Kingdom through biblical teaching and practical ministry.
-</p>
 
-<p>
-His vision is to see believers grow in spiritual maturity,
-discover their God-given purpose, and impact their communities
-for Christ.
+Jesus Christ remains the foundation
+of our mission, values, and direction.
+
 </p>
 
 </div>
 
+
+
+
+<div class="card">
+
+<h3>
+
+🤝 Servant Leadership
+
+</h3>
+
+<p>
+
+Leadership begins by serving,
+encouraging, and empowering others.
+
+</p>
+
 </div>
+
+
+
+
+<div class="card">
+
+<h3>
+
+📖 Biblical Truth
+
+</h3>
+
+<p>
+
+Scripture guides our decisions,
+teaching, and ministry philosophy.
+
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+
+🛡 Integrity
+
+</h3>
+
+<p>
+
+We pursue honesty, accountability,
+faithfulness, and transparency.
+
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+
+🌍 Kingdom Impact
+
+</h3>
+
+<p>
+
+Faith should influence families,
+churches, communities, and nations.
+
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+
+📈 Continuous Growth
+
+</h3>
+
+<p>
+
+We encourage lifelong learning,
+discipleship, and spiritual maturity.
+
+</p>
+
+</div>
+
+
+
+</div>
+
 
 </section>
 
+
+
+
+
+
 <section>
 
-<h2>Ministry Departments</h2>
+
+<h2 class="section-title">
+
+Ministry Focus Areas
+
+</h2>
+
+
 
 <div class="cards">
 
-<div class="card">
-<h3>📖 Discipleship & Training</h3>
-<p>
-Developing believers through biblical teaching,
-discipleship classes, and leadership training.
-</p>
-</div>
 
 <div class="card">
-<h3>🙏 Prayer Ministry</h3>
+
+<h3>
+
+📚 Biblical Learning
+
+</h3>
+
 <p>
-Encouraging spiritual growth through prayer,
-intercession, and pastoral support.
+
+Bible studies, devotionals,
+courses, and study materials.
+
 </p>
+
 </div>
 
-<div class="card">
-<h3>🌍 Evangelism & Outreach</h3>
-<p>
-Sharing the Gospel and serving communities
-through outreach initiatives.
-</p>
-</div>
+
 
 <div class="card">
-<h3>👨‍👩‍👧 Family Ministry</h3>
+
+<h3>
+
+⛪ Church Resources
+
+</h3>
+
 <p>
-Supporting families through biblical teaching,
-counseling, and encouragement.
+
+Teaching curricula,
+discipleship programs,
+and ministry tools.
+
 </p>
+
 </div>
 
-<div class="card">
-<h3>🧑 Youth Development</h3>
-<p>
-Mentoring young people to become committed
-followers of Jesus Christ.
-</p>
-</div>
+
 
 <div class="card">
-<h3>📚 Resource Ministry</h3>
+
+<h3>
+
+🏆 Leadership Development
+
+</h3>
+
 <p>
-Producing and distributing Christian teaching
-materials and discipleship resources.
+
+Mentorship initiatives,
+training programs,
+and leadership courses.
+
 </p>
+
 </div>
+
+
+
+<div class="card">
+
+<h3>
+
+👨‍👩‍👧 Family Enrichment
+
+</h3>
+
+<p>
+
+Resources for marriages,
+parents, youth,
+and families.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+
+🙏 Prayer & Encouragement
+
+</h3>
+
+<p>
+
+Prayer support,
+inspiration,
+and spiritual guidance.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+
+💻 Digital Ministry
+
+</h3>
+
+<p>
+
+Using technology
+to expand biblical learning
+around the world.
+
+</p>
+
+</div>
+
 
 </div>
 
 </section>
 
-<section>
 
-<h2>Our Leadership Values</h2>
 
-<div class="cards">
 
-<div class="card">
-<h3>✝ Christ-Centered</h3>
-<p>
-Jesus Christ remains the foundation and model of our leadership.
-</p>
-</div>
 
-<div class="card">
-<h3>📖 Biblically Grounded</h3>
-<p>
-Every ministry decision is guided by Scripture.
-</p>
-</div>
-
-<div class="card">
-<h3>🤝 Servant Leadership</h3>
-<p>
-We lead by serving others with humility and love.
-</p>
-</div>
-
-<div class="card">
-<h3>🛡 Integrity</h3>
-<p>
-We strive to demonstrate honesty, accountability,
-and faithful stewardship.
-</p>
-</div>
-
-</div>
-
-</section>
 
 <section>
 
-<h2>Scripture Foundation</h2>
 
-<blockquote>
+<h2 class="section-title">
 
-"Whoever wants to become great among you must be your servant,
-and whoever wants to be first must be slave of all."
+Scripture Foundation
+
+</h2>
+
+
+
+<div class="quote">
+
+
+"Whoever wants to become great among you
+must be your servant."
+
+
 
 <br><br>
 
-<strong>Mark 10:43-44</strong>
 
-</blockquote>
+<strong>
 
-</section>
+Mark 10:43
 
-<section>
+</strong>
 
-<h2>Contact Leadership</h2>
-
-<div class="card">
-
-<p>
-For counseling, prayer, ministry inquiries,
-or leadership appointments, please contact us.
-</p>
-
-<p>
-📞 +254721335631
-</p>
-
-<p>
-📧 gracepathnetwork@gmail.com
-</p>
-
-<p>
-📍 Naishi, Njoro, Kenya
-</p>
 
 </div>
 
+
 </section>
+
+
+
+
+
+
+<section>
+
+
+<h2 class="section-title">
+
+Connect With Leadership
+
+</h2>
+
+
+
+<div class="card contact">
+
+
+<p>
+
+📞 +254 721 335 631
+
+</p>
+
+
+<p>
+
+📧 gracepathnetwork@gmail.com
+
+</p>
+
+
+<p>
+
+🌐 www.gracepathnetwork.org
+
+</p>
+
+
+<p>
+
+📍 Kenya
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
 
 <footer>
 
-<p>Email: gracepathnetwork@gmail.com</p>
 
-<p>Phone: +254721335631</p>
+<p>
 
-<p>© GracePath Network. All Rights Reserved.</p>
+<strong>
+
+GracePath Network
+
+</strong>
+
+</p>
+
+
+<p>
+
+Growing in Christ • Walking in Grace • Impacting Lives
+
+</p>
+
+
+<p>
+
+gracepathnetwork@gmail.com
+
+</p>
+
+
+<p>
+
++254 721 335 631
+
+</p>
+
+
+<p>
+
+© 2026 GracePath Network.
+All Rights Reserved.
+
+</p>
+
+
 
 </footer>
 
+
+
+
 <a href="https://wa.me/254721335631"
+
 class="whatsapp-btn">
+
 💬
+
 </a>
+
+
 
 </body>
 

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Prayer Requests | GracePath Admin</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+margin-top:20px;
+}
+
+th{
+background:#f59e0b;
+color:white;
+padding:12px;
+text-align:left;
+}
+
+td{
+padding:12px;
+border:1px solid #ddd;
+vertical-align:top;
+}
+
+.delete-btn{
+background:#dc2626;
+color:white;
+border:none;
+padding:8px 12px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.delete-btn:hover{
+opacity:0.85;
+}
+
+.empty-message{
+text-align:center;
+padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="index.html">← Dashboard</a>
+
+</nav>
+
+<header>
+
+<h1>🙏 Prayer Requests</h1>
+
+<p>
+View and manage prayer requests submitted through GracePath Network.
+</p>
+
+</header>
+
+<section>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Prayer Request</th>
+<th>Status</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="requestsTable">
+
+<tr>
+<td colspan="6" class="empty-message">
+Loading requests...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs,
+deleteDoc,
+doc,
+updateDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+
+projectId: "gods-grace-sanctuary-7c3e9",
+
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+
+messagingSenderId: "794689665126",
+
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const table = document.getElementById("requestsTable");
+
+async function loadRequests(){
+
+table.innerHTML = "";
+
+try{
+
+const snapshot = await getDocs(
+collection(db,"prayer-request")
+);
+
+if(snapshot.empty){
+
+table.innerHTML = `
+<tr>
+<td colspan="6" class="empty-message">
+No prayer requests found.
+</td>
+</tr>
+`;
+
+return;
+
+}
+
+snapshot.forEach((requestDoc)=>{
+
+const data = requestDoc.data();
+
+const date = data.createdAt
+? data.createdAt.toDate().toLocaleString()
+: "";
+
+table.innerHTML += `
+<tr>
+
+<td>${data.name || ""}</td>
+
+<td>${data.email || ""}</td>
+
+<td>${data.prayer || ""}</td>
+
+<td>${data.status || "New"}</td>
+
+<td>${date}</td>
+
+<td>
+
+<button
+class="faith-btn"
+onclick="markAnswered('${requestDoc.id}')">
+Answered
+</button>
+
+<button
+class="delete-btn"
+onclick="deleteRequest('${requestDoc.id}')">
+Delete
+</button>
+
+</td>
+
+</tr>
+`;
+
+});
+
+}catch(error){
+
+console.error(error);
+
+table.innerHTML = `
+<tr>
+<td colspan="6" class="empty-message">
+Error loading prayer requests.
+</td>
+</tr>
+`;
+
+}
+
+}
+
+window.markAnswered = async function(id){
+
+try{
+
+await updateDoc(
+doc(db,"prayer-request",id),
+{
+status:"Answered"
+}
+);
+
+loadRequests();
+
+}catch(error){
+
+console.error(error);
+alert("Unable to update status.");
+
+}
+
+};
+
+window.deleteRequest = async function(id){
+
+if(confirm("Delete this prayer request?")){
+
+try{
+
+await deleteDoc(
+doc(db,"prayer-request",id)
+);
+
+loadRequests();
+
+}catch(error){
+
+console.error(error);
+alert("Unable to delete request.");
+
+}
+
+}
+
+};
+
+loadRequests();
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Member Profile | GracePath Admin</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.profile-card{
+max-width:900px;
+margin:30px auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.profile-card h2{
+margin-bottom:20px;
+}
+
+.profile-row{
+padding:12px 0;
+border-bottom:1px solid #eee;
+}
+
+.label{
+font-weight:bold;
+}
+
+.status{
+font-weight:bold;
+color:#16a34a;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="members.html">← Members Registry</a>
+
+</nav>
+
+<header>
+
+<h1>👤 Member Profile</h1>
+
+</header>
+
+<div class="profile-card" id="profile">
+
+Loading member profile...
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+collection,
+query,
+where,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = {
+
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+
+projectId: "gods-grace-sanctuary-7c3e9",
+
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+
+messagingSenderId: "794689665126",
+
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const profile = document.getElementById("profile");
+
+const params = new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+console.log("ID:", id);
+
+if(!id){
+
+profile.innerHTML = "Member not found.";
+
+}else{
+
+const memberRef = doc(
+db,
+"members",
+id
+);
+
+const memberSnap = await getDoc(memberRef);
+
+console.log("Exists:", memberSnap.exists());
+
+if(!memberSnap.exists()){
+
+profile.innerHTML = "Member not found.";
+
+}else{
+
+const data = memberSnap.data();
+
+const memberId = data.memberId || "";
+
+let coursesHtml = "";
+let certificatesHtml = "";
+
+/* MEMBER COURSES */
+
+const coursesQuery = query(
+collection(db,"memberCourses"),
+where("memberId","==",memberId)
+);
+
+const coursesSnapshot = await getDocs(coursesQuery);
+
+if(coursesSnapshot.empty){
+
+coursesHtml = `
+<div class="profile-row">
+<span class="label">Courses:</span>
+No course records found
+</div>
+`;
+
+}else{
+
+coursesSnapshot.forEach((courseDoc)=>{
+
+const course = courseDoc.data();
+
+coursesHtml += `
+
+<div class="profile-row">
+
+<strong>${course.program || ""}</strong><br>
+
+Level: ${course.level || "-"}<br>
+
+Lessons Completed: ${course.lessonsCompleted || 0}<br>
+
+Progress: ${course.progress || 0}%<br>
+
+<div style="
+background:#e5e7eb;
+border-radius:10px;
+height:20px;
+margin-top:8px;
+margin-bottom:8px;
+">
+
+<div style="
+width:${course.progress || 0}%;
+background:#16a34a;
+height:20px;
+border-radius:10px;
+">
+</div>
+
+</div>
+
+Status: ${course.status || ""}
+
+</div>
+
+`;
+
+});
+
+}
+
+/* CERTIFICATES */
+
+const certQuery = query(
+collection(db,"memberCertificates"),
+where("memberId","==",memberId)
+);
+
+const certSnapshot = await getDocs(certQuery);
+
+if(certSnapshot.empty){
+
+certificatesHtml = `
+<div class="profile-row">
+<span class="label">Certificates:</span>
+No certificates awarded
+</div>
+`;
+
+}else{
+
+certSnapshot.forEach((certDoc)=>{
+
+const cert = certDoc.data();
+
+let awarded = "";
+
+if(cert.dateAwarded){
+awarded = cert.dateAwarded.toDate().toLocaleDateString();
+}
+
+certificatesHtml += `
+
+<div class="profile-row">
+
+<a href="${cert.certificateUrl || '#'}"
+target="_blank">
+
+🏆 ${cert.certificateName || ""}
+
+</a>
+
+<br>
+
+Program: ${cert.program || ""}
+
+<br>
+
+Awarded: ${awarded}
+
+</div>
+
+`;
+});
+
+}
+
+profile.innerHTML = `
+
+<div style="text-align:center;margin-bottom:20px;">
+
+<img
+src="${data.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.fullName || 'Member')}"
+style="
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid #16a34a;
+">
+
+<h2>${data.fullName || ""}</h2>
+
+<p style="color:#666;">
+${data.membershipLevel || "Member"}
+</p>
+
+</div>
+
+<div class="profile-row">
+<span class="label">Member ID:</span>
+${data.memberId || ""}
+</div>
+
+<div class="profile-row">
+<span class="label">Phone:</span>
+${data.phone || ""}
+</div>
+
+<div class="profile-row">
+<span class="label">Email:</span>
+${data.email || ""}
+</div>
+
+<div class="profile-row">
+<span class="label">Country:</span>
+${data.country || "Not provided"}
+</div>
+
+<div class="profile-row">
+<span class="label">Region:</span>
+${data.region || "Not provided"}
+</div>
+
+<div class="profile-row">
+<span class="label">County / District:</span>
+${data.county || "Not provided"}
+</div>
+
+<div class="profile-row">
+<span class="label">Occupation:</span>
+${data.occupation || "Not provided"}
+</div>
+
+<div class="profile-row">
+<span class="label">Area of Interest:</span>
+${data.ministryInterest || "Not provided"}
+</div>
+
+<div class="profile-row">
+<span class="label">Faith Background:</span>
+${data.denomination || "Not provided"}
+</div>
+
+<div class="profile-row">
+<span class="label">Gender:</span>
+${data.gender || "Not provided"}
+</div>
+
+<div class="profile-row">
+<span class="label">Marital Status:</span>
+${data.maritalStatus || "Not provided"}
+</div>
+
+<div class="profile-row">
+<span class="label">Prayer Request:</span>
+${data.prayerRequest || "None"}
+</div>
+
+<div class="profile-row">
+<span class="label">Birthday:</span>
+${data.dateOfBirth
+ ? new Date(data.dateOfBirth).toLocaleDateString(
+     'en-GB',
+     { day:'numeric', month:'long' }
+   )
+ : "Not provided"}
+</div>
+
+<div class="profile-row">
+<span class="label">Membership Level:</span>
+${data.membershipLevel || ""}
+</div>
+
+<div class="profile-row">
+<span class="label">Status:</span>
+<span class="status">
+${data.status || ""}
+</span>
+</div>
+
+<div class="profile-row">
+<span class="label">Joined Date:</span>
+${data.joinedDate || ""}
+</div>
+
+<div style="margin-top:30px;text-align:center;">
+
+<button id="printBtn"
+style="
+background:#2563eb;
+color:white;
+padding:12px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+">
+🖨️ Print Profile
+</button>
+
+</div>
+
+<h3>📚 Course Progress</h3>
+${coursesHtml}
+
+<h3>🏆 Certificates Awarded</h3>
+
+${certificatesHtml}
+
+<h3>📈 Discipleship Summary</h3>
+
+<div class="profile-row">
+<span class="label">Member ID:</span>
+${data.memberId || ""}
+</div>
+
+<div class="profile-row">
+<span class="label">Current Status:</span>
+${data.status || ""}
+</div>
+
+<div class="profile-row">
+<span class="label">Current Program:</span>
+Firm Foundations
+</div>
+
+`;
+
+const printBtn = document.getElementById("printBtn");
+
+if (printBtn) {
+    printBtn.addEventListener("click", () => {
+        window.print();
+    });
+}
+
+}   // closes: if (!memberSnap.exists()) else block
+
+}   // closes: if (!id) else block
+
+</script>
+
+</body>
+
+</html>

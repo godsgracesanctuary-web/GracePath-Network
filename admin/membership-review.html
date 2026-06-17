@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership Review</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f3f4f6;
+padding:20px;
+}
+
+h1{
+text-align:center;
+color:#1e3a8a;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-bottom:15px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.card h3{
+margin-top:0;
+color:#1e3a8a;
+}
+
+button{
+padding:10px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-right:10px;
+}
+
+.approve{
+background:#16a34a;
+color:white;
+}
+
+.reject{
+background:#dc2626;
+color:white;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Membership Applications</h1>
+
+<div id="applications">
+Loading applications...
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs,
+doc,
+updateDoc,
+setDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "YOUR_API_KEY",
+authDomain: "YOUR_PROJECT.firebaseapp.com",
+projectId: "YOUR_PROJECT_ID",
+storageBucket: "YOUR_PROJECT.appspot.com",
+messagingSenderId: "YOUR_SENDER_ID",
+appId: "YOUR_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const container =
+document.getElementById("applications");
+
+async function loadApplications(){
+
+container.innerHTML="";
+
+const snapshot =
+await getDocs(
+collection(db,"membershipApplication")
+);
+
+snapshot.forEach((docSnap)=>{
+
+const data = docSnap.data();
+
+if(data.status==="approved") return;
+
+container.innerHTML += `
+<div class="card">
+
+<h3>${data.fullName || ""}</h3>
+
+<p><b>Email:</b> ${data.email || ""}</p>
+
+<p><b>Phone:</b> ${data.phone || ""}</p>
+
+<p><b>Location:</b> ${data.address || ""}</p>
+
+<p><b>Membership Level:</b>
+${data.membershipLevel || ""}
+</p>
+
+<button
+class="approve"
+onclick="approveMember('${docSnap.id}')">
+Approve
+</button>
+
+<button
+class="reject"
+onclick="rejectMember('${docSnap.id}')">
+Reject
+</button>
+
+</div>
+`;
+
+});
+
+}
+
+window.approveMember = async(id)=>{
+
+const applicationRef =
+doc(db,"membershipApplication",id);
+
+await updateDoc(applicationRef,{
+status:"approved"
+});
+
+alert("Member Approved");
+
+location.reload();
+
+};
+
+window.rejectMember = async(id)=>{
+
+const applicationRef =
+doc(db,"membershipApplication",id);
+
+await updateDoc(applicationRef,{
+status:"rejected"
+});
+
+alert("Application Rejected");
+
+location.reload();
+
+};
+
+loadApplications();
+
+</script>
+
+</body>
+</html>

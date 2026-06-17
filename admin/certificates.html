@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GracePath Certificates Management</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#fff;
+padding:25px;
+margin-bottom:20px;
+border-radius:15px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+input,
+select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ddd;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#2563eb;
+color:white;
+margin:5px;
+}
+
+button:hover{
+opacity:.9;
+}
+
+.cert-card{
+background:#f8fafc;
+padding:20px;
+margin-top:15px;
+border-radius:12px;
+border-left:5px solid #2563eb;
+}
+
+.delete-btn{
+background:#dc2626;
+}
+
+.find-btn{
+background:#0891b2;
+}
+
+.generate-btn{
+background:#16a34a;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="index.html">← Admin Dashboard</a>
+
+</nav>
+
+<div class="container">
+
+<div class="card">
+
+<h1>🏆 Certificates Management</h1>
+
+<p>
+Issue, manage and track GracePath certificates.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Issue Certificate</h2>
+
+<input
+type="text"
+id="memberId"
+placeholder="Member ID">
+
+<button
+class="find-btn"
+onclick="findMember()">
+Find Member
+</button>
+
+<input
+type="text"
+id="memberName"
+placeholder="Member Name"
+readonly>
+
+<select id="program">
+
+<option value="">
+Select Program
+</option>
+
+<option>Faith Starter Series</option>
+<option>Discipleship Pathway</option>
+<option>Leadership Development</option>
+<option>Family Enrichment</option>
+<option>Youth Development</option>
+<option>Community Service</option>
+
+</select>
+
+<input
+type="text"
+id="certificateName"
+placeholder="Certificate Name"
+readonly>
+
+<button
+class="generate-btn"
+onclick="generateCertificate()">
+Generate Certificate
+</button>
+
+<button onclick="saveCertificate()">
+Issue Certificate
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Search Certificates</h2>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search Member ID">
+
+<button onclick="searchCertificates()">
+Search
+</button>
+
+<button onclick="loadCertificates()">
+Show All
+</button>
+
+</div>
+
+<div class="card">
+
+<h2 id="certCount">
+Total Certificates: 0
+</h2>
+
+<div id="certificatesList">
+Loading...
+</div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+deleteDoc,
+doc,
+query,
+where,
+orderBy
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+projectId: "gods-grace-sanctuary-7c3e9",
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+messagingSenderId: "794689665126",
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+
+const db = getFirestore(app);
+
+let certificateNumber = "";
+let verificationCode = "";
+
+window.findMember = async function(){
+
+const memberId =
+document.getElementById("memberId")
+.value
+.trim();
+
+if(!memberId){
+
+alert("Enter Member ID");
+
+return;
+
+}
+
+try{
+
+const q = query(
+collection(db,"members"),
+where("memberId","==",memberId)
+);
+
+const snapshot =
+await getDocs(q);
+
+if(snapshot.empty){
+
+alert("Member not found");
+
+document.getElementById(
+"memberName"
+).value = "";
+
+return;
+
+}
+
+snapshot.forEach((memberDoc)=>{
+
+const member =
+memberDoc.data();
+
+document.getElementById(
+"memberName"
+).value =
+member.fullName || member.name || "";
+
+});
+
+}catch(error){
+
+console.error(error);
+
+alert("Error finding member");
+
+}
+
+};
+
+
+window.generateCertificate = function(){
+
+const program =
+document.getElementById("program")
+.value;
+
+if(!program){
+
+alert("Select Program");
+
+return;
+
+}
+
+certificateNumber =
+"GP-CERT-" + Date.now();
+
+verificationCode =
+Math.random()
+.toString(36)
+.substring(2,10)
+.toUpperCase();
+
+document.getElementById(
+"certificateName"
+).value =
+program + " Certificate";
+
+alert(
+"Certificate Generated Successfully"
+);
+
+};
+
+window.saveCertificate = async function(){
+
+const memberId =
+document.getElementById("memberId")
+.value
+.trim();
+
+const memberName =
+document.getElementById("memberName")
+.value
+.trim();
+
+const program =
+document.getElementById("program")
+.value;
+
+const certificateName =
+document.getElementById("certificateName")
+.value;
+
+if(
+!memberId ||
+!memberName ||
+!program ||
+!certificateName
+){
+
+alert(
+"Complete all required fields"
+);
+
+return;
+
+}
+
+try{
+
+if(!certificateNumber){
+
+alert("Generate Certificate First");
+
+return;
+
+}
+
+await addDoc(
+collection(
+db,
+"memberCertificates"
+),
+{
+
+memberId,
+memberName,
+program,
+certificateName,
+
+certificateNumber,
+
+verificationCode,
+
+status:"Issued",
+
+issuedBy:
+"GracePath Admin",
+
+dateIssued:
+new Date()
+.toLocaleDateString(),
+
+createdAt:
+new Date()
+.toISOString()
+
+}
+);
+
+alert(
+"Certificate Issued Successfully"
+);
+
+document.getElementById(
+"memberId"
+).value="";
+
+document.getElementById(
+"memberName"
+).value="";
+
+document.getElementById(
+"program"
+).value="";
+
+document.getElementById(
+"certificateName"
+).value="";
+
+loadCertificates();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Failed to issue certificate"
+);
+
+}
+
+};
+
+window.loadCertificates =
+async function(){
+
+const q =
+query(
+collection(
+db,
+"memberCertificates"
+),
+orderBy(
+"createdAt",
+"desc"
+)
+);
+
+const snapshot =
+await getDocs(q);
+
+renderCertificates(
+snapshot
+);
+
+};
+
+function renderCertificates(
+snapshot
+){
+
+const list =
+document.getElementById(
+"certificatesList"
+);
+
+list.innerHTML = "";
+
+document.getElementById(
+"certCount"
+).innerHTML =
+"Total Certificates: " +
+snapshot.size;
+
+if(snapshot.empty){
+
+list.innerHTML =
+"<p>No certificates found.</p>";
+
+return;
+
+}
+
+snapshot.forEach(
+(docSnap)=>{
+
+const cert =
+docSnap.data();
+
+list.innerHTML += `
+
+<div class="cert-card">
+
+<h3>
+🏆 ${cert.certificateName}
+</h3>
+
+<p>
+<strong>Member:</strong>
+${cert.memberName}
+</p>
+
+<p>
+<strong>Member ID:</strong>
+${cert.memberId}
+</p>
+
+<p>
+<strong>Certificate No:</strong>
+${cert.certificateNumber}
+</p>
+
+<p>
+<strong>Verification:</strong>
+${cert.verificationCode}
+</p>
+
+<p>
+<strong>Program:</strong>
+${cert.program}
+</p>
+
+<p>
+<strong>Status:</strong>
+${cert.status}
+</p>
+
+<p>
+<strong>Date Issued:</strong>
+${cert.dateIssued}
+</p>
+
+<button
+class="delete-btn"
+onclick="deleteCertificate('${docSnap.id}')">
+
+Delete
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+window.searchCertificates =
+async function(){
+
+const searchValue =
+document.getElementById(
+"searchInput"
+)
+.value
+.trim()
+.toLowerCase();
+
+const snapshot =
+await getDocs(
+collection(
+db,
+"memberCertificates"
+)
+);
+
+const list =
+document.getElementById(
+"certificatesList"
+);
+
+list.innerHTML = "";
+
+let count = 0;
+
+snapshot.forEach(
+(docSnap)=>{
+
+const cert =
+docSnap.data();
+
+if(
+(cert.memberId || "")
+.toLowerCase()
+.includes(searchValue)
+){
+
+count++;
+
+list.innerHTML += `
+
+<div class="cert-card">
+
+<h3>
+🏆 ${cert.certificateName}
+</h3>
+
+<p>
+${cert.memberName}
+</p>
+
+<p>
+${cert.memberId}
+</p>
+
+<p>
+${cert.program}
+</p>
+
+</div>
+
+`;
+
+}
+
+});
+
+document.getElementById(
+"certCount"
+).innerHTML =
+"Search Results: " +
+count;
+
+if(count === 0){
+
+list.innerHTML =
+"<p>No matching certificates found.</p>";
+
+}
+
+};
+
+window.deleteCertificate =
+async function(id){
+
+if(
+!confirm(
+"Delete certificate?"
+)
+) return;
+
+try{
+
+await deleteDoc(
+doc(
+db,
+"memberCertificates",
+id
+)
+);
+
+loadCertificates();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Failed to delete certificate"
+);
+
+}
+
+};
+
+loadCertificates();
+
+</script>
+
+</body>
+</html>

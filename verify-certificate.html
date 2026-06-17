@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Verify Certificate | GracePath Network</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.container{
+max-width:700px;
+margin:auto;
+padding:30px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ddd;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#2563eb;
+color:white;
+}
+
+.result{
+margin-top:20px;
+padding:20px;
+background:#f8fafc;
+border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>🏆 Verify Certificate</h1>
+
+<p>
+Enter Certificate Number and Verification Code.
+</p>
+
+<input
+type="text"
+id="certificateNumber"
+placeholder="Certificate Number">
+
+<input
+type="text"
+id="verificationCode"
+placeholder="Verification Code">
+
+<button onclick="verifyCertificate()">
+Verify Certificate
+</button>
+
+<div id="result" class="result">
+Awaiting verification...
+</div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs,
+query,
+where
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+authDomain:"gods-grace-sanctuary-7c3e9.firebaseapp.com",
+projectId:"gods-grace-sanctuary-7c3e9",
+storageBucket:"gods-grace-sanctuary-7c3e9.firebasestorage.app",
+messagingSenderId:"794689665126",
+appId:"1:794689665126:web:a593f7831c0e161a9b15a7"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.verifyCertificate = async function(){
+
+const certificateNumber =
+document.getElementById("certificateNumber")
+.value
+.trim();
+
+const verificationCode =
+document.getElementById("verificationCode")
+.value
+.trim();
+
+const q =
+query(
+collection(db,"memberCertificates"),
+where("certificateNumber","==",certificateNumber),
+where("verificationCode","==",verificationCode)
+);
+
+const snapshot =
+await getDocs(q);
+
+const result =
+document.getElementById("result");
+
+if(snapshot.empty){
+
+result.innerHTML = `
+<h3>❌ Certificate Not Found</h3>
+`;
+
+return;
+
+}
+
+snapshot.forEach((docSnap)=>{
+
+const cert = docSnap.data();
+
+result.innerHTML = `
+
+<h3>✅ Certificate Verified</h3>
+
+<p><strong>Member:</strong> ${cert.memberName}</p>
+
+<p><strong>Member ID:</strong> ${cert.memberId}</p>
+
+<p><strong>Program:</strong> ${cert.program}</p>
+
+<p><strong>Certificate:</strong> ${cert.certificateName}</p>
+
+<p><strong>Date Issued:</strong> ${cert.dateIssued}</p>
+
+<p><strong>Status:</strong> ${cert.status}</p>
+
+`;
+
+});
+
+};
+
+</script>
+
+</body>
+</html>

@@ -1440,15 +1440,12 @@ header{
 
     .featured-latest::before{
         position:static;
-
         display:inline-block;
-
         margin-bottom:15px;
     }
 
     .featured-latest h3{
         font-size:1.6rem;
-
         padding-right:0;
     }
 
@@ -1458,9 +1455,60 @@ header{
 
     .latest-btn{
         display:flex;
-
         width:100%;
-
         text-align:center;
     }
+}
+
+.location-btn{
+    display:inline-block;
+    margin-top:10px;
+    padding:12px 20px;
+    background:#f59e0b;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:600;
+}
+
+.location-btn:hover{
+    opacity:0.9;
+}#visit{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.social-links{
+    margin-top:30px;
+}
+
+.social-btn{
+    display:inline-block;
+    margin:10px;
+    padding:12px 20px;
+    background;#1f2937;
+    color;white;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:600;
+}
+
+.location-box{
+    margin-top:40px;
+}
+
+.location-btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:14px 24px;
+    background:#f59e0b;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:700;
+   box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+.location-btn:hover{
+    transform:translateY(-2px);
 }

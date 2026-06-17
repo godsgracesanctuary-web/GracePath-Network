@@ -8,52 +8,437 @@
 
 <title>Young Adults Inspiration | GracePath Network</title>
 
-<link rel="stylesheet" href="../../style.css">
+<meta name="description" content="Inspirational Christian stories for young adults focused on faith, purpose, leadership, relationships, destiny, resilience, and personal growth.">
+
+<link rel="icon" type="image/png" href="../images/gracepath-logo.png">
+
+<meta property="og:title" content="Young Adults Inspiration | GracePath Network">
+<meta property="og:description" content="Powerful stories that inspire purpose, leadership, faith, destiny, resilience, and impact.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="../images/young-adults-banner.jpg">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f8fafc;
+    color:#334155;
+    line-height:1.8;
+}
+
+/* NAVIGATION */
+
+nav{
+    background:#1e1b4b;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.logo{
+    color:#fbbf24;
+    font-size:1.3rem;
+    font-weight:800;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#fbbf24;
+}
+
+/* HERO */
+
+.hero{
+    background:
+    linear-gradient(rgba(49,46,129,.88),rgba(79,70,229,.88)),
+    url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80');
+
+    background-size:cover;
+    background-position:center;
+
+    color:white;
+    text-align:center;
+    padding:120px 20px;
+}
+
+.hero-badge{
+    display:inline-block;
+    background:#fbbf24;
+    color:#312e81;
+    padding:10px 20px;
+    border-radius:50px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:4rem;
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:900px;
+    margin:auto;
+    font-size:1.15rem;
+}
+
+.hero-buttons{
+    margin-top:35px;
+}
+
+.btn{
+    display:inline-block;
+    text-decoration:none;
+    padding:14px 30px;
+    border-radius:50px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.btn-primary{
+    background:#fbbf24;
+    color:#312e81;
+}
+
+.btn-primary:hover{
+    transform:translateY(-4px);
+}
+
+.btn-secondary{
+    border:2px solid white;
+    color:white;
+    margin-left:10px;
+}
+
+.btn-secondary:hover{
+    background:white;
+    color:#312e81;
+}
+
+/* SECTIONS */
+
+section{
+    padding:90px 8%;
+}
+
+.section-title{
+    text-align:center;
+    color:#312e81;
+    font-size:2.5rem;
+    margin-bottom:15px;
+}
+
+.section-subtitle{
+    text-align:center;
+    max-width:850px;
+    margin:auto;
+    margin-bottom:50px;
+    color:#64748b;
+}
+
+/* FEATURED STORY */
+
+.featured{
+    background:white;
+    border-radius:30px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+    border-top:8px solid #fbbf24;
+}
+
+.latest-badge{
+    display:inline-block;
+    background:#fbbf24;
+    color:#312e81;
+    padding:8px 18px;
+    border-radius:30px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.featured h3{
+    color:#312e81;
+    font-size:2rem;
+    margin-bottom:15px;
+}
+
+.featured p{
+    max-width:800px;
+    margin:auto;
+    margin-bottom:30px;
+}
+
+/* STORIES */
+
+.story-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.story-card{
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.story-card:hover{
+    transform:translateY(-10px);
+}
+
+.story-top{
+    height:10px;
+    background:#fbbf24;
+}
+
+.story-content{
+    padding:30px;
+}
+
+.story-content h3{
+    color:#312e81;
+    margin-bottom:15px;
+}
+
+.story-content p{
+    color:#64748b;
+    margin-bottom:25px;
+}
+
+/* LEARNING */
+
+.learning-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.learning-card{
+    background:white;
+    border-radius:25px;
+    padding:35px 25px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.learning-card:hover{
+    transform:translateY(-8px);
+}
+
+.learning-card h3{
+    color:#312e81;
+    margin-bottom:10px;
+}
+
+/* SCRIPTURE */
+
+.scripture{
+    background:linear-gradient(135deg,#312e81,#4f46e5);
+    color:white;
+    text-align:center;
+    border-radius:30px;
+    padding:70px 30px;
+}
+
+.scripture h2{
+    color:#fbbf24;
+    margin-bottom:25px;
+}
+
+.scripture p{
+    max-width:850px;
+    margin:auto;
+    font-size:1.15rem;
+}
+
+.scripture strong{
+    display:block;
+    margin-top:20px;
+    color:#fbbf24;
+}
+
+/* QUOTE */
+
+.quote-box{
+    background:white;
+    border-radius:30px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.quote-box p{
+    font-size:1.4rem;
+    font-style:italic;
+    font-weight:600;
+    color:#312e81;
+}
+
+/* CTA */
+
+.cta-box{
+    background:white;
+    border-radius:30px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.cta-box h2{
+    color:#312e81;
+    margin-bottom:15px;
+}
+
+.cta-box p{
+    max-width:800px;
+    margin:auto;
+    margin-bottom:25px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#1e1b4b;
+    color:white;
+    text-align:center;
+    padding:70px 20px;
+}
+
+footer h2{
+    color:#fbbf24;
+    margin-bottom:15px;
+}
+
+.footer-note{
+    max-width:850px;
+    margin:20px auto;
+    color:#c7d2fe;
+}
+
+.copyright{
+    margin-top:25px;
+    color:#a5b4fc;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero{
+    padding:90px 20px;
+}
+
+.hero h1{
+    font-size:2.5rem;
+    line-height:1.2;
+}
+
+.hero-buttons .btn{
+    display:block;
+    margin:10px auto;
+    max-width:280px;
+}
+
+.btn-secondary{
+    margin-left:0;
+}
+
+section{
+    padding:70px 20px;
+}
+
+}
+
+</style>
 
 </head>
 
 <body>
 
 <nav>
-<a href="../index.html">← Back to Stories That Inspire</a>
+
+<div class="logo">
+🎓 GracePath Young Adults
+</div>
+
+<a href="../index.html">
+← Back Home
+</a>
+
 </nav>
 
-<header>
+<header class="hero">
 
-<h1>🎓 Young Adults Inspiration</h1>
+<div class="hero-badge">
+🌟 Purpose • Leadership • Destiny
+</div>
 
-<p><strong>📚 8 Inspirational Stories Available</strong></p>
+<h1>Young Adults Inspiration</h1>
 
 <p>
-Discover powerful stories of faith, purpose, leadership, relationships,
-destiny, and personal growth designed to inspire the next generation.
+Discover powerful stories of faith, purpose, leadership, relationships, destiny, resilience, and personal growth designed to inspire the next generation.
 </p>
+
+<div class="hero-buttons">
+
+<a href="#stories" class="btn btn-primary">
+Explore Stories
+</a>
+
+<a href="../index.html" class="btn btn-secondary">
+GracePath Network
+</a>
+
+</div>
 
 </header>
 
 <section>
 
-<h2>🌟 Featured Story</h2>
+<h2 class="section-title">🌟 Featured Story</h2>
 
-<<p style="
-background:#ffd700;
-display:inline-block;
-padding:8px 18px;
-border-radius:25px;
-font-weight:bold;
-margin-bottom:20px;">
-⭐ Latest Release
+<p class="section-subtitle">
+Our latest inspirational release for young adults.
 </p>
 
-<div class="card">
+<div class="featured">
 
-<h3>🏺 The Preacher's Daughter</h3>
+<div class="latest-badge">
+⭐ Latest Release
+</div>
+
+<h3>🏺 Purpose Unlocked</h3>
 
 <p>
-A pastor's daughter discovers grace, purpose, and faith through trials.
+A pastor's daughter discovers grace, purpose, faith, healing, and restoration through life's challenges.
 </p>
 
-<a href="stories/THE PREACHERS DAUGHTER.pdf" target="_blank">
+<a href="stories/Purpose Unlocked.pdf" target="_blank" class="btn btn-primary">
 Read Featured Story
 </a>
 
@@ -61,136 +446,95 @@ Read Featured Story
 
 </section>
 
-<section>
+<section id="stories">
 
-<h2>📚 Available Stories</h2>
+<h2 class="section-title">📚 Story Collection</h2>
 
-<div class="cards">
+<p class="section-subtitle">
+Nine inspirational stories designed to strengthen faith, develop leadership, and unlock purpose.
+</p>
 
-<div class="card">
+<div class="story-grid">
 
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
 <h3>🏺 The Preacher's Daughter</h3>
-
-<p>
-A pastor's daughter discovers grace, purpose, and faith through trials.
-</p>
-
-<a href="stories/THE PREACHERS DAUGHTER.pdf" target="_blank">
-Read Story
-</a>
-
+<p>A pastor's daughter discovers grace, purpose, and faith through trials.</p>
+<a href="stories/THE PREACHERS DAUGHTER.pdf" class="btn btn-primary">Read Story</a>
+</div>
 </div>
 
-<div class="card">
-
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
 <h3>🔥 Chosen for Greatness</h3>
-
-<p>
-A young believer discovers that God has called him for a greater purpose.
-</p>
-
-<a href="stories/CHOSEN FOR GREATNESS.pdf" target="_blank">
-Read Story
-</a>
-
+<p>A young believer discovers that God has called him for a greater purpose.</p>
+<a href="stories/CHOSEN FOR GREATNESS.pdf" class="btn btn-primary">Read Story</a>
+</div>
 </div>
 
-<div class="card">
-
-<h3>🔥 Grace Beyond The Storm</h3>
-
-<p>
-A young man's journey through storms, discovering faith, purpose, integrity, and destiny.
-</p>
-
-<a href="stories/GRACE BEYOND THE STORM.pdf" target="_blank">
-Read Story
-</a>
-
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
+<h3>🌊 Grace Beyond The Storm</h3>
+<p>A journey through storms, discovering faith, purpose, integrity, and destiny.</p>
+<a href="stories/GRACE BEYOND THE STORM.pdf" class="btn btn-primary">Read Story</a>
 </div>
-  
-<div class="card">
+</div>
 
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
 <h3>🎯 Purpose Unlocked</h3>
-
-<p>
-Discovering your calling and living a life of impact and significance.
-</p>
-
-<a href="stories/purpose-unlocked.pdf" target="_blank">
-Read Story
-</a>
-
+<p>Discovering your calling and living a life of impact and significance.</p>
+<a href="stories/purpose-unlocked.pdf" class="btn btn-primary">Read Story</a>
+</div>
 </div>
 
-<div class="card">
-
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
 <h3>🏺 The Potter's House</h3>
-
-<p>
-Learning how God shapes, molds, and prepares lives for His purposes.
-</p>
-
-<a href="stories/the-potters-house.pdf" target="_blank">
-Read Story
-</a>
-
+<p>Learning how God shapes, molds, and prepares lives for His purposes.</p>
+<a href="stories/the-potters-house.pdf" class="btn btn-primary">Read Story</a>
+</div>
 </div>
 
-<div class="card">
-
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
 <h3>🏆 Building a Legacy</h3>
-
-<p>
-A story about making choices today that will influence generations tomorrow.
-</p>
-
-<a href="stories/building-a-legacy.pdf" target="_blank">
-Read Story
-</a>
-
+<p>Making choices today that will influence generations tomorrow.</p>
+<a href="stories/building-a-legacy.pdf" class="btn btn-primary">Read Story</a>
+</div>
 </div>
 
-<div class="card">
-
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
 <h3>🚀 Faith for the Impossible</h3>
-
-<p>
-Overcoming obstacles and trusting God for greater things.
-</p>
-
-<a href="stories/faith-for-the-impossible.pdf" target="_blank">
-Read Story
-</a>
-
+<p>Overcoming obstacles and trusting God for greater things.</p>
+<a href="stories/faith-for-the-impossible.pdf" class="btn btn-primary">Read Story</a>
+</div>
 </div>
 
-<div class="card">
-
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
 <h3>👑 The Leader Within</h3>
-
-<p>
-Unlocking leadership potential through character, service, and vision.
-</p>
-
-<a href="stories/the-leader-within.pdf" target="_blank">
-Read Story
-</a>
-
+<p>Unlocking leadership potential through character, service, and vision.</p>
+<a href="stories/the-leader-within.pdf" class="btn btn-primary">Read Story</a>
+</div>
 </div>
 
-<div class="card">
-
+<div class="story-card">
+<div class="story-top"></div>
+<div class="story-content">
 <h3>🌟 Designed for Destiny</h3>
-
-<p>
-Understanding that every life has a God-given purpose and assignment.
-</p>
-
-<a href="stories/designed-for-destiny.pdf" target="_blank">
-Read Story
-</a>
-
+<p>Understanding that every life has a God-given purpose and assignment.</p>
+<a href="stories/designed-for-destiny.pdf" class="btn btn-primary">Read Story</a>
+</div>
 </div>
 
 </div>
@@ -199,28 +543,33 @@ Read Story
 
 <section>
 
-<h2>🎯 What Young Adults Will Learn</h2>
+<h2 class="section-title">🎯 What Young Adults Will Learn</h2>
 
-<div class="cards">
+<div class="learning-grid">
 
-<div class="card">
+<div class="learning-card">
 <h3>🎯 Purpose</h3>
 <p>Discovering God's direction and calling for life.</p>
 </div>
 
-<div class="card">
+<div class="learning-card">
 <h3>👑 Leadership</h3>
 <p>Developing influence through service and godly character.</p>
 </div>
 
-<div class="card">
+<div class="learning-card">
 <h3>💪 Resilience</h3>
 <p>Overcoming challenges and growing through adversity.</p>
 </div>
 
-<div class="card">
+<div class="learning-card">
 <h3>🏆 Legacy</h3>
 <p>Building a life that impacts future generations.</p>
+</div>
+
+<div class="learning-card">
+<h3>🌟 Destiny</h3>
+<p>Walking confidently in God's unique plan.</p>
 </div>
 
 </div>
@@ -229,26 +578,26 @@ Read Story
 
 <section>
 
-<h2>💡 Life Areas Covered</h2>
+<h2 class="section-title">💡 Life Areas Covered</h2>
 
-<div class="cards">
+<div class="learning-grid">
 
-<div class="card">
+<div class="learning-card">
 <h3>🙏 Faith</h3>
 <p>Growing deeper in your relationship with God.</p>
 </div>
 
-<div class="card">
+<div class="learning-card">
 <h3>💼 Career</h3>
 <p>Applying biblical principles in work and leadership.</p>
 </div>
 
-<div class="card">
+<div class="learning-card">
 <h3>❤️ Relationships</h3>
 <p>Building healthy and godly relationships.</p>
 </div>
 
-<div class="card">
+<div class="learning-card">
 <h3>🌍 Impact</h3>
 <p>Using your gifts and talents to influence the world.</p>
 </div>
@@ -259,43 +608,85 @@ Read Story
 
 <section>
 
+<div class="scripture">
+
 <h2>📖 Scripture Inspiration</h2>
 
 <p>
-"For I know the plans I have for you," declares the Lord,
-"plans to prosper you and not to harm you,
-plans to give you hope and a future."
+"For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you hope and a future."
 </p>
 
-<p><strong>Jeremiah 29:11</strong></p>
+<strong>Jeremiah 29:11</strong>
+
+</div>
 
 </section>
 
 <section>
 
-<h2>✨ Inspiration Quote</h2>
+<div class="quote-box">
 
-<p style="
-font-size:1.3rem;
-font-weight:600;
-font-style:italic;
-text-align:center;">
+<p>
 "Your story is not over. God is still writing it."
 </p>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="cta-box">
+
+<h2>🌍 Continue Your Journey</h2>
+
+<p>
+Explore more stories, biblical lessons, devotionals, leadership resources, inspirational novels, and faith-building materials from GracePath Network.
+</p>
+
+<a href="../index.html" class="btn btn-primary">
+Explore More Resources
+</a>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="cta-box">
+
+<h2>📱 Connect With GracePath Network</h2>
+
+<p>
+Scan the QR Code to access stories, devotionals, biblical lessons, leadership resources, and Christian content.
+</p>
+
+<img src="../images/gracepath-qr.png"
+alt="GracePath QR Code"
+style="width:180px;margin-top:20px;">
+
+</div>
 
 </section>
 
 <footer>
 
-<h3>GracePath Network</h3>
+<h2>GracePath Network</h2>
 
-<p><em>Transforming Lives Through Christ</em></p>
+<p><strong>Transforming Lives Through Christ, One Story at a Time</strong></p>
 
 <p>📧 gracepathnetwork@gmail.com</p>
 
 <p>📞 +254 721 335 631</p>
 
-<p>&copy; 2026 GracePath Network. All Rights Reserved.</p>
+<p class="footer-note">
+Helping young adults discover purpose, leadership, faith, destiny, resilience, and impact through Christ-centered stories and biblical resources.
+</p>
+
+<p class="copyright">
+© 2026 GracePath Network. All Rights Reserved.
+</p>
 
 </footer>
 

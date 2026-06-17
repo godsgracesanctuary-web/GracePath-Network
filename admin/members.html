@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GracePath Family Registry | GracePath Admin</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+margin-top:20px;
+}
+
+th{
+background:#16a34a;
+color:white;
+padding:12px;
+text-align:left;
+}
+
+td{
+border:1px solid #ddd;
+padding:10px;
+}
+
+.open-btn{
+background:#2563eb;
+color:white;
+padding:8px 12px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.status{
+font-weight:bold;
+color:#16a34a;
+}
+
+.stats-container{
+    display:flex;
+    gap:20px;
+    margin:20px 0;
+    flex-wrap:wrap;
+}
+
+.stat-card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    min-width:200px;
+    text-align:center;
+}
+
+.stat-card h3{
+    margin:0 0 10px;
+}
+
+.stat-card p{
+    font-size:32px;
+    font-weight:bold;
+    color:#2e7d32;
+    margin:0;
+}
+
+.member-photo{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #e5e7eb;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">← Dashboard</a>
+</nav>
+
+<header>
+
+<h1>👥 Members Registry</h1>
+
+<p>
+Approved and active GracePath Network members.
+</p>
+
+</header>
+
+<div class="stats-container">
+
+  <div class="stat-card">
+    <h3>Total Members</h3>
+    <p id="totalMembers">0</p>
+  </div>
+
+  <div class="stat-card">
+    <h3>Active Members</h3>
+    <p id="activeMembers">0</p>
+  </div>
+
+  <div class="stat-card">
+    <h3>Pending Applications</h3>
+    <p id="pendingMembers">0</p>
+  </div>
+
+<a href="leaders.html" style="text-decoration:none;color:inherit;">
+    <div class="stat-card">
+        <h3>Leaders</h3>
+        <p id="leadersCount">0</p>
+    </div>
+</a>
+</div>  <!-- closes stats-container -->
+<div style="margin:20px 0;">
+    <input
+        id="searchInput"
+        type="text"
+        placeholder="Search by Member ID, Name, Email or Phone"
+        style="
+            width:100%;
+            padding:12px;
+            border:1px solid #ddd;
+            border-radius:8px;
+        ">
+</div>
+
+<section>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Member ID</th>
+<th>Name</th>
+<th>Phone</th>
+<th>Email</th>
+<th>Level</th>
+<th>Status</th>
+<th>Joined</th>
+<th>Photo</th>
+<th>Profile</th>
+
+</tr>
+
+</thead>
+
+<tbody id="membersTable">
+
+<tr>
+<td colspan="9">
+Loading members...
+</td>
+
+</tr>
+
+
+
+</tbody>
+
+</table>
+ 
+</section>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+projectId: "gods-grace-sanctuary-7c3e9",
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+messagingSenderId: "794689665126",
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const table = document.getElementById("membersTable");
+
+
+const totalMembersCard =
+document.getElementById("totalMembers");
+
+const activeMembersCard =
+document.getElementById("activeMembers");
+
+const pendingMembersCard =
+document.getElementById("pendingMembers");
+
+const leadersCard =
+document.getElementById("leadersCount");
+
+const searchInput =
+document.getElementById("searchInput");
+
+async function loadMembers(){
+
+table.innerHTML = "";
+
+const snapshot = await getDocs(
+collection(db,"members")
+);
+
+let activeCount = 0;
+let leadersCount = 0;
+
+const applicationsSnapshot = await getDocs(
+  collection(db,"membershipApplication")
+);
+
+let pendingCount = 0;
+
+applicationsSnapshot.forEach((doc) => {
+
+  const data = doc.data();
+
+  if(data.status === "Pending"){
+    pendingCount++;
+  }
+
+});
+
+pendingMembersCard.textContent = pendingCount;
+
+snapshot.forEach((memberDoc)=>{
+   const data = memberDoc.data();
+
+   if(data.status === "Active"){
+   activeCount++;
+}
+
+if(
+   data.membershipLevel === "Leader" ||
+   data.membershipLevel === "Pastor" ||
+   data.membershipLevel === "Elder"
+){
+   leadersCount++;
+}
+});
+
+totalMembersCard.textContent = snapshot.size;
+activeMembersCard.textContent = activeCount;
+leadersCard.textContent = leadersCount;
+
+
+
+
+if(snapshot.empty){
+
+table.innerHTML = `
+<tr>
+<td colspan="8">
+No members found.
+</td>
+</tr>
+`;
+
+return;
+
+}
+
+snapshot.forEach((memberDoc)=>{
+
+const data = memberDoc.data();
+
+const searchTerm =
+searchInput.value.toLowerCase();
+
+const memberText = `
+${data.memberId || ""}
+${data.fullName || ""}
+${data.email || ""}
+${data.phone || ""}
+`.toLowerCase();
+
+if(
+searchTerm &&
+!memberText.includes(searchTerm)
+){
+return;
+}
+
+table.innerHTML += `
+
+<tr>
+
+<td>${data.memberId || ""}</td>
+
+<td>${data.fullName || ""}</td>
+
+<td>${data.phone || ""}</td>
+
+<td>${data.email || ""}</td>
+
+<td>${data.membershipLevel || ""}</td>
+
+<td class="status">
+${data.status || ""}
+</td>
+
+<td>${data.joinedDate || ""}</td>
+
+<td>
+  <img
+    src="${data.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.fullName || 'Member')}"
+    width="40"
+    height="40"
+    style="
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      object-fit:cover;
+      border:1px solid #ddd;
+    "
+  >
+</td>
+
+<td>
+
+
+<a
+href="member-profile.html?id=${memberDoc.id}"
+class="open-btn">
+
+
+
+Open
+
+</a>
+</td>
+</tr>
+
+`;
+
+});
+
+}
+
+loadMembers();
+
+searchInput.addEventListener(
+"input",
+loadMembers
+);
+
+</script>
+
+</body>
+
+</html>

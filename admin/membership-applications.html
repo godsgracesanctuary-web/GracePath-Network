@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Membership Applications | GracePath Admin</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+margin-top:20px;
+}
+
+th{
+background:#f59e0b;
+color:white;
+padding:12px;
+text-align:left;
+}
+
+td{
+border:1px solid #ddd;
+padding:10px;
+vertical-align:top;
+}
+
+button{
+padding:6px 10px;
+margin:2px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+color:white;
+}
+
+.contact-btn{
+background:#2563eb;
+}
+
+.approve-btn{
+background:#16a34a;
+}
+
+.active-btn{
+background:#7c3aed;
+}
+
+.view-btn{
+background:#f59e0b;
+}
+
+.delete-btn{
+background:#dc2626;
+}
+
+.status{
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">← Dashboard</a>
+</nav>
+
+<header>
+
+<h1>👥 Membership Applications</h1>
+
+<p>
+View and manage membership applications submitted through GracePath Network.
+</p>
+
+</header>
+
+<section>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>Phone</th>
+<th>Email</th>
+<th>Location</th>
+<th>Ministry</th>
+<th>Status</th>
+<th>Orientation</th>
+<th>Date</th>
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="membersTable">
+
+<tr>
+<td colspan="9">
+Loading applications...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs,
+doc,
+updateDoc,
+deleteDoc,
+getDoc,
+setDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+projectId: "gods-grace-sanctuary-7c3e9",
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+messagingSenderId: "794689665126",
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const table = document.getElementById("membersTable");
+
+async function loadApplications(){
+
+table.innerHTML = "";
+
+try{
+
+const snapshot = await getDocs(
+collection(db,"membershipApplication")
+);
+
+if(snapshot.empty){
+
+table.innerHTML = `
+<tr>
+<td colspan="9">
+No membership applications found.
+</td>
+</tr>
+`;
+
+return;
+
+}
+
+snapshot.forEach((memberDoc)=>{
+
+const data = memberDoc.data();
+
+const date =
+data.createdAt
+? data.createdAt.toDate().toLocaleString()
+: "";
+
+table.innerHTML += `
+
+<tr>
+
+<td>${data.fullName || ""}</td>
+
+<td>${data.phoneNumber || ""}</td>
+
+<td>${data.email || ""}</td>
+
+<td>
+${data.county || ""}
+${data.country ? ", " + data.country : ""}
+</td>
+
+<td>${data.ministryInterest || ""}</td>
+
+<td class="status">
+${data.status || "Pending"}
+</td>
+
+<td>
+${data.orientationDate || "-"}
+</td>
+
+<td>${date}</td>
+
+<td>
+
+<button
+class="contact-btn"
+onclick="markContacted('${memberDoc.id}')">
+Contacted
+</button>
+
+<button
+class="approve-btn"
+onclick="approveMember('${memberDoc.id}')">
+Approve
+</button>
+
+<button
+class="active-btn"
+onclick="activateMember('${memberDoc.id}')">
+Active
+</button>
+
+<button
+class="view-btn"
+onclick="window.location.href='member-profile.html?id=${memberDoc.id}'">
+Profile
+</button>
+
+<button
+class="delete-btn"
+onclick="deleteMember('${memberDoc.id}')">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}catch(error){
+
+console.error(error);
+
+table.innerHTML = `
+<tr>
+<td colspan="9">
+Error loading applications.
+</td>
+</tr>
+`;
+
+}
+
+}
+
+window.markContacted = async function(id){
+
+await updateDoc(
+doc(db,"membershipApplication",id),
+{
+status:"Contacted"
+}
+);
+
+loadApplications();
+
+};
+
+window.approveMember = async function(id){
+
+try{
+
+const applicationRef =
+doc(db,"membershipApplication",id);
+
+const applicationSnap =
+await getDoc(applicationRef);
+
+if(!applicationSnap.exists()){
+
+alert("Application not found");
+
+return;
+
+}
+
+const data =
+applicationSnap.data();
+
+/* Update application */
+
+await updateDoc(
+applicationRef,
+{
+status:"Approved"
+}
+);
+
+/* Generate Member ID */
+
+const membersSnapshot =
+await getDocs(
+collection(db,"members")
+);
+
+const memberNumber =
+String(membersSnapshot.size + 1)
+.padStart(4,"0");
+
+const memberId =
+"GPN" + memberNumber;
+
+/* Create member */
+
+await setDoc(
+doc(db,"members",memberId),
+{
+
+memberId,
+
+fullName:
+data.fullName || "",
+
+email:
+data.email || "",
+
+phone:
+data.phoneNumber || "",
+
+country:
+data.country || "",
+
+region:
+data.region || "",
+
+county:
+data.county || "",
+
+dateOfBirth:
+data.dateOfBirth || "",
+
+occupation:
+data.occupation || "",
+
+gender:
+data.gender || "",
+
+maritalStatus:
+data.maritalStatus || "",
+
+denomination:
+data.denomination || "",
+
+prayerRequest:
+data.prayerRequest || "",
+
+ministryInterest:
+data.ministryInterest || "",
+
+membershipLevel:
+"Member",
+
+status:
+"Active",
+
+photoURL:
+data.photoURL || "",
+
+joinedDate:
+new Date()
+.toISOString()
+.split("T")[0]
+
+}
+);
+
+alert(
+    "Member Approved and Added Successfully"
+);
+
+loadApplications();
+
+}catch(error){
+
+    console.error(error);
+
+    alert(
+        "Failed to approve member"
+    );
+
+}
+
+};
+
+window.activateMember = async function(id){
+
+await updateDoc(
+doc(db,"membershipApplication",id),
+{
+status:"Active Member"
+}
+);
+
+loadApplications();
+
+};
+
+window.deleteMember = async function(id){
+
+if(confirm("Delete this application?")){
+
+await deleteDoc(
+doc(db,"membershipApplication",id)
+);
+
+loadApplications();
+
+}
+
+};
+
+loadApplications();
+
+</script>
+
+</body>
+</html>

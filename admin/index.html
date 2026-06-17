@@ -6,45 +6,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Dashboard | GracePath Network</title>
+<title>GracePath Administration Center</title>
 
 <link rel="stylesheet" href="../style.css">
-
-<link rel="icon" href="../images/logo.png">
+<link rel="icon" href="../logo.png">
 
 <style>
 
-.notice{
-    background:#fef3c7;
-    border-left:6px solid #f59e0b;
-    padding:20px;
-    border-radius:15px;
-    margin-bottom:40px;
+.admin-hero{
+text-align:center;
+padding:40px 20px;
 }
 
-.admin-header{
-    text-align:center;
+.admin-hero h1{
+margin-bottom:15px;
 }
 
-.admin-header h1{
-    margin-bottom:10px;
-}
-
-.admin-header p{
-    max-width:800px;
-    margin:auto;
+.admin-notice{
+background:#eff6ff;
+border-left:6px solid #2563eb;
+padding:20px;
+border-radius:15px;
+margin:20px 0 40px 0;
 }
 
 .admin-card{
-    text-align:center;
+text-align:center;
 }
 
 .admin-card a{
-    margin-top:15px;
+margin-top:15px;
+display:inline-block;
 }
 
-.notes-list p{
-    margin:12px 0;
+.stat-card{
+text-align:center;
+}
+
+.stat-card h2{
+font-size:2rem;
+margin:10px 0;
+color:#2563eb;
 }
 
 </style>
@@ -55,33 +57,36 @@
 
 <nav>
 
-<a href="../index.html">Home</a>
-<a href="../membership/index.html">Membership</a>
-<a href="../prayer-requests/index.html">Prayer</a>
-<a href="../contact/index.html">Contact</a>
-<a href="../giving/index.html">Giving</a>
+<a href="../index.html">🏠 Home</a>
+<a href="../member-portal.html">👤 Member Portal</a>
+<a href="../membership/index.html">🌍 Membership</a>
+<a href="../latest/index.html">🔥 Latest</a>
+<a href="../contact/index.html">📞 Contact</a>
 
 </nav>
 
-<header class="admin-header">
+<header class="admin-hero">
 
-<h1>GracePath Admin Dashboard</h1>
+<h1>⚙️ GracePath Administration Center</h1>
 
 <p>
-GracePath Network Administration and Ministry Management Center
+Manage members, learning programs, certificates,
+community engagement, content, requests, and ministry resources
+from one central dashboard.
 </p>
 
 </header>
 
 <section>
 
-<div class="notice">
+<div class="admin-notice">
 
-<strong>ADMIN ACCESS ONLY</strong>
+<h3>Administrator Access</h3>
 
 <p>
-This dashboard provides quick access to church administration,
-membership records, prayer requests, forms, and ministry resources.
+This area is intended for authorized GracePath administrators.
+Use this dashboard to manage members, learning records,
+certificates, membership cards, requests, and community resources.
 </p>
 
 </div>
@@ -90,42 +95,114 @@ membership records, prayer requests, forms, and ministry resources.
 
 <section>
 
-<h2>Membership Management</h2>
+<h2>📊 Dashboard Overview</h2>
 
 <div class="cards">
+
+<a href="members.html"
+   style="text-decoration:none;color:inherit;">
+
+    <div class="card stat-card">
+
+        <h3>👥 Members</h3>
+
+        <h2 id="memberCount">0</h2>
+
+        <p>Registered Members</p>
+
+    </div>
+
+</a>
+
+<a href="membership-applications.html" style="text-decoration:none;color:inherit;">
+    <div class="card stat-card">
+        <h3>📝 Applications</h3>
+        <h2 id="applicationCount">0</h2>
+        <p>Pending Applications</p>
+    </div>
+</a>
+
+<div class="card stat-card">
+
+<h3>📚 Learning Programs</h3>
+
+<h2 id="courseCount">0</h2>
+
+<p>Active Enrollments</p>
+
+</div>
+
+<div class="card stat-card">
+
+<h3>🏆 Certificates</h3>
+
+<h2 id="certificateCount">0</h2>
+
+<p>Certificates Issued</p>
+
+</div>
+
+<div class="card stat-card">
+
+<h3>🙏 Requests</h3>
+
+<h2 id="requestCount">0</h2>
+
+<p>Pending Requests</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>👥 Community Management</h2>
+
+<div class="cards">
+
+<div class="card admin-card">
+
+<h3>Members</h3>
+
+<p>
+View, edit and manage GracePath members.
+</p>
+
+<a href="members.html"
+class="membership-btn">
+Manage Members
+</a>
+
+</div>
 
 <div class="card admin-card">
 
 <h3>Membership Applications</h3>
 
 <p>
-Review, approve, reject, and manage membership applications.
+Review and approve new applications.
 </p>
 
-<a href="https://docs.google.com/spreadsheets/d/1gB0gtpzcl53h97Hq24z1NqXW14xPlEsWpA5HOwbvt6E/edit?resourcekey=&gid=1931057446#gid=1931057446"
-target="_blank"
-class="membership-btn">
-
-Open Applications
-
-</a>
-
-</div>
-
-<div class="card admin-card">
-
-<h3>Membership Registration Form</h3>
-
-<p>
-Open the public membership registration form.
-</p>
-
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSdqr8rdmSce1UrGSFo5VjTKDkkWWMyvKDwTQKzhihT3sSi3tw/viewform"
-target="_blank"
+<a href="membership-applications.html"
 class="discipleship-btn">
+Open Applications
+</a>
 
-Open Form
+</div>
 
+<div class="card admin-card">
+
+<h3>Member Profiles</h3>
+
+<p>
+Update member information and status.
+</p>
+
+<a href="member-profile.html"
+class="faith-btn">
+Manage Profiles
 </a>
 
 </div>
@@ -136,154 +213,161 @@ Open Form
 
 <section>
 
-<h2>Prayer Ministry Management</h2>
+<h2>📚 Learning & Certification</h2>
 
 <div class="cards">
 
 <div class="card admin-card">
 
-<h3>Prayer Request Form</h3>
+<h3>Learning Programs</h3>
 
 <p>
-Open the public prayer request form.
+Manage courses, lessons and progress tracking.
 </p>
 
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSdOVrAvrBBCea31DA7tzd5bsVToSAFBrAozHo0_rVPziFQVbw/viewform"
-target="_blank"
-class="prayer-btn">
-
-Open Prayer Form
-
+<a href="courses.html"
+class="discipleship-btn">
+Open Programs
 </a>
 
 </div>
 
 <div class="card admin-card">
 
-<h3>Prayer Requests Database</h3>
+<h3>Certificates</h3>
 
 <p>
-View, track, and manage prayer requests submitted online.
+Issue, update and manage certificates.
 </p>
 
-<a href="https://docs.google.com/spreadsheets/d/1xD425Yz4y66VsZvhyJImlOHCQLokXkasGad4CG9lG5g/edit?pli=1&gid=1427075925#gid=1427075925"
-target="_blank"
-class="prayer-btn">
-
-Open Prayer Requests
-
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>Quick Ministry Access</h2>
-
-<div class="cards">
-
-<div class="card admin-card">
-
-<h3>Events</h3>
-
-<p>
-View gracepath events and ministry programs.
-</p>
-
-<a href="../events/index.html"
+<a href="certificates.html"
 class="events-btn">
-
-Open Events
-
+Manage Certificates
 </a>
 
 </div>
 
 <div class="card admin-card">
 
-<h3>Projects</h3>
+<h3>Membership Cards</h3>
 
 <p>
-Review ministry projects and development plans.
+Generate and manage membership cards.
 </p>
 
-<a href="../projects/index.html"
-class="projects-btn">
+<a href="membership-cards.html"
+class="membership-btn">
+Manage Cards
+</a>
 
-Open Projects
+</div>
 
+</div>
+
+</section>
+
+<section>
+
+<h2>📨 Requests & Communication</h2>
+
+<div class="cards">
+
+<div class="card admin-card">
+
+<h3>Lesson Requests</h3>
+
+<p>
+Review requested lessons and topics.
+</p>
+
+<a href="lesson-requests.html"
+class="discipleship-btn">
+Open Requests
 </a>
 
 </div>
 
 <div class="card admin-card">
 
-<h3>Leadership</h3>
+<h3>Prayer Requests</h3>
 
 <p>
-Access ministry leadership information.
+Review prayer requests and follow-up.
 </p>
 
-<a href="../leadership/index.html"
+<a href="prayer-requests.html"
+class="prayer-btn">
+Open Requests
+</a>
+
+</div>
+
+<div class="card admin-card">
+
+<h3>Contact Messages</h3>
+
+<p>
+View website inquiries and messages.
+</p>
+
+<a href="contact-messages.html"
 class="contact-btn">
+Open Messages
+</a>
 
-Open Leadership
+</div>
 
+</div>
+
+</section>
+
+<section>
+
+<h2>📝 Content Management</h2>
+
+<div class="cards">
+
+<div class="card admin-card">
+
+<h3>Latest Content</h3>
+
+<p>
+Manage featured content and updates.
+</p>
+
+<a href="../latest/index.html"
+class="latest-btn">
+Open
 </a>
 
 </div>
 
 <div class="card admin-card">
 
-<h3>Downloads</h3>
+<h3>Media Library</h3>
 
 <p>
-Access discipleship lessons, sermons, and ministry resources.
+Manage sermons, videos, music and teaching resources.
+</p>
+
+<a href="../media-library/index.html"
+class="mentorship-btn">
+Open
+</a>
+
+</div>
+
+<div class="card admin-card">
+
+<h3>Books & Resources</h3>
+
+<p>
+Manage downloadable books and learning materials.
 </p>
 
 <a href="../downloads/index.html"
 class="discipleship-btn">
-
-Open Downloads
-
-</a>
-
-</div>
-
-<div class="card admin-card">
-
-<h3>Gallery</h3>
-
-<p>
-View ministry photos, ministry moments, and events.
-</p>
-
-<a href="../gallery/index.html"
-class="events-btn">
-
-Open Gallery
-
-</a>
-
-</div>
-
-<div class="card admin-card">
-
-<h3>Contact Page</h3>
-
-<p>
-View ministry contact information.
-</p>
-
-<a href="../contact/index.html"
-class="contact-btn">
-
-Open Contact
-
+Open
 </a>
 
 </div>
@@ -294,83 +378,165 @@ Open Contact
 
 <section>
 
-<h2>Administration Reminders</h2>
+<h2>👑 Leadership Management</h2>
 
 <div class="cards">
 
-<div class="card">
+<div class="card admin-card">
 
-<h3>Membership</h3>
-
-<p>
-Review new applications and update status regularly.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Prayer Ministry</h3>
+<h3>Leaders Directory</h3>
 
 <p>
-Review prayer requests and follow up where necessary.
+View pastors, elders, leaders and ministry coordinators.
 </p>
 
-</div>
-
-<div class="card">
-
-<h3>Communication</h3>
-
-<p>
-Maintain contact with members and ministry leaders.
-</p>
+<a href="leaders.html"
+class="faith-btn">
+Open Leaders
+</a>
 
 </div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>Administration Notes</h2>
-
-<div class="card notes-list">
-
-<p>✓ Review membership applications weekly.</p>
-
-<p>✓ Follow up with new members within 48 hours.</p>
-
-<p>✓ Review prayer requests daily.</p>
-
-<p>✓ Record testimonies and answered prayers.</p>
-
-<p>✓ Maintain confidentiality of church records.</p>
-
-<p>✓ Keep member contact information updated.</p>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>Quick Contact</h2>
 
 <div class="card admin-card">
 
+<h3>Ministry Teams</h3>
+
 <p>
-Need immediate communication?
+Manage ministry assignments and leadership roles.
+</p>
+
+<a href="ministries.html"
+class="membership-btn">
+Manage Teams
+</a>
+
+</div>
+
+<div class="card admin-card">
+
+<h3>Leadership Reports</h3>
+
+<p>
+View leadership statistics and ministry coverage.
+</p>
+
+<a href="leadership-reports.html"
+class="events-btn">
+Open Reports
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>📊 Reports & Analytics</h2>
+
+<div class="cards">
+
+<div class="card admin-card">
+
+<h3>Membership Report</h3>
+
+<p>
+View membership growth and statistics.
+</p>
+
+<a href="membership-report.html"
+class="membership-btn">
+Open Report
+</a>
+
+</div>
+
+<div class="card admin-card">
+
+<h3>Learning Report</h3>
+
+<p>
+Track course enrollments and completions.
+</p>
+
+<a href="learning-report.html"
+class="discipleship-btn">
+Open Report
+</a>
+
+</div>
+
+<div class="card admin-card">
+
+<h3>Certificate Report</h3>
+
+<p>
+View certificates issued and completed programs.
+</p>
+
+<a href="certificate-report.html"
+class="events-btn">
+Open Report
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>⚙️ Administration Tools</h2>
+
+<div class="cards">
+
+<div class="card admin-card">
+
+<h3>WhatsApp</h3>
+
+<p>
+Contact ministry leadership quickly.
 </p>
 
 <a href="https://wa.me/254721335631"
 target="_blank"
 class="faith-btn">
-
 Open WhatsApp
-
 </a>
+
+</div>
+
+<div class="card admin-card">
+
+<h3>Reports</h3>
+
+<p>
+Membership, learning and activity reports.
+</p>
+
+<a href="#"
+class="events-btn">
+Coming Soon
+</a>
+
+</div>
+
+<div class="card admin-card">
+
+<h3>Return to Website</h3>
+
+<p>
+Visit the public GracePath website.
+</p>
+
+<a href="../index.html"
+class="faith-btn">
+Open Website
+</a>
+
+</div>
 
 </div>
 
@@ -378,20 +544,21 @@ Open WhatsApp
 
 <section>
 
-<h2>Return to Website</h2>
+<h2>📋 Administration Reminders</h2>
 
-<div class="card admin-card">
+<div class="card">
 
-<p>
-Return to the public God's Grace Sanctuary website.
-</p>
+<p>✓ Review membership applications weekly.</p>
 
-<a href="../index.html"
-class="faith-btn">
+<p>✓ Follow up with new members within 48 hours.</p>
 
-Home Page
+<p>✓ Monitor learning program progress regularly.</p>
 
-</a>
+<p>✓ Issue certificates promptly after completion.</p>
+
+<p>✓ Maintain confidentiality and data protection.</p>
+
+<p>✓ Keep member records updated.</p>
 
 </div>
 
@@ -399,13 +566,23 @@ Home Page
 
 <footer>
 
-<p>GracePath Network</p>
+<h3>GracePath Administration Center</h3>
 
-<p>gracepathnetwork@gmail.com</p>
+<p>
+Managing Community • Learning • Leadership • Growth
+</p>
 
-<p>+254721335631</p>
+<p>
+📧 gracepathnetwork@gmail.com
+</p>
 
-<p>© GracePath Network. All Rights Reserved.</p>
+<p>
+📞 +254 721 335 631
+</p>
+
+<p>
+© 2026 GracePath Network. All Rights Reserved.
+</p>
 
 </footer>
 
@@ -413,6 +590,86 @@ Home Page
 class="whatsapp-btn">
 💬
 </a>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+projectId: "gods-grace-sanctuary-7c3e9",
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+messagingSenderId: "794689665126",
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadDashboardStats(){
+
+try{
+
+const membersSnapshot =
+await getDocs(collection(db,"members"));
+
+const certificatesSnapshot =
+await getDocs(collection(db,"memberCertificates"));
+
+const requestsSnapshot =
+await getDocs(collection(db,"prayer-request"));
+
+const programsSnapshot =
+await getDocs(collection(db,"Programs"));
+
+document.getElementById("memberCount").textContent =
+membersSnapshot.size;
+
+document.getElementById("courseCount").textContent =
+programsSnapshot.size;
+
+document.getElementById("certificateCount").textContent =
+certificatesSnapshot.size;
+
+const applicationsSnapshot =
+await getDocs(collection(db,"membershipApplication"));
+
+let pendingApplications = 0;
+
+applicationsSnapshot.forEach((doc)=>{
+   const data = doc.data();
+
+   if(data.status === "Pending"){
+      pendingApplications++;
+   }
+});
+
+document.getElementById("applicationCount").textContent =
+pendingApplications;
+
+document.getElementById("requestCount").textContent =
+requestsSnapshot.size;
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+loadDashboardStats();
+
+</script>
 
 </body>
 
