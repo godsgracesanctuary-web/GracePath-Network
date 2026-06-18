@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>My Certificates</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f4f6f9;
+margin:0;
+}
+
+header{
+background:#0b2d5c;
+padding:25px;
+color:white;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+margin-bottom:20px;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.btn{
+display:inline-block;
+padding:10px 16px;
+background:#16a34a;
+color:white;
+text-decoration:none;
+border-radius:6px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🏆 My Certificates</h1>
+
+</header>
+
+
+<div class="container">
+
+<div id="certificates">
+
+Loading certificates...
+
+</div>
+
+</div>
+
+
+
+<script type="module">
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+
+getFirestore,
+collection,
+query,
+where,
+getDocs
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig={
+
+apiKey:"YOUR_KEY",
+
+authDomain:"YOUR_DOMAIN",
+
+projectId:"gods-grace-sanctuary-7c3e9",
+
+storageBucket:"",
+
+messagingSenderId:"",
+
+appId:""
+
+};
+
+
+const app=initializeApp(firebaseConfig);
+
+const db=getFirestore(app);
+
+
+
+const memberId=
+
+localStorage.getItem(
+
+"currentMemberId"
+
+);
+
+
+
+const area=
+
+document.getElementById(
+
+"certificates"
+
+);
+
+
+
+if(!memberId){
+
+area.innerHTML=
+
+"<h3>Please login first.</h3>";
+
+}else{
+
+
+const q=query(
+
+collection(
+
+db,
+
+"memberCertificates"
+
+),
+
+where(
+
+"memberId",
+
+"==",
+
+memberId
+
+)
+
+);
+
+
+
+const snap=
+
+await getDocs(q);
+
+
+
+if(snap.empty){
+
+area.innerHTML=`
+
+<div class='card'>
+
+<h3>No certificates awarded yet</h3>
+
+</div>
+
+`;
+
+}else{
+
+
+area.innerHTML="";
+
+
+snap.forEach(doc=>{
+
+
+const cert=
+
+doc.data();
+
+
+let awarded = "Not recorded";
+
+if(cert.dateAwarded){
+
+if(cert.dateAwarded.toDate){
+
+awarded =
+cert.dateAwarded
+.toDate()
+.toLocaleDateString('en-GB');
+
+}else{
+
+awarded =
+cert.dateAwarded;
+
+}
+
+}
+
+
+area.innerHTML += `
+
+
+<div class="card">
+
+<h2>
+
+${cert.certificateName}
+
+</h2>
+
+
+<p>
+
+Program:
+
+${cert.program}
+
+</p>
+
+
+<p>
+
+Awarded:
+
+${awarded}
+
+</p>
+
+
+<a
+
+class="btn"
+
+href="${cert.certificateUrl}"
+
+target="_blank">
+
+View Certificate
+
+</a>
+
+
+</div>
+
+`;
+
+});
+
+
+}
+
+
+}
+
+
+</script>
+
+</body>
+</html>

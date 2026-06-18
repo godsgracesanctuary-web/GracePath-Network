@@ -1,272 +1,515 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GracePath Family Membership Card</title>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>GracePath Membership Card</title>
 
 <style>
 
 body{
-font-family:Arial,sans-serif;
-background:#f3f4f6;
-padding:30px;
+
+margin:0;
+padding:40px;
+background:#eef4ff;
+font-family:Arial,Helvetica,sans-serif;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
 }
+
 
 .card{
-width:340px;
-height:480px;
+
+width:540px;
+height:320px;
+
 background:white;
-border-radius:20px;
+
+border-radius:25px;
+
 overflow:hidden;
-margin:auto;
-box-shadow:0 4px 20px rgba(0,0,0,.15);
+
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+border:3px solid #3b82f6;
+
 }
 
-.card-header{
+
+.top{
+
+height:110px;
+
 background:linear-gradient(
 135deg,
-#0f172a,
-#1e3a8a,
+#081c5e,
 #2563eb
 );
-color:white;
-padding:25px;
-text-align:center;
-min-height:220px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:35px;
+
 }
 
 
-.seal{
-width:130px;
-height:130px;
-object-fit:contain;
-margin:0 auto 10px auto;
-display:block;
-}
+.logo{
 
-.card-body{
-padding:25px;
-text-align:center;
-}
+width:80px;
+height:80px;
 
-.card-photo{
-width:90px;
-height:90px;
 border-radius:50%;
-border:3px solid #2563eb;
+
+object-fit:cover;
+
+border:4px solid white;
+
 }
 
-.member-name{
-font-size:24px;
-font-weight:bold;
-margin-top:15px;
+
+.photo{
+
+width:80px;
+height:80px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:4px solid #22c55e;
+
 }
 
-.member-info{
-margin-top:20px;
-line-height:2;
-text-align:left;
-}
 
-.member-info strong{
-display:inline-block;
-width:140px;
-}
+.middle{
 
-.qr-section{
-margin-top:25px;
+padding:15px 25px;
+
 text-align:center;
+
 }
+
+
+.name{
+
+font-size:28px;
+
+font-weight:bold;
+
+margin:0;
+
+}
+
+
+.memberid{
+
+font-size:24px;
+
+font-weight:bold;
+
+color:#2563eb;
+
+margin-top:5px;
+
+}
+
+
+
+.bottom{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:0 25px;
+
+}
+
+
+
+.details{
+
+font-size:18px;
+
+line-height:2;
+
+}
+
+
+
+.details td{
+
+padding-right:15px;
+
+}
+
+
+
+.qr img{
+
+width:110px;
+
+}
+
+
 
 .footer{
-margin-top:20px;
-font-size:12px;
-color:#666;
+
 text-align:center;
+
+font-size:12px;
+
+color:#666;
+
+margin-top:5px;
+
 }
 
-.print-btn{
+
+
+button{
+
 margin-top:20px;
-background:#1e3a8a;
-color:white;
+
+padding:12px 30px;
+
 border:none;
-padding:12px 20px;
+
 border-radius:8px;
+
+background:#2563eb;
+
+color:white;
+
+font-size:16px;
+
 cursor:pointer;
+
 }
+
 
 @media print{
-.print-btn{
+
+
+button{
+
 display:none;
-}
-body{
-background:white;
-}
+
 }
 
+
+body{
+
+background:white;
+
+padding:0;
+
+}
+
+
+.card{
+
+box-shadow:none;
+
+}
+
+
+}
+
+
 </style>
+
 </head>
 
 <body>
 
+
+
 <div class="card">
 
-<div class="card-header">
 
-<img
-src="cardlogo.png"
-style="
-width:90px;
-height:90px;
-display:block;
-margin:0 auto 10px auto;
-">
 
-<h1 style="
-margin:10px 0;
-font-size:28px;
-">
-GracePath Family
+<div class="top">
+
+
+<img src="cardlogo.png" class="logo">
+
+
+<img id="photo"
+class="photo">
+
+
+</div>
+
+
+
+
+<div class="middle">
+
+
+<h1 class="name"
+id="name">
+Loading...
 </h1>
 
-<p style="
-font-size:14px;
-white-space:nowrap;
-">
-Learning • Discipleship • Growth • Community
-</p>
 
-<div style="
-height:4px;
-background:#f59e0b;
-margin-top:15px;
-border-radius:10px;
-"></div>
+<div class="memberid"
+id="memberid">
+</div>
+
 
 </div>
 
-<div class="card-body" id="cardContent">
 
-Loading Membership Card...
+
+
+<div class="bottom">
+
+
+<div class="details">
+
+
+<table>
+
+
+<tr>
+
+<td><b>Level</b></td>
+
+<td id="level"></td>
+
+</tr>
+
+
+
+<tr>
+
+<td><b>Status</b></td>
+
+<td id="status"></td>
+
+</tr>
+
+
+
+<tr>
+
+<td><b>Region</b></td>
+
+<td id="region"></td>
+
+</tr>
+
+
+
+<tr>
+
+<td><b>Joined</b></td>
+
+<td id="joined"></td>
+
+</tr>
+
+
+</table>
+
 
 </div>
-</div> <!-- closes card -->
+
+
+
+<div class="qr">
+
+<img id="qr">
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="footer">
+
+
+GracePath Family
+
+
+<br>
+
+
+Growing in Christ • Walking in Grace • Impacting Lives
+
+
+<br>
+
+
+www.gracepathnetwork.org
+
+
+</div>
+
+
+
+</div>
+
+
+
+<button onclick="window.print()">
+
+
+🖨 Print Card
+
+
+</button>
+
+
 
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {initializeApp}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
+
 getFirestore,
+
 doc,
+
 getDoc
+
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig = {
+from
 
-apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
-authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
-projectId: "gods-grace-sanctuary-7c3e9",
-storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
-messagingSenderId: "794689665126",
-appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+const firebaseConfig={
+
+apiKey:"YOUR_KEY",
+
+authDomain:"gods-grace-sanctuary-7c3e9.firebaseapp.com",
+
+projectId:"gods-grace-sanctuary-7c3e9",
+
+storageBucket:"gods-grace-sanctuary-7c3e9.firebasestorage.app",
+
+messagingSenderId:"794689665126",
+
+appId:"YOUR_APP_ID"
 
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
-const params =
-new URLSearchParams(window.location.search);
 
-const id = params.get("id");
+const app=initializeApp(firebaseConfig);
 
-const card =
-document.getElementById("cardContent");
+const db=getFirestore(app);
 
-if(!id){
 
-card.innerHTML =
-"<h3>Member not found</h3>";
 
-}else{
+const id=
 
-const memberSnap =
-await getDoc(
-doc(db,"members",id)
+localStorage.getItem(
+
+"currentMemberDocId"
+
 );
 
-if(!memberSnap.exists()){
 
-card.innerHTML =
-"<h3>Member not found</h3>";
 
-}else{
+const snap=
 
-const data =
-memberSnap.data();
+await getDoc(
 
-const verifyUrl =
+doc(
+
+db,
+
+"members",
+
+id
+
+)
+
+);
+
+
+
+const m=snap.data();
+
+
+
+document.getElementById("name").textContent=
+m.fullName||"";
+
+
+document.getElementById("memberid").textContent=
+m.memberId||"";
+
+
+document.getElementById("level").textContent=
+m.membershipLevel||"Member";
+
+
+document.getElementById("status").textContent=
+m.status||"Active";
+
+
+document.getElementById("region").textContent=
+m.region||"-";
+
+
+document.getElementById("joined").textContent=
+m.joinedDate||"-";
+
+
+document.getElementById("photo").src=
+
+m.photoURL ||
+
+"https://ui-avatars.com/api/?name="+
+
+encodeURIComponent(
+
+m.fullName
+
+);
+
+
+
+const verify=
+
 `${window.location.origin}/membership/verify.html?id=${id}`;
 
-const qrUrl =
-`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(verifyUrl)}`;
-
-card.innerHTML = `
-
-<img
-class="card-photo"
-src="${data.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.fullName)}"
->
-
-<div class="member-name">
-${data.fullName || ""}
-</div>
-
-<div style="
-margin-top:10px;
-font-size:18px;
-font-weight:bold;
-color:#2563eb;
-">
-Member ID: ${data.memberId || ""}
-</div>
 
 
-<p>
-GracePath Family
-</p>
+document.getElementById("qr").src=
 
-<p>
-Growing in Christ • Walking in Purpose
-</p>
+`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(verify)}`;
 
-<p>
-www.gracepathnetwork.org
-</p>
-
-</div>
-
-<button
-class="print-btn"
-onclick="window.print()">
-
-🖨 Print Membership Card
-
-</button>
-
-`;
-
-}
-
-}
 
 </script>
+
 
 </body>
 </html>

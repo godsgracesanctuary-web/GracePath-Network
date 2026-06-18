@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Learning Progress | GracePath Family</title>
+
+<style>
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+margin:0;
+background:#f4f6f9;
+}
+
+header{
+background:#0b2d5c;
+color:white;
+padding:30px;
+text-align:center;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:25px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.card h3{
+margin-top:0;
+color:#0b2d5c;
+}
+
+.big{
+font-size:30px;
+font-weight:bold;
+color:#16a34a;
+}
+
+.course{
+background:white;
+padding:25px;
+margin-bottom:20px;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.progress{
+height:24px;
+background:#e5e7eb;
+border-radius:20px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.progress-fill{
+height:24px;
+background:#16a34a;
+border-radius:20px;
+}
+
+.badge{
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-size:14px;
+
+font-weight:bold;
+
+display:inline-block;
+
+margin-top:10px;
+
+}
+
+.active{
+background:#dcfce7;
+color:#15803d;
+}
+
+.completed{
+background:#dbeafe;
+color:#1d4ed8;
+}
+
+.pending{
+background:#fee2e2;
+color:#dc2626;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📚 Learning Progress</h1>
+
+<p>Track your discipleship journey</p>
+
+</header>
+
+
+<div class="container">
+
+
+<div class="stats">
+
+
+<div class="card">
+
+<h3>Programs</h3>
+
+<p class="big" id="programs">0</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>Lessons Completed</h3>
+
+<p class="big" id="lessons">0</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>Average Progress</h3>
+
+<p class="big" id="average">0%</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>Status</h3>
+
+<p class="big" id="status">-</p>
+
+</div>
+
+
+</div>
+
+
+
+<div id="courses">
+
+Loading...
+
+</div>
+
+
+
+</div>
+
+
+
+
+<script type="module">
+
+import { initializeApp }
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+
+getFirestore,
+
+collection,
+
+query,
+
+where,
+
+getDocs
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+const firebaseConfig={
+
+apiKey:"AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+
+authDomain:"gods-grace-sanctuary-7c3e9.firebaseapp.com",
+
+projectId:"gods-grace-sanctuary-7c3e9",
+
+storageBucket:"gods-grace-sanctuary-7c3e9.firebasestorage.app",
+
+messagingSenderId:"794689665126",
+
+appId:"1:794689665126:web:a593f7831c0e161a9b15a7"
+
+};
+
+
+
+const app=initializeApp(firebaseConfig);
+
+const db=getFirestore(app);
+
+
+
+const memberId=
+
+localStorage.getItem(
+
+"currentMemberId"
+
+);
+
+
+
+const courses=
+
+document.getElementById(
+
+"courses"
+
+);
+
+
+
+if(!memberId){
+
+courses.innerHTML=`
+
+<div class="card">
+
+<h3>Please sign in first.</h3>
+
+</div>
+
+`;
+
+}else{
+
+
+const q=query(
+
+collection(
+
+db,
+
+"memberCourses"
+
+),
+
+where(
+
+"memberId",
+
+"==",
+
+memberId
+
+)
+
+);
+
+
+
+const snap=
+
+await getDocs(q);
+
+
+
+if(snap.empty){
+
+courses.innerHTML=`
+
+<div class="card">
+
+<h3>No learning records found.</h3>
+
+</div>
+
+`;
+
+}else{
+
+
+courses.innerHTML="";
+
+
+let totalLessons=0;
+
+let totalProgress=0;
+
+let count=0;
+
+let overallStatus="In Progress";
+
+
+
+snap.forEach(doc=>{
+
+
+const c=doc.data();
+
+
+count++;
+
+
+totalLessons +=
+Number(
+c.lessonsCompleted ||
+c.LessonsCompleted ||
+0
+);
+
+
+totalProgress+=
+
+Number(
+
+c.progress||0
+
+);
+
+let badgeClass = "active";
+
+overallStatus = c.status || "In Progress";
+
+
+if(c.status==="Completed"){
+
+badgeClass = "completed";
+
+}
+
+else if(c.status==="Pending"){
+
+badgeClass = "pending";
+
+}
+
+
+courses.innerHTML += `
+
+
+<div class="course">
+
+
+<h2>
+
+${c.program||""}
+
+</h2>
+
+
+
+<p>
+
+<strong>Level:</strong>
+
+${c.level||"-"}
+
+</p>
+
+<p>
+
+<strong>Enrolled:</strong>
+
+${
+c.enrolledDate
+?
+
+c.enrolledDate
+.toDate()
+.toLocaleDateString(
+'en-GB'
+)
+
+:
+
+'-'
+
+}
+
+</p>
+
+<p>
+
+<strong>Lessons Completed:</strong>
+
+${
+
+c.lessonsCompleted ||
+
+c.LessonsCompleted ||
+
+0
+
+}
+
+</p>
+
+
+
+<p>
+
+<strong>Total Lessons:</strong>
+
+${c.totalLessons||0}
+
+</p>
+
+
+
+<p>
+
+<strong>Progress:</strong>
+
+${c.progress||0}%
+
+</p>
+
+
+
+<div class="progress">
+
+<div class="progress-fill"
+style="
+width:${c.progress||0}%;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:13px;
+font-weight:bold;
+">
+
+${c.progress||0}%
+
+</div>
+
+</div>
+
+<p>
+
+<strong>Graduation:</strong>
+
+${
+
+(c.progress||0) >= 100
+
+?
+
+'<span style="color:#16a34a;font-weight:bold;">Eligible</span>'
+
+:
+
+'<span style="color:#dc2626;font-weight:bold;">Not Yet Eligible</span>'
+
+}
+
+</p>
+
+<div
+
+class="badge ${badgeClass}">
+
+${c.status||""}
+
+</div>
+
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+
+document.getElementById(
+
+"programs"
+
+)
+
+.textContent=
+
+count;
+
+
+
+document.getElementById(
+
+"lessons"
+
+)
+
+.textContent=
+
+totalLessons;
+
+
+
+document.getElementById(
+
+"average"
+
+)
+
+.textContent=
+
+Math.round(
+
+totalProgress/count
+
+)
+
++"%";
+
+
+
+document.getElementById(
+
+"status"
+
+)
+
+.textContent=
+
+overallStatus;
+
+
+
+}
+
+
+
+}
+
+
+
+</script>
+
+</body>
+
+</html>

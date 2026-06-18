@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>My Profile | GracePath Family</title>
 
@@ -19,9 +17,9 @@ margin:0;
 }
 
 header{
-background:#0b2d5c;
+background:#1e3a8a;
 color:white;
-padding:40px 20px;
+padding:20px;
 text-align:center;
 }
 
@@ -33,9 +31,9 @@ padding:20px;
 
 .card{
 background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 2px 8px rgba(0,0,0,.1);
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 margin-bottom:20px;
 }
 
@@ -43,608 +41,236 @@ input{
 width:100%;
 padding:12px;
 margin-bottom:15px;
-border:1px solid #ddd;
-border-radius:8px;
+border:1px solid #ccc;
+border-radius:6px;
 box-sizing:border-box;
 }
 
 button{
-padding:12px 20px;
+padding:12px 18px;
 border:none;
-border-radius:8px;
+border-radius:6px;
 cursor:pointer;
-background:#2563eb;
+background:#1e3a8a;
 color:white;
-font-size:15px;
-}
-
-button:hover{
-background:#1d4ed8;
 }
 
 .profile-row{
-padding:10px 0;
-border-bottom:1px solid #eee;
+margin-bottom:12px;
 }
 
 .profile-label{
 font-weight:bold;
 }
 
-.profile-photo{
-width:120px;
-height:120px;
-border-radius:50%;
-object-fit:cover;
-border:4px solid #16a34a;
-}
-
 #profileSection{
 display:none;
-}
-
-.message{
-margin-top:10px;
-font-weight:bold;
 }
 
 </style>
 
 </head>
-
 <body>
 
 <header>
-
 <h1>👤 My Profile</h1>
-
-<p>
-GracePath Family Member Portal
-</p>
-
+<p>GracePath Family Member Portal</p>
 </header>
-
 
 <div class="container">
 
-
-
 <div class="card">
 
-<h2>Access My Profile</h2>
-
+<h2>Profile Access</h2>
 
 <input
+type="text"
 id="membershipNumber"
 placeholder="Membership Number">
 
-
 <input
+type="text"
 id="phone"
 placeholder="Registered Phone Number">
 
-
 <button onclick="findMember()">
-
 Access My Profile
-
 </button>
 
-
-<p class="message"
-id="message"></p>
-
+<p id="message"></p>
 
 </div>
 
+<div class="card" id="profileSection">
 
-
-
-<div class="card"
-
-id="profileSection">
-
-
-
-<div style="text-align:center;">
-
-
-<img
-
-id="photo"
-
-class="profile-photo"
-
-
-src="https://ui-avatars.com/api/?name=Member">
-
-
-
-<h2 id="displayName"></h2>
-
-<p id="displayLevel"></p>
-
-</div>
-
-
+<h2>Member Information</h2>
 
 <div class="profile-row">
+<span class="profile-label">Name:</span>
+<span id="displayName"></span>
+</div>
 
-<span class="profile-label">
-
-Email:
-
-</span>
-
+<div class="profile-row">
+<span class="profile-label">Email:</span>
 <span id="displayEmail"></span>
-
 </div>
 
-
-
 <div class="profile-row">
-
-<span class="profile-label">
-
-Phone:
-
-</span>
-
+<span class="profile-label">Phone:</span>
 <span id="displayPhone"></span>
-
 </div>
 
-
-
 <div class="profile-row">
-
-<span class="profile-label">
-
-Region:
-
-</span>
-
+<span class="profile-label">Region:</span>
 <span id="displayRegion"></span>
-
 </div>
-
-
 
 <div class="profile-row">
-
-<span class="profile-label">
-
-Membership Number:
-
-</span>
-
+<span class="profile-label">Membership Number:</span>
 <span id="displayMembershipNumber"></span>
-
 </div>
-
-
-
-
-<div style="margin-top:25px;">
-
-
+<div style="margin-top:20px;">
 
 <button onclick="openCard()">
-
 🪪 Membership Card
-
 </button>
 
-
-
-<button
-
-onclick="location.href='my-certificates.html'">
-
-🏆 Certificates
-
+<button onclick="window.location.href='my-certificates.html'">
+🏆 My Certificates
 </button>
 
-
-
-<button
-
-onclick="location.href='learning-progress.html'">
-
+<button onclick="window.location.href='learning-progress.html'">
 📚 Learning Progress
-
 </button>
 
-
-
-</div>
-
-
-
 </div>
 
 
 </div>
 
-
+</div>
 
 <script type="module">
+window.openCard = function(){
 
-
-import {
-
-initializeApp
-
-}
-
-from
-
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-
-
-import {
-
-getFirestore,
-
-collection,
-
-query,
-
-where,
-
-getDocs
-
-}
-
-from
-
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-
-const firebaseConfig={
-
-apiKey:"AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
-
-authDomain:"gods-grace-sanctuary-7c3e9.firebaseapp.com",
-
-projectId:"gods-grace-sanctuary-7c3e9",
-
-storageBucket:"gods-grace-sanctuary-7c3e9.firebasestorage.app",
-
-messagingSenderId:"794689665126",
-
-appId:"1:794689665126:web:a593f7831c0e161a9b15a7"
+location.href = "card.html";
 
 };
 
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+authDomain: "gods-grace-sanctuary-7c3e9.firebaseapp.com",
+projectId: "gods-grace-sanctuary-7c3e9",
+storageBucket: "gods-grace-sanctuary-7c3e9.firebasestorage.app",
+messagingSenderId: "794689665126",
+appId: "1:794689665126:web:a593f7831c0e161a9b15a7"
 
 
-const app=initializeApp(firebaseConfig);
+};
 
-const db=getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
+window.findMember = async function(){
 
+const membershipNumber =
+document.getElementById("membershipNumber").value.trim();
 
-window.findMember=async function(){
+const phone =
+document.getElementById("phone").value.trim();
 
+const message =
+document.getElementById("message");
 
-
-const membershipNumber=
-
-document.getElementById(
-
-"membershipNumber"
-
-)
-
-.value
-
-.trim()
-
-.toUpperCase();
-
-
-
-const phone=
-
-document.getElementById(
-
-"phone"
-
-)
-
-.value
-
-.replace(/\D/g,'');
-
-
-
-const message=
-
-document.getElementById(
-
-"message"
-
-);
-
-
-
-message.textContent="";
-
-
+message.textContent = "";
 
 try{
 
+const snapshot =
+await getDocs(collection(db,"members"));
 
-const q=query(
+let found = false;
 
-collection(db,"members"),
+snapshot.forEach((doc) => {
 
-where(
+const member = doc.data();
 
-"memberId",
+const memberNo = member.memberId || "";
+const memberPhone = member.phone || "";
 
-"==",
+if (
+memberNo.trim() === membershipNumber.trim() &&
+memberPhone.trim() === phone.trim()
+) {
 
-membershipNumber
+found = true;
 
-)
+document.getElementById("profileSection").style.display = "block";
 
-);
+document.getElementById("displayName").textContent =
+member.fullName || "";
 
+document.getElementById("displayEmail").textContent =
+member.email || "";
 
+document.getElementById("displayPhone").textContent =
+member.phone || "";
 
-const snap=
+document.getElementById("displayRegion").textContent =
+member.region || "";
 
-await getDocs(q);
-
-
-
-if(snap.empty){
-
-message.style.color="red";
-
-message.textContent=
-
-"Member ID not found.";
-
-return;
-
-}
-
-
-
-let found=false;
-
-
-
-snap.forEach((doc)=>{
-
-
-const m=doc.data();
-
-
-
-const storedPhone=
-
-(m.phone||"")
-
-.replace(/\D/g,'');
-
-
-
-if(
-
-storedPhone===phone
-
-){
-
-
-found=true;
-
-
+document.getElementById("displayMembershipNumber").textContent =
+member.memberId || "";
 
 localStorage.setItem(
-
-"currentMemberDocId",
-
-doc.id
-
+  "currentMemberId",
+  member.memberId
 );
-
-
 
 localStorage.setItem(
-
-"currentMemberId",
-
-m.memberId
-
+  "currentMemberDocId",
+  doc.id
 );
+message.style.color = "green";
 
-
-
-
-document.getElementById(
-
-"profileSection"
-
-)
-
-.style.display="block";
-
-
-
-
-document.getElementById(
-
-"displayName"
-
-)
-
-.textContent=
-
-m.fullName||"";
-
-
-
-document.getElementById(
-
-"displayEmail"
-
-)
-
-.textContent=
-
-m.email||"";
-
-
-
-document.getElementById(
-
-"displayPhone"
-
-)
-
-.textContent=
-
-m.phone||"";
-
-
-
-document.getElementById(
-
-"displayRegion"
-
-)
-
-.textContent=
-
-m.region||"";
-
-
-
-document.getElementById(
-
-"displayMembershipNumber"
-
-)
-
-.textContent=
-
-m.memberId||"";
-
-
-
-document.getElementById(
-
-"displayLevel"
-
-)
-
-.textContent=
-
-m.membershipLevel||
-
-"Member";
-
-
-
-document.getElementById(
-
-"photo"
-
-)
-
-.src=
-
-m.photoURL ||
-
-"https://ui-avatars.com/api/?name="+
-
-encodeURIComponent(
-
-m.fullName
-
-);
-
-
-
-
-message.style.color=
-
-"green";
-
-
-message.textContent=
-
+message.textContent =
 "Profile loaded successfully.";
 
-
 }
-
 
 });
 
+if (!found) {
 
-
-
-if(!found){
-
-message.style.color=
-
-"red";
-
-message.textContent=
-
-"Phone number does not match.";
+message.style.color = "red";
+message.textContent = "No matching member found.";
 
 }
 
-
-
-}
-
-
-catch(error){
-
+}catch(error){
 
 console.error(error);
 
-
-message.style.color=
-
-"red";
-
-
-message.textContent=
-
-"Unable to load profile.";
-
+message.style.color = "red";
+message.textContent = "Unable to load member information.";
 
 }
-
-
-};
-
-
-
-window.openCard=function(){
-
-
-location.href=
-
-"membership/card.html";
-
 
 };
 
 
 </script>
 
-
 </body>
-
 </html>
