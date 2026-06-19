@@ -4,134 +4,169 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Faith Starter Series | GracePath Network</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Faith Starter Series</title>
 
 <link rel="stylesheet" href="../style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 body{
-    font-family:'Poppins',sans-serif;
+
+margin:0;
+
+font-family:Arial,Helvetica,sans-serif;
+
+background:#f4f6f9;
+
 }
 
-/* NAVIGATION */
 
-nav{
-    padding:15px 25px;
-}
-
-nav a{
-    text-decoration:none;
-    color:white;
-    font-weight:600;
-    margin-right:15px;
-}
-
-/* HEADER */
 
 header{
-    text-align:center;
-    padding:80px 20px;
+
+background:linear-gradient(
+135deg,
+#15803d,
+#22c55e
+);
+
+padding:70px 20px;
+
+text-align:center;
+
+color:white;
+
 }
+
+
 
 header h1{
-    font-size:3rem;
-    margin-bottom:15px;
+
+margin:0;
+
+font-size:42px;
+
 }
+
+
 
 header p{
-    font-size:1.1rem;
+
+max-width:700px;
+
+margin:20px auto;
+
+line-height:1.8;
+
 }
 
-/* SECTION */
 
-section{
-    padding:40px 8%;
+
+.container{
+
+max-width:1200px;
+
+margin:auto;
+
+padding:40px 20px;
+
 }
 
-/* TITLE */
 
-.section-title{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-/* CARDS GRID */
 
 .cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(280px,1fr));
+
+gap:25px;
+
 }
 
-/* CARD */
+
 
 .card{
-    background:linear-gradient(to bottom right,#ffffff,#dcfce7);
 
-    border-radius:25px;
+background:white;
 
-    padding:30px 25px;
+padding:25px;
 
-    border-top:6px solid #22c55e;
+border-radius:15px;
 
-    box-shadow:
-    0 8px 25px rgba(0,0,0,0.08),
-    0 3px 10px rgba(34,197,94,0.08);
+box-shadow:
+0 2px 10px rgba(0,0,0,.08);
 
-    transition:all 0.4s ease;
+border-top:5px solid #22c55e;
 
-    position:relative;
-
-    overflow:hidden;
 }
 
-.card:hover{
-    transform:translateY(-10px);
 
-    box-shadow:
-    0 15px 35px rgba(0,0,0,0.12),
-    0 5px 15px rgba(34,197,94,0.15);
-}
 
 .card h3{
-    font-size:1.4rem;
-    margin-bottom:20px;
+
+margin-top:0;
+
+color:#166534;
+
 }
+
+
 
 .card p{
-    line-height:1.8;
-    color:#475569;
+
+line-height:1.7;
+
+color:#555;
+
 }
 
-/* BUTTON */
+
 
 .card a{
-    display:inline-block;
-    margin-top:20px;
-    padding:12px 24px;
-    background:#22c55e;
-    color:white;
-    text-decoration:none;
-    border-radius:40px;
-    font-weight:700;
+
+display:inline-block;
+
+margin-top:15px;
+
+padding:12px 20px;
+
+background:#22c55e;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:8px;
+
 }
+
+
 
 .card a:hover{
-    transform:translateY(-3px);
+
+background:#16a34a;
+
 }
 
-/* FOOTER */
+
 
 footer{
-    text-align:center;
-    padding:30px 20px;
-    margin-top:40px;
+
+text-align:center;
+
+padding:40px;
+
+color:#666;
+
 }
+
+
 
 </style>
 
@@ -139,320 +174,248 @@ footer{
 
 <body>
 
-<!-- NAVIGATION -->
 
-<nav>
-
-<a href="../index.html">Home</a>
-
-</nav>
-
-<!-- HEADER -->
-
-<header><!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Faith Starter Series | GracePath Network</title>
-
-<link rel="stylesheet" href="../style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-
-body{
-    font-family:'Poppins',sans-serif;
-}
-
-/* NAVIGATION */
-
-nav{
-    padding:15px 25px;
-}
-
-nav a{
-    text-decoration:none;
-    color:white;
-    font-weight:600;
-    margin-right:15px;
-}
-
-/* HEADER */
-
-header{
-    text-align:center;
-    padding:80px 20px;
-}
-
-header h1{
-    font-size:3rem;
-    margin-bottom:15px;
-    color:#0f172a;
-}
-
-header p{
-    font-size:1.1rem;
-    color:#475569;
-    max-width:700px;
-    margin:auto;
-}
-
-/* SECTION */
-
-section{
-    padding:40px 8%;
-}
-
-/* TITLE */
-
-.section-title{
-    text-align:center;
-    margin-bottom:15px;
-}
-
-.section-description{
-    text-align:center;
-    color:#64748b;
-    max-width:800px;
-    margin:0 auto 35px auto;
-}
-
-/* CARDS GRID */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
-}
-
-/* CARD */
-
-.card{
-    background:linear-gradient(to bottom right,#ffffff,#dcfce7);
-
-    border-radius:25px;
-
-    padding:30px 25px;
-
-    border-top:6px solid #22c55e;
-
-    box-shadow:
-    0 8px 25px rgba(0,0,0,0.08),
-    0 3px 10px rgba(34,197,94,0.08);
-
-    transition:all 0.4s ease;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.card:hover{
-    transform:translateY(-10px);
-
-    box-shadow:
-    0 15px 35px rgba(0,0,0,0.12),
-    0 5px 15px rgba(34,197,94,0.15);
-}
-
-.card h3{
-    font-size:1.4rem;
-    margin-bottom:20px;
-    color:#166534;
-}
-
-.card p{
-    line-height:1.8;
-    color:#475569;
-}
-
-/* BUTTON */
-
-.card a{
-    display:inline-block;
-    margin-top:20px;
-    padding:12px 24px;
-    background:#22c55e;
-    color:white;
-    text-decoration:none;
-    border-radius:40px;
-    font-weight:700;
-    transition:0.3s ease;
-}
-
-.card a:hover{
-    transform:translateY(-3px);
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:30px 20px;
-    margin-top:40px;
-}
-
-footer p{
-    margin:5px 0;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<!-- NAVIGATION -->
-
-<nav>
-
-<a href="../index.html">Home</a>
-
-</nav>
-
-<!-- HEADER -->
 
 <header>
 
-<h1>Faith Starter Series</h1>
+<h1>
+
+🌱 Faith Starter Series
+
+</h1>
+
 
 <p>
-A fun and engaging Bible lesson series designed to help children grow in faith, understand God's Word, and develop a personal relationship with Jesus Christ.
+
+Helping children know, love and follow Jesus through exciting Bible adventures.
+
 </p>
+
 
 </header>
 
-<!-- LESSONS -->
 
-<section>
 
-<h2 class="section-title">Available Lessons</h2>
 
-<p class="section-description">
-Explore exciting Bible adventures that teach faith, obedience, courage, kindness, and God's amazing love.
-</p>
+
+<div class="container">
+
 
 <div class="cards">
 
-<!-- LESSON 1 -->
+
+
+
 
 <div class="card">
 
-<h3> 👕⭐Joseph: Trusting God's Plan</h3>
+<h3>
+
+👕 Joseph The Dreamer
+
+</h3>
 
 <p>
-Learn how Joseph trusted God through challenges, forgave others, and fulfilled God's purpose.
+
+Joseph trusted God through difficulties and discovered God's purpose.
+
 </p>
 
-<a href="Joseph The Dreamer.pdf" target="_blank">
+<a href="Lessons/Joseph The Dreamer.pdf"
+
+target="_blank">
+
 Open Lesson
+
 </a>
 
 </div>
 
-<!-- LESSON 2 -->
+
+
+
+
 
 <div class="card">
 
-<h3>The Great Flood</h3>
+<h3>
+
+🌊 The Great Flood
+
+</h3>
 
 <p>
-Learn how Noah obeyed God, built the ark, and trusted Him even when others did not understand.
+
+Noah obeyed God and trusted Him even when others doubted.
+
 </p>
 
-<a href="The Great Flood.pdf" target="_blank">
+<a href="Lessons/The Great Flood.pdf"
+
+target="_blank">
+
 Open Lesson
+
 </a>
 
 </div>
 
-<!-- LESSON 3 -->
+
+
+
+
 
 <div class="card">
 
-<h3>Jonah and the Big Fish</h3>
+<h3>
+
+🐋 Jonah and the Big Fish
+
+</h3>
 
 <p>
-An exciting lesson about obedience, repentance, God's mercy, and why we can never run away from Him.
+
+Learn obedience, repentance and God's mercy.
+
 </p>
 
-<a href="JONAH AND THE BIG FISH.pdf" target="_blank">
+<a href="Lessons/JONAH AND THE BIG FISH.pdf"
+
+target="_blank">
+
 Open Lesson
+
 </a>
 
 </div>
 
-<!-- LESSON 4 -->
+
+
+
+
 
 <div class="card">
 
-<h3>Little is Much in Jesus Hands</h3>
+<h3>
+
+🍞 Little is Much in Jesus Hands
+
+</h3>
 
 <p>
-A boy's small gift became a miracle when placed in Jesus' hands.
+
+A small gift became a miracle when surrendered to Jesus.
+
 </p>
 
-<a href="Little is Much in Jesus Hands.pdf" target="_blank">
+<a href="Lessons/Little is Much in Jesus Hands.pdf"
+
+target="_blank">
+
 Open Lesson
-</a>
 
-</div>
-<!-- LESSON 5 -->
-
-<div class="card">
-
-<h3>The Good Neighbour</h3>
-
-<p>
-A kind Samaritan helped a stranger, showing God's love to everyone
-</p>
-
-<a href="The Good Neighbour.pdf" target="_blank">
-Open Lesson
-</a>
-
-</div>
-<div class="cards">
-
-<!-- LESSON 6 -->
-
-<div class="card">
-
-<h3>Little Hero</h3>
-
-<p>
-Discover ordinary people in the Bible who trusted God and accomplished extraordinary things through faith.
-</p>
-
-<a href="Little Hero.pdf" target="_blank">
-Open Lesson
 </a>
 
 </div>
 
-    
+
+
+
+
+
+<div class="card">
+
+<h3>
+
+❤️ The Good Neighbour
+
+</h3>
+
+<p>
+
+A lesson about kindness, compassion and loving others.
+
+</p>
+
+<a href="Lessons/The Good Neighbour.pdf"
+
+target="_blank">
+
+Open Lesson
+
+</a>
+
 </div>
 
-</section>
 
-<!-- FOOTER -->
+
+
+
+
+<div class="card">
+
+<h3>
+
+🦸 Little Hero
+
+</h3>
+
+<p>
+
+Ordinary people can accomplish extraordinary things through faith.
+
+</p>
+
+<a href="Lessons/Little Hero.pdf"
+
+target="_blank">
+
+Open Lesson
+
+</a>
+
+</div>
+
+
+
+
+
+</div>
+
+</div>
+
+
+
+
 
 <footer>
 
-<p><strong>GracePath Network</strong></p>
 
-<p>gracepathnetwork@gmail.com</p>
+<strong>GracePath Network</strong>
 
-<p>+254721335631</p>
 
-<p>Raising Children to Know, Love, and Follow Jesus Christ.</p>
+<br>
+
+
+gracepathnetwork@gmail.com
+
+
+<br>
+
+
++254 721 335 631
+
+
+<br>
+
+
+Raising Children to Know, Love and Follow Jesus Christ.
+
+
 
 </footer>
+
+
 
 </body>
 

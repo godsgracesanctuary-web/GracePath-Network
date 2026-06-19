@@ -4,77 +4,137 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Learning Progress | GracePath Family</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Learning Progress</title>
 
 <style>
 
 body{
-font-family:Arial,Helvetica,sans-serif;
+
 margin:0;
+
+font-family:Arial,Helvetica,sans-serif;
+
 background:#f4f6f9;
+
 }
+
 
 header{
+
 background:#0b2d5c;
-color:white;
-padding:30px;
+
+padding:25px;
+
 text-align:center;
+
+color:white;
+
 }
+
 
 .container{
-max-width:1000px;
+
+max-width:1100px;
+
 margin:auto;
-padding:20px;
+
+padding:30px;
+
 }
+
 
 .stats{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
 gap:20px;
-margin-bottom:25px;
+
+margin-bottom:30px;
+
 }
+
 
 .card{
+
 background:white;
+
 padding:20px;
+
 border-radius:12px;
-box-shadow:0 2px 8px rgba(0,0,0,.1);
+
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+
+text-align:center;
+
 }
 
-.card h3{
-margin-top:0;
-color:#0b2d5c;
-}
 
 .big{
-font-size:30px;
+
+font-size:32px;
+
 font-weight:bold;
+
 color:#16a34a;
+
 }
+
 
 .course{
+
 background:white;
+
 padding:25px;
-margin-bottom:20px;
+
+margin-bottom:25px;
+
 border-radius:12px;
-box-shadow:0 2px 8px rgba(0,0,0,.1);
+
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+
 }
+
 
 .progress{
-height:24px;
-background:#e5e7eb;
+
+height:25px;
+
+background:#ddd;
+
 border-radius:20px;
+
 overflow:hidden;
+
 margin-top:10px;
+
 }
 
+
 .progress-fill{
-height:24px;
+
+height:25px;
+
 background:#16a34a;
-border-radius:20px;
+
+color:white;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-weight:bold;
+
 }
+
 
 .badge{
 
@@ -84,27 +144,54 @@ border-radius:20px;
 
 font-size:14px;
 
-font-weight:bold;
-
 display:inline-block;
 
-margin-top:10px;
+margin-top:15px;
 
 }
+
 
 .active{
+
 background:#dcfce7;
+
 color:#15803d;
+
 }
+
 
 .completed{
+
 background:#dbeafe;
+
 color:#1d4ed8;
+
 }
 
+
 .pending{
+
 background:#fee2e2;
+
 color:#dc2626;
+
+}
+
+
+button{
+
+padding:12px 20px;
+
+background:#0b2d5c;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
 }
 
 </style>
@@ -113,13 +200,24 @@ color:#dc2626;
 
 <body>
 
+
+
 <header>
 
-<h1>📚 Learning Progress</h1>
+<h1>
 
-<p>Track your discipleship journey</p>
+📚 Learning Progress
+
+</h1>
+
+<p>
+
+GracePath Academy
+
+</p>
 
 </header>
+
 
 
 <div class="container">
@@ -130,36 +228,71 @@ color:#dc2626;
 
 <div class="card">
 
-<h3>Programs</h3>
+<h3>
 
-<p class="big" id="programs">0</p>
+Programs
 
-</div>
+</h3>
 
+<p class="big" id="programs">
 
-<div class="card">
+0
 
-<h3>Lessons Completed</h3>
-
-<p class="big" id="lessons">0</p>
-
-</div>
-
-
-<div class="card">
-
-<h3>Average Progress</h3>
-
-<p class="big" id="average">0%</p>
+</p>
 
 </div>
 
 
+
 <div class="card">
 
-<h3>Status</h3>
+<h3>
 
-<p class="big" id="status">-</p>
+Lessons Completed
+
+</h3>
+
+<p class="big" id="lessons">
+
+0
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+
+Average Progress
+
+</h3>
+
+<p class="big" id="average">
+
+0%
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+
+Certificates
+
+</h3>
+
+<p class="big" id="certificates">
+
+0
+
+</p>
 
 </div>
 
@@ -176,6 +309,15 @@ Loading...
 
 
 
+<br>
+
+<button onclick="history.back()">
+
+← Back
+
+</button>
+
+
 </div>
 
 
@@ -183,7 +325,11 @@ Loading...
 
 <script type="module">
 
-import { initializeApp }
+import {
+
+initializeApp
+
+}
 
 from
 
@@ -212,25 +358,38 @@ from
 
 const firebaseConfig={
 
-apiKey:"AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+apiKey:"YOUR API",
 
-authDomain:"gods-grace-sanctuary-7c3e9.firebaseapp.com",
+authDomain:"YOUR DOMAIN",
 
 projectId:"gods-grace-sanctuary-7c3e9",
 
-storageBucket:"gods-grace-sanctuary-7c3e9.firebasestorage.app",
+storageBucket:"",
 
-messagingSenderId:"794689665126",
+messagingSenderId:"",
 
-appId:"1:794689665126:web:a593f7831c0e161a9b15a7"
+appId:""
 
 };
 
 
 
-const app=initializeApp(firebaseConfig);
+const app=
 
-const db=getFirestore(app);
+initializeApp(
+
+firebaseConfig
+
+);
+
+
+const db=
+
+getFirestore(
+
+app
+
+);
 
 
 
@@ -256,20 +415,19 @@ document.getElementById(
 
 if(!memberId){
 
-courses.innerHTML=`
+courses.innerHTML=
 
-<div class="card">
+"<h2>Please login first.</h2>";
 
-<h3>Please sign in first.</h3>
-
-</div>
-
-`;
-
-}else{
+}
 
 
-const q=query(
+else{
+
+
+const q=
+
+query(
 
 collection(
 
@@ -295,23 +453,12 @@ memberId
 
 const snap=
 
-await getDocs(q);
+await getDocs(
 
+q
 
+);
 
-if(snap.empty){
-
-courses.innerHTML=`
-
-<div class="card">
-
-<h3>No learning records found.</h3>
-
-</div>
-
-`;
-
-}else{
 
 
 courses.innerHTML="";
@@ -321,27 +468,33 @@ let totalLessons=0;
 
 let totalProgress=0;
 
-let count=0;
+let totalCertificates=0;
 
-let overallStatus="In Progress";
+let count=0;
 
 
 
 snap.forEach(doc=>{
 
 
-const c=doc.data();
+const c=
+
+doc.data();
+
 
 
 count++;
 
 
-totalLessons +=
+
+totalLessons+=
+
 Number(
-c.lessonsCompleted ||
-c.LessonsCompleted ||
-0
+
+c.lessonsCompleted||0
+
 );
+
 
 
 totalProgress+=
@@ -352,33 +505,50 @@ c.progress||0
 
 );
 
-let badgeClass = "active";
-
-overallStatus = c.status || "In Progress";
 
 
-if(c.status==="Completed"){
+if(
 
-badgeClass = "completed";
+c.certificateAwarded
 
-}
+)
 
-else if(c.status==="Pending"){
-
-badgeClass = "pending";
-
-}
+totalCertificates++;
 
 
-courses.innerHTML += `
 
+let badge="active";
+
+
+
+if(
+
+c.status=="Completed"
+
+)
+
+badge="completed";
+
+
+
+if(
+
+c.status=="Pending"
+
+)
+
+badge="pending";
+
+
+
+courses.innerHTML+=`
 
 <div class="course">
 
 
 <h2>
 
-${c.program||""}
+${c.program}
 
 </h2>
 
@@ -386,47 +556,9 @@ ${c.program||""}
 
 <p>
 
-<strong>Level:</strong>
+Level :
 
-${c.level||"-"}
-
-</p>
-
-<p>
-
-<strong>Enrolled:</strong>
-
-${
-c.enrolledDate
-?
-
-c.enrolledDate
-.toDate()
-.toLocaleDateString(
-'en-GB'
-)
-
-:
-
-'-'
-
-}
-
-</p>
-
-<p>
-
-<strong>Lessons Completed:</strong>
-
-${
-
-c.lessonsCompleted ||
-
-c.LessonsCompleted ||
-
-0
-
-}
+${c.level}
 
 </p>
 
@@ -434,19 +566,13 @@ c.LessonsCompleted ||
 
 <p>
 
-<strong>Total Lessons:</strong>
+Completed :
 
-${c.totalLessons||0}
+${c.lessonsCompleted}
 
-</p>
+/
 
-
-
-<p>
-
-<strong>Progress:</strong>
-
-${c.progress||0}%
+${c.totalLessons}
 
 </p>
 
@@ -454,48 +580,25 @@ ${c.progress||0}%
 
 <div class="progress">
 
+
 <div class="progress-fill"
-style="
-width:${c.progress||0}%;
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
-font-size:13px;
-font-weight:bold;
-">
 
-${c.progress||0}%
+style="width:${c.progress}%;">
+
+
+${c.progress}%
+
 
 </div>
 
+
 </div>
 
-<p>
 
-<strong>Graduation:</strong>
 
-${
+<div class="badge ${badge}">
 
-(c.progress||0) >= 100
-
-?
-
-'<span style="color:#16a34a;font-weight:bold;">Eligible</span>'
-
-:
-
-'<span style="color:#dc2626;font-weight:bold;">Not Yet Eligible</span>'
-
-}
-
-</p>
-
-<div
-
-class="badge ${badgeClass}">
-
-${c.status||""}
+${c.status}
 
 </div>
 
@@ -504,7 +607,6 @@ ${c.status||""}
 </div>
 
 `;
-
 
 
 });
@@ -517,7 +619,7 @@ document.getElementById(
 
 )
 
-.textContent=
+.innerHTML=
 
 count;
 
@@ -529,7 +631,7 @@ document.getElementById(
 
 )
 
-.textContent=
+.innerHTML=
 
 totalLessons;
 
@@ -541,7 +643,7 @@ document.getElementById(
 
 )
 
-.textContent=
+.innerHTML=
 
 Math.round(
 
@@ -549,32 +651,28 @@ totalProgress/count
 
 )
 
-+"%";
++
+
+"%";
 
 
 
 document.getElementById(
 
-"status"
+"certificates"
 
 )
 
-.textContent=
+.innerHTML=
 
-overallStatus;
-
-
-
-}
+totalCertificates;
 
 
 
 }
-
 
 
 </script>
 
 </body>
-
 </html>

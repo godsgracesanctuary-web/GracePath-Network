@@ -135,16 +135,23 @@ Access My Profile
 🪪 Membership Card
 </button>
 
-<button onclick="window.location.href='my-certificates.html'">
+<button onclick="location.href='my-certificates.html'">
 🏆 My Certificates
 </button>
 
-<button onclick="window.location.href='learning-progress.html'">
-📚 Learning Progress
+<button onclick="location.href='learning-progress.html'">
+📈 Learning Progress
+</button>
+
+<button onclick="location.href='../programs.html'">
+📚 Programs
+</button>
+
+<button onclick="logout()">
+🚪 Logout
 </button>
 
 </div>
-
 
 </div>
 
@@ -266,7 +273,38 @@ message.style.color = "red";
 message.textContent = "Unable to load member information.";
 
 }
+window.logout = function(){
 
+localStorage.removeItem(
+"currentMemberId"
+);
+
+localStorage.removeItem(
+"currentMemberDocId"
+);
+
+document.getElementById(
+"profileSection"
+).style.display = "none";
+
+document.getElementById(
+"membershipNumber"
+).value = "";
+
+document.getElementById(
+"phone"
+).value = "";
+
+document.getElementById(
+"message"
+).style.color = "green";
+
+document.getElementById(
+"message"
+).textContent =
+"Logged out successfully.";
+
+}
 };
 
 

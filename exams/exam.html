@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>GracePath Examination</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f4f6f9;
+}
+
+header{
+background:#0b2d5c;
+padding:20px;
+text-align:center;
+color:white;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:30px;
+}
+
+.info{
+display:flex;
+justify-content:space-between;
+margin-bottom:25px;
+font-weight:bold;
+}
+
+.question{
+
+background:white;
+
+padding:20px;
+
+margin-bottom:20px;
+
+border-radius:10px;
+
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+
+}
+
+.question h3{
+margin-top:0;
+}
+
+label{
+
+display:block;
+
+padding:8px 0;
+
+}
+
+button{
+
+padding:14px 25px;
+
+border:none;
+
+border-radius:8px;
+
+background:#0f766e;
+
+color:white;
+
+cursor:pointer;
+
+font-size:16px;
+
+}
+
+#result{
+
+margin-top:30px;
+
+font-size:24px;
+
+font-weight:bold;
+
+text-align:center;
+
+}
+
+.pass{
+color:green;
+}
+
+.fail{
+color:red;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+<h1>
+
+GracePath Academy Examination
+
+</h1>
+
+</header>
+
+
+<div class="container">
+
+
+<div class="info">
+
+<div>
+
+Student :
+
+<span id="student">
+
+Guest
+
+</span>
+
+</div>
+
+
+<div>
+
+Time Left :
+
+<span id="timer">
+
+30:00
+
+</span>
+
+</div>
+
+</div>
+
+
+
+<h2 id="title">
+
+Exam
+
+</h2>
+
+
+
+<div id="questions">
+
+</div>
+
+
+
+<button onclick="gradeExam()">
+
+Submit Exam
+
+</button>
+
+
+
+<button onclick="location.reload()">
+
+Retake
+
+</button>
+
+
+
+<div id="result">
+
+</div>
+
+
+
+</div>
+
+
+
+
+<script type="module">
+
+import { initializeApp }
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+
+getFirestore,
+
+collection,
+
+addDoc,
+
+query,
+
+where,
+
+getDocs,
+
+updateDoc,
+
+doc
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+const firebaseConfig={
+
+apiKey:"AIzaSyDam-sUomXTNWvsjVwen8fHHChyEeM5a5c",
+
+authDomain:"gods-grace-sanctuary-7c3e9.firebaseapp.com",
+
+projectId:"gods-grace-sanctuary-7c3e9",
+
+storageBucket:"gods-grace-sanctuary-7c3e9.firebasestorage.app",
+
+messagingSenderId:"794689665126",
+
+appId:"1:794689665126:web:a593f7831c0e161a9b15a7"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+document.getElementById(
+
+"student"
+
+)
+
+.innerHTML=
+
+localStorage.getItem(
+
+"currentMemberId"
+
+)
+
+||
+
+"Guest";
+
+
+
+const exams={
+
+
+
+stewardship:[
+
+{
+q:"Who owns everything in heaven and earth?",
+o:["Government","Church","God","People"],
+a:2
+},
+
+{
+q:"Stewardship means?",
+o:["Ownership","Faithful management","Leadership","Giving"],
+a:1
+},
+
+{
+q:"Matthew 25 teaches the parable of the?",
+o:["Sower","Talents","Sheep","Prodigal Son"],
+a:1
+},
+
+{
+q:"A steward is expected to be?",
+o:["Popular","Faithful","Rich","Educated"],
+a:1
+},
+
+{
+q:"Which scripture says stewards must be faithful?",
+o:["John 3:16","1 Corinthians 4:2","Psalm 23","Acts 2"],
+a:1
+},
+
+{
+q:"Time is considered?",
+o:["A burden","A gift from God","Luck","A possession"],
+a:1
+},
+
+{
+q:"Believers should use their talents for?",
+o:["Personal glory","Serving God","Competition","Business"],
+a:1
+},
+
+{
+q:"Money entrusted to believers belongs to?",
+o:["The family","The church","God","The government"],
+a:2
+},
+
+{
+q:"Tithing means giving?",
+o:["5 percent","10 percent","20 percent","50 percent"],
+a:1
+},
+
+{
+q:"Generous giving demonstrates?",
+o:["Pride","Love and obedience","Fear","Tradition"],
+a:1
+},
+
+{
+q:"Jesus said where your treasure is?",
+o:["There your enemies are","There your heart will be also","There is suffering","There is wisdom"],
+a:1
+},
+
+{
+q:"Good stewardship includes managing?",
+o:["Money only","Time only","Talents only","All resources"],
+a:3
+},
+
+{
+q:"Wastefulness dishonors?",
+o:["Friends","Church","God","Family"],
+a:2
+},
+
+{
+q:"The servant with one talent was condemned because?",
+o:["He lost it","He buried it","He shared it","He spent it"],
+a:1
+},
+
+{
+q:"Believers should work?",
+o:["Lazily","Faithfully","Occasionally","Only Sundays"],
+a:1
+},
+
+{
+q:"Stewardship reflects?",
+o:["Faithfulness","Popularity","Knowledge","Position"],
+a:0
+},
+
+{
+q:"The earth belongs to?",
+o:["Kings","People","God","Churches"],
+a:2
+},
+
+{
+q:"A cheerful giver is loved by?",
+o:["People","Leaders","God","Pastors"],
+a:2
+},
+
+{
+q:"Stewardship affects?",
+o:["Only finances","Only ministry","Every area of life","Only business"],
+a:2
+},
+
+{
+q:"The ultimate goal of stewardship is?",
+o:["Recognition","Profit","Glorifying God","Success"],
+a:2
+}
+
+],
+
+
+foundation:[
+
+{
+q:"Salvation is received through?",
+o:["Works","Grace through faith","Baptism","Giving"],
+a:1
+},
+
+{
+q:"Who is the Son of God?",
+o:["Moses","Paul","Jesus Christ","Peter"],
+a:2
+},
+
+{
+q:"Which book contains John 3:16?",
+o:["Matthew","Luke","John","Acts"],
+a:2
+},
+
+{
+q:"The Bible is the?",
+o:["Word of God","History book","Novel","Magazine"],
+a:0
+},
+
+{
+q:"Prayer is primarily?",
+o:["Talking to God","Singing","Reading","Fasting"],
+a:0
+},
+
+{
+q:"Who convicts people of sin?",
+o:["Pastor","Holy Spirit","Angel","Church"],
+a:1
+},
+
+{
+q:"Repentance means?",
+o:["Changing churches","Turning from sin","Giving money","Praying loudly"],
+a:1
+},
+
+{
+q:"Water baptism symbolizes?",
+o:["Membership","New birth","Death and resurrection with Christ","Leadership"],
+a:2
+},
+
+{
+q:"Communion reminds believers of?",
+o:["Creation","Israel","Christ's sacrifice","Pentecost"],
+a:2
+},
+
+{
+q:"Faith comes by hearing?",
+o:["Stories","Music","The Word of God","Dreams"],
+a:2
+},
+
+{
+q:"The church is called?",
+o:["Body of Christ","Temple of Buddha","Government","School"],
+a:0
+},
+
+{
+q:"Which person denied Jesus three times?",
+o:["John","Peter","Thomas","Andrew"],
+a:1
+},
+
+{
+q:"The Holy Spirit gives believers?",
+o:["Confusion","Power","Weakness","Fear"],
+a:1
+},
+
+{
+q:"Christians should forgive?",
+o:["Sometimes","Only family","As Christ forgave us","Never"],
+a:2
+},
+
+{
+q:"Jesus rose from the dead after?",
+o:["One day","Two days","Three days","Seven days"],
+a:2
+},
+
+{
+q:"Who wrote many New Testament letters?",
+o:["David","Paul","Abraham","Joshua"],
+a:1
+},
+
+{
+q:"The greatest commandment is?",
+o:["Love God","Fast","Build churches","Travel"],
+a:0
+},
+
+{
+q:"Believers become children of God through?",
+o:["Birth","Faith in Christ","Education","Culture"],
+a:1
+},
+
+{
+q:"Eternal life is found in?",
+o:["Good works","Money","Jesus Christ","Religion"],
+a:2
+},
+
+{
+q:"The Christian life should be marked by?",
+o:["Fear","Pride","Love","Anger"],
+a:2
+}
+
+],
+
+
+part1:[
+
+{
+q:"Who is a disciple?",
+o:["A church member","A follower of Jesus","A pastor","An evangelist"],
+a:1
+},
+
+{
+q:"Jesus called His disciples to?",
+o:["Make money","Make disciples","Build houses","Travel abroad"],
+a:1
+},
+
+{
+q:"According to John 3:3, a person must be?",
+o:["Educated","Rich","Born again","Baptized"],
+a:2
+},
+
+{
+q:"Salvation is found in?",
+o:["Religion","Good works","Jesus Christ","Tradition"],
+a:2
+},
+
+{
+q:"Which apostle denied Jesus three times?",
+o:["John","Peter","Andrew","Thomas"],
+a:1
+},
+
+{
+q:"Repentance means?",
+o:["Joining a church","Turning away from sin","Praying loudly","Giving money"],
+a:1
+},
+
+{
+q:"Faith comes by hearing?",
+o:["Stories","Dreams","The Word of God","Music"],
+a:2
+},
+
+{
+q:"A disciple should obey?",
+o:["Government only","Church leaders","Jesus Christ","Friends"],
+a:2
+},
+
+{
+q:"Who empowers believers for Christian living?",
+o:["Angels","Pastors","Holy Spirit","Prophets"],
+a:2
+},
+
+{
+q:"Jesus said, 'Follow me and I will make you...'?",
+o:["Teachers","Fishers of men","Leaders","Kings"],
+a:1
+},
+
+{
+q:"The first step after salvation is?",
+o:["Baptism","Marriage","Leadership","Fasting"],
+a:0
+},
+
+{
+q:"A disciple should read?",
+o:["Magazines","History books","The Bible","Novels"],
+a:2
+},
+
+{
+q:"Prayer is?",
+o:["Talking to God","Singing","Preaching","Fasting"],
+a:0
+},
+
+{
+q:"The Great Commission is found in?",
+o:["Matthew 28","Genesis 1","Psalm 23","Acts 1"],
+a:0
+},
+
+{
+q:"Jesus died for?",
+o:["Jews only","Christians only","The sins of the world","Israel only"],
+a:2
+},
+
+{
+q:"The evidence of discipleship is?",
+o:["Titles","Love","Wealth","Popularity"],
+a:1
+},
+
+{
+q:"Believers should fellowship with?",
+o:["No one","Other believers","Only pastors","Visitors"],
+a:1
+},
+
+{
+q:"The Holy Spirit helps believers to?",
+o:["Sin","Witness","Fear","Hide"],
+a:1
+},
+
+{
+q:"The goal of discipleship is?",
+o:["Knowledge only","Spiritual maturity","Church membership","Fame"],
+a:1
+},
+
+{
+q:"A disciple should carry his?",
+o:["Money","Bible","Cross","Books"],
+a:2
+}
+
+],
+
+part2:[
+
+{
+q:"What ordinance symbolizes identification with Christ?",
+o:["Communion","Baptism","Fasting","Giving"],
+a:1
+},
+
+{
+q:"Prayer is communication with?",
+o:["Angels","Pastors","God","Saints"],
+a:2
+},
+
+{
+q:"Jesus taught His disciples to pray beginning with?",
+o:["O Lord","Father","Our Father","Almighty God"],
+a:2
+},
+
+{
+q:"Which book records the coming of the Holy Spirit?",
+o:["Matthew","Acts","Romans","Hebrews"],
+a:1
+},
+
+{
+q:"Fellowship helps believers grow in?",
+o:["Popularity","Faith","Politics","Wealth"],
+a:1
+},
+
+{
+q:"Communion reminds us of?",
+o:["Creation","Christ's sacrifice","Moses","Abraham"],
+a:1
+},
+
+{
+q:"The early church continued steadfastly in?",
+o:["Business","Prayer","Sports","Entertainment"],
+a:1
+},
+
+{
+q:"Baptism should follow?",
+o:["Birth","Marriage","Salvation","Leadership"],
+a:2
+},
+
+{
+q:"Prayer should be offered in?",
+o:["Fear","Faith","Confusion","Silence"],
+a:1
+},
+
+{
+q:"Jesus prayed often because?",
+o:["He lacked power","He depended on the Father","He was afraid","He was lonely"],
+a:1
+},
+
+{
+q:"The Holy Spirit is our?",
+o:["Judge","Comforter","Enemy","Servant"],
+a:1
+},
+
+{
+q:"Believers should fellowship with?",
+o:["Only pastors","Other believers","Nobody","Children"],
+a:1
+},
+
+{
+q:"Prayer can include?",
+o:["Thanksgiving","Complaining","Pride","Fear"],
+a:0
+},
+
+{
+q:"The Lord's Supper was instituted by?",
+o:["Peter","Paul","Jesus","John"],
+a:2
+},
+
+{
+q:"Acts 2 describes?",
+o:["Creation","Pentecost","Exodus","Flood"],
+a:1
+},
+
+{
+q:"Prayer strengthens our?",
+o:["Cars","Faith","Houses","Jobs"],
+a:1
+},
+
+{
+q:"Christians should gather together for?",
+o:["Entertainment","Fellowship","Business","Politics"],
+a:1
+},
+
+{
+q:"Baptism represents death and?",
+o:["Life","Resurrection","Marriage","Healing"],
+a:1
+},
+
+{
+q:"The church is a community of?",
+o:["Perfect people","Believers","Teachers","Leaders"],
+a:1
+},
+
+{
+q:"Prayer should be made regularly with?",
+o:["Faith","Fear","Pride","Anger"],
+a:0
+}
+
+],
+
+part3:[
+
+{
+q:"True worship is offered in?",
+o:["Music only","Spirit and truth","Church buildings","Silence"],
+a:1
+},
+
+{
+q:"Christian character is produced by?",
+o:["Education","Holy Spirit","Money","Experience"],
+a:1
+},
+
+{
+q:"Stewardship means?",
+o:["Ownership","Faithful management","Giving only","Leadership"],
+a:1
+},
+
+{
+q:"The fruit of the Spirit is found in?",
+o:["Romans 12","Galatians 5","Acts 2","Hebrews 11"],
+a:1
+},
+
+{
+q:"Love is?",
+o:["Optional","The greatest virtue","Weakness","Emotion only"],
+a:1
+},
+
+{
+q:"Worship includes?",
+o:["Only singing","Our whole life","Prayer only","Giving only"],
+a:1
+},
+
+{
+q:"Believers should serve with?",
+o:["Pride","Joy","Fear","Complaining"],
+a:1
+},
+
+{
+q:"The Holy Spirit gives believers?",
+o:["Confusion","Spiritual gifts","Fear","Weakness"],
+a:1
+},
+
+{
+q:"Faithfulness is a fruit of?",
+o:["Knowledge","Spirit","Money","Leadership"],
+a:1
+},
+
+{
+q:"Humility means?",
+o:["Thinking less of yourself","Thinking of yourself less","Weakness","Silence"],
+a:1
+},
+
+{
+q:"Christians should forgive because?",
+o:["People deserve it","Christ forgave us","Pastors command it","Society expects it"],
+a:1
+},
+
+{
+q:"God loves a cheerful?",
+o:["Singer","Leader","Giver","Teacher"],
+a:2
+},
+
+{
+q:"Patience helps believers?",
+o:["Grow spiritually","Become rich","Avoid prayer","Ignore others"],
+a:0
+},
+
+{
+q:"Worship should glorify?",
+o:["People","Churches","God","Leaders"],
+a:2
+},
+
+{
+q:"Self-control helps believers?",
+o:["Sin freely","Live victoriously","Become famous","Avoid worship"],
+a:1
+},
+
+{
+q:"Spiritual gifts are given for?",
+o:["Personal fame","Building the church","Business","Politics"],
+a:1
+},
+
+{
+q:"Christians should be examples in?",
+o:["Speech","Conduct","Love","All of these"],
+a:3
+},
+
+{
+q:"Good stewardship includes?",
+o:["Money only","Time only","All resources","Buildings only"],
+a:2
+},
+
+{
+q:"The greatest expression of Christian maturity is?",
+o:["Knowledge","Love","Titles","Success"],
+a:1
+},
+
+{
+q:"Jesus taught servant leadership by?",
+o:["Teaching","Washing feet","Preaching","Fasting"],
+a:1
+}
+
+],
+
+part4:[
+
+{
+q:"The Great Commission is found in?",
+o:["Matthew 28","Genesis 1","Psalm 23","Romans 8"],
+a:0
+},
+
+{
+q:"Jesus commanded believers to make?",
+o:["Churches","Disciples","Buildings","Leaders"],
+a:1
+},
+
+{
+q:"Evangelism means?",
+o:["Teaching children","Sharing the Gospel","Building churches","Prayer meetings"],
+a:1
+},
+
+{
+q:"Who gives believers power to witness?",
+o:["Angels","Pastors","Holy Spirit","Parents"],
+a:2
+},
+
+{
+q:"Acts 1:8 teaches believers to be?",
+o:["Teachers","Missionaries","Witnesses","Leaders"],
+a:2
+},
+
+{
+q:"Spiritual warfare is fought with?",
+o:["Weapons","Politics","Prayer and God's Word","Money"],
+a:2
+},
+
+{
+q:"The armor of God is described in?",
+o:["Romans 12","Galatians 5","Ephesians 6","Acts 2"],
+a:2
+},
+
+{
+q:"The helmet represents?",
+o:["Peace","Salvation","Faith","Love"],
+a:1
+},
+
+{
+q:"The sword of the Spirit is?",
+o:["Prayer","Faith","The Word of God","Love"],
+a:2
+},
+
+{
+q:"Believers should pray?",
+o:["Occasionally","Only Sundays","Always","Only in trouble"],
+a:2
+},
+
+{
+q:"Church ministry is for?",
+o:["Pastors only","Leaders only","All believers","Teachers"],
+a:2
+},
+
+{
+q:"Spiritual gifts are given to?",
+o:["Make money","Serve others","Gain fame","Control people"],
+a:1
+},
+
+{
+q:"Mission work includes?",
+o:["Preaching Christ","Politics","Business","Entertainment"],
+a:0
+},
+
+{
+q:"Jesus came to seek and save?",
+o:["Israel only","The lost","Leaders","Children"],
+a:1
+},
+
+{
+q:"A disciple should bear?",
+o:["Books","Fruit","Money","Titles"],
+a:1
+},
+
+{
+q:"Christians are called?",
+o:["Salt and Light","Judges","Kings","Workers"],
+a:0
+},
+
+{
+q:"The Gospel is good news about?",
+o:["Churches","Jesus Christ","Israel","History"],
+a:1
+},
+
+{
+q:"Believers should encourage?",
+o:["No one","Only pastors","One another","Visitors"],
+a:2
+},
+
+{
+q:"Jesus promised to be with believers?",
+o:["Sometimes","Only Sundays","Always","Never"],
+a:2
+},
+
+{
+q:"The ultimate goal of discipleship is?",
+o:["Knowledge","Maturity and multiplication","Titles","Recognition"],
+a:1
+}
+
+],
+
+godfactor:[
+
+{
+q:"The God Factor refers to?",
+o:["Human wisdom","God's presence and influence","Education","Experience"],
+a:1
+},
+
+{
+q:"Without God we can do?",
+o:["Everything","Nothing","Many things","Most things"],
+a:1
+},
+
+{
+q:"God's presence brings?",
+o:["Confusion","Peace and direction","Fear","Failure"],
+a:1
+},
+
+{
+q:"Who was called a man after God's own heart?",
+o:["Moses","David","Peter","Paul"],
+a:1
+},
+
+{
+q:"God's presence went before Israel as a?",
+o:["Cloud and fire","Angel only","Wind","Rainbow"],
+a:0
+},
+
+{
+q:"Moses said, 'If Your presence does not go with us...'?",
+o:["Stay here","Do not send us up","We will go alone","We will pray"],
+a:1
+},
+
+{
+q:"The fear of the Lord is the beginning of?",
+o:["Knowledge","Wisdom","Power","Success"],
+a:1
+},
+
+{
+q:"Prayer helps believers?",
+o:["Depend on God","Depend on people","Become wealthy","Avoid challenges"],
+a:0
+},
+
+{
+q:"God gives wisdom to those who?",
+o:["Study hard","Ask in faith","Fast often","Travel"],
+a:1
+},
+
+{
+q:"Jesus promised never to?",
+o:["Sleep","Leave believers","Teach","Pray"],
+a:1
+},
+
+{
+q:"The Holy Spirit guides believers into?",
+o:["Confusion","Truth","Traditions","Politics"],
+a:1
+},
+
+{
+q:"Faith means trusting?",
+o:["People","Circumstances","God","Luck"],
+a:2
+},
+
+{
+q:"God's grace is?",
+o:["Earned","A free gift","Temporary","Limited"],
+a:1
+},
+
+{
+q:"The God Factor changes?",
+o:["Only ministry","Only finances","Every area of life","Nothing"],
+a:2
+},
+
+{
+q:"David defeated Goliath because?",
+o:["He was strong","God was with him","He had armor","He was tall"],
+a:1
+},
+
+{
+q:"Joseph prospered because?",
+o:["He was educated","The Lord was with him","He had money","He traveled"],
+a:1
+},
+
+{
+q:"God opens doors that?",
+o:["People cannot close","Governments close","Churches build","Angels ignore"],
+a:0
+},
+
+{
+q:"Believers should acknowledge God in?",
+o:["Some ways","All ways","Few ways","Difficult times only"],
+a:1
+},
+
+{
+q:"God works all things together for good to?",
+o:["Everyone","Believers who love Him","Pastors","Leaders"],
+a:1
+},
+
+{
+q:"The ultimate purpose of the God Factor is?",
+o:["Fame","Prosperity","Glorifying God","Popularity"],
+a:2
+}
+
+],
+
+standingfirm:[
+
+{
+q:"What should believers stand firm in?",
+o:["Traditions","Faith","Opinions","Politics"],
+a:1
+},
+
+{
+q:"Faith comes by hearing?",
+o:["Stories","Music","The Word of God","Dreams"],
+a:2
+},
+
+{
+q:"The armor of God is found in?",
+o:["Romans 8","Ephesians 6","Acts 2","Hebrews 11"],
+a:1
+},
+
+{
+q:"The shield of faith protects against?",
+o:["Rain","Fiery darts","Enemies","Temptation only"],
+a:1
+},
+
+{
+q:"The helmet represents?",
+o:["Peace","Salvation","Grace","Truth"],
+a:1
+},
+
+{
+q:"The belt of truth signifies?",
+o:["Knowledge","Honesty and truth","Power","Leadership"],
+a:1
+},
+
+{
+q:"Jesus said believers should build on?",
+o:["Sand","Rock","Wood","Clay"],
+a:1
+},
+
+{
+q:"Trials produce?",
+o:["Weakness","Perseverance","Fear","Anger"],
+a:1
+},
+
+{
+q:"Who is called the author and finisher of our faith?",
+o:["Paul","Peter","Jesus","Moses"],
+a:2
+},
+
+{
+q:"Prayer strengthens our?",
+o:["Wealth","Faith","Popularity","Influence"],
+a:1
+},
+
+{
+q:"Believers should encourage?",
+o:["Only pastors","One another","Leaders only","Children"],
+a:1
+},
+
+{
+q:"God's Word is described as?",
+o:["Fire and hammer","Novel","Song","History"],
+a:0
+},
+
+{
+q:"The righteous shall live by?",
+o:["Sight","Faith","Experience","Knowledge"],
+a:1
+},
+
+{
+q:"Spiritual maturity helps believers?",
+o:["Compromise","Stand firm","Avoid church","Seek titles"],
+a:1
+},
+
+{
+q:"Christians should resist?",
+o:["Friends","The devil","Family","Leaders"],
+a:1
+},
+
+{
+q:"Jesus overcame temptation using?",
+o:["Miracles","Scripture","Silence","Dreams"],
+a:1
+},
+
+{
+q:"Persecution should cause believers to?",
+o:["Quit","Stand firm","Hide","Retreat"],
+a:1
+},
+
+{
+q:"Fellowship provides?",
+o:["Entertainment","Encouragement","Popularity","Riches"],
+a:1
+},
+
+{
+q:"The Christian race requires?",
+o:["Speed","Endurance","Strength","Wisdom"],
+a:1
+},
+
+{
+q:"Standing firm ultimately glorifies?",
+o:["People","Leaders","God","Churches"],
+a:2
+}
+
+],
+
+leadership:[
+
+{
+q:"Biblical leadership is primarily about?",
+o:["Power","Service","Position","Popularity"],
+a:1
+},
+
+{
+q:"Jesus taught leadership by?",
+o:["Building churches","Washing feet","Writing books","Fasting"],
+a:1
+},
+
+{
+q:"A church leader should be?",
+o:["Proud","Faithful","Harsh","Greedy"],
+a:1
+},
+
+{
+q:"The greatest leader among believers should be?",
+o:["Master","Teacher","Servant","King"],
+a:2
+},
+
+{
+q:"Vision in ministry comes from?",
+o:["Experience","God","Friends","Education"],
+a:1
+},
+
+{
+q:"A leader must first lead?",
+o:["Church","Nation","Family","Himself"],
+a:3
+},
+
+{
+q:"Moses was known for being?",
+o:["Proud","Meek","Angry","Fearless"],
+a:1
+},
+
+{
+q:"A leader's character is more important than?",
+o:["Titles","Money","Education","All of these"],
+a:3
+},
+
+{
+q:"Church leaders should shepherd?",
+o:["Buildings","People","Animals","Businesses"],
+a:1
+},
+
+{
+q:"According to 1 Timothy 3, a leader should be?",
+o:["Greedy","Self-controlled","Lazy","Arrogant"],
+a:1
+},
+
+{
+q:"Leadership without integrity leads to?",
+o:["Growth","Failure","Promotion","Blessing"],
+a:1
+},
+
+{
+q:"A leader should listen to?",
+o:["Nobody","Wise counsel","Rumors","Enemies"],
+a:1
+},
+
+{
+q:"The purpose of leadership is to?",
+o:["Control people","Equip saints","Gain fame","Build wealth"],
+a:1
+},
+
+{
+q:"Nehemiah demonstrated leadership through?",
+o:["Prayer and planning","Business","Politics","Travel"],
+a:0
+},
+
+{
+q:"David led Israel with?",
+o:["Fear","Courage and faith","Money","Power"],
+a:1
+},
+
+{
+q:"Leaders should be examples in?",
+o:["Speech","Conduct","Love","All of these"],
+a:3
+},
+
+{
+q:"Church leadership requires?",
+o:["Humility","Pride","Competition","Popularity"],
+a:0
+},
+
+{
+q:"Paul described himself as?",
+o:["King","Servant","Judge","Master"],
+a:1
+},
+
+{
+q:"Good leaders develop?",
+o:["Followers only","Other leaders","Buildings","Programs"],
+a:1
+},
+
+{
+q:"The ultimate purpose of leadership is?",
+o:["Recognition","Success","Glorifying God","Expansion"],
+a:2
+}
+
+],
+
+};
+const lesson=
+
+new URLSearchParams(
+
+window.location.search
+
+)
+
+.get(
+
+"lesson"
+
+);
+
+
+
+
+const exam=
+
+exams[lesson];
+
+
+
+document.getElementById(
+
+"title"
+
+)
+
+.innerHTML=
+
+lesson.toUpperCase()
+
++
+
+" EXAM";
+
+
+
+
+const qBox=
+
+document.getElementById(
+
+"questions"
+
+);
+
+
+
+exam.forEach(
+
+(q,i)=>{
+
+
+let html=`
+
+<div class='question'>
+
+<h3>
+
+${i+1}.
+
+${q.q}
+
+</h3>
+
+`;
+
+
+
+q.o.forEach(
+
+(opt,j)=>{
+
+
+html+=`
+
+<label>
+
+<input
+
+type='radio'
+
+name='q${i}'
+
+value='${j}'>
+
+${opt}
+
+</label>
+
+`;
+
+
+
+});
+
+
+
+html+=`
+
+</div>
+
+`;
+
+
+
+qBox.innerHTML+=
+
+html;
+
+
+
+});
+
+
+
+
+async function gradeExam(){
+
+
+let score=0;
+
+
+exam.forEach((q,i)=>{
+
+
+const s=
+
+document.querySelector(
+
+`input[name=q${i}]:checked`
+
+);
+
+
+if(
+
+s &&
+
+parseInt(s.value)==q.a
+
+){
+
+score++;
+
+}
+
+
+});
+
+
+const percent=
+
+Math.round(
+
+(score/exam.length)*100
+
+);
+
+
+const result=
+
+document.getElementById(
+
+"result"
+
+);
+
+
+
+if(percent>=70){
+
+
+result.className=
+
+"pass";
+
+
+result.innerHTML=
+
+"✅ PASSED"
+
++
+
+"<br>"
+
++
+
+"Score : "
+
++
+
+percent
+
++
+
+"%"
+
++
+
+"<br>"
+
++
+
+"Certificate Eligible";
+
+
+
+localStorage.setItem(
+
+lesson+"_score",
+
+percent
+
+);
+
+
+localStorage.setItem(
+
+lesson+"_status",
+
+"Passed"
+
+);
+
+
+
+await saveExam(
+
+percent
+
+);
+
+
+await updateProgress();
+
+
+}else{
+
+
+result.className=
+
+"fail";
+
+
+result.innerHTML=
+
+"❌ FAILED"
+
++
+
+"<br>"
+
++
+
+"Score : "
+
++
+
+percent
+
++
+
+"%"
+
++
+
+"<br>"
+
++
+
+"Please Retake Exam";
+
+
+
+localStorage.setItem(
+
+lesson+"_score",
+
+percent
+
+);
+
+
+localStorage.setItem(
+
+lesson+"_status",
+
+"Failed"
+
+);
+
+
+}
+
+
+}
+
+
+
+
+async function saveExam(score){
+
+
+await addDoc(
+
+collection(
+
+db,
+
+"examResults"
+
+),
+
+{
+
+memberId:
+
+localStorage.getItem(
+
+"currentMemberId"
+
+),
+
+
+lesson:
+
+lesson,
+
+
+score:
+
+score,
+
+
+passed:true,
+
+
+dateTaken:
+
+new Date()
+
+
+}
+
+);
+
+
+}
+
+
+
+
+
+async function updateProgress(){
+
+const examKey = lesson+"_completed";
+
+if(localStorage.getItem(examKey)){
+
+return;
+
+}
+
+
+const memberId=
+
+localStorage.getItem(
+
+"currentMemberId"
+
+);
+
+
+const q=query(
+
+collection(db,"memberCourses"),
+
+where("memberId","==",memberId)
+
+);
+
+
+const snap=await getDocs(q);
+
+
+snap.forEach(async(d)=>{
+
+
+const c=d.data();
+
+
+let completed=
+
+Number(
+
+c.lessonsCompleted||0
+
+);
+
+
+completed++;
+
+
+let progress=
+
+Math.round(
+
+(completed/
+
+c.totalLessons)
+
+*100
+
+);
+
+
+let status="In Progress";
+
+let certificate=false;
+
+
+if(progress>=100){
+
+progress=100;
+
+status="Completed";
+
+certificate=true;
+
+}
+
+
+await updateDoc(
+
+doc(
+
+db,
+
+"memberCourses",
+
+d.id
+
+),
+
+{
+
+lessonsCompleted:completed,
+
+progress:progress,
+
+status:status,
+
+certificateAwarded:certificate
+
+}
+
+);
+
+
+localStorage.setItem(
+
+examKey,
+
+"yes"
+
+);
+
+
+});
+
+
+}
+
+
+let time = 1800;
+
+setInterval(() => {
+
+let m = Math.floor(time/60);
+
+let s = time % 60;
+
+
+document.getElementById("timer").innerHTML =
+
+String(m).padStart(2,'0')
+
++
+
+":"
+
++
+
+String(s).padStart(2,'0');
+
+
+time--;
+
+
+if(time < 0){
+
+gradeExam();
+
+}
+
+},1000);
+
+</script>
+
+</body>
+
+</html>
